@@ -1,21 +1,36 @@
 = bio-alignment
 
-Description goes here.
+Alignment handler for multiple sequence alignments (MSA).
 
-== Contributing to bio-alignment
- 
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
-* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
-* Fork the project.
-* Start a feature/bugfix branch.
-* Commit and push until you are happy with your contribution.
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+This alignment handler makes no assumptions about the underlying
+sequence object.  Support for any nucleotide, amino acid and codon
+sequences that are lists. Any list with payload can be used (e.g.
+nucleotide quality score, codon annotation). The only requirement is
+that the list is iterable and can be indexed. 
+
+This work is based on Pjotr's experience designing the BioScala
+Alignment handler and BioRuby's PAML support. See also the
+[design document]()
+
+Note: this software is under active development.
+
+== Developers
+
+To use the library
+
+  require 'bio-alignment'
+
+for code examples see ./spec/*.rb
+
+== Cite
+
+  If you use this software, please cite
+
+    http://dx.doi.org/10.1093/bioinformatics/btq475
 
 == Copyright
 
-Copyright (c) 2012 Pjotr Prins. See LICENSE.txt for
-further details.
+Copyright (c) 2012 Pjotr Prins. See LICENSE.txt for further details.
 
 == Biogems.info
 

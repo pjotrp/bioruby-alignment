@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "bio-alignment"
   gem.homepage = "http://github.com/pjotrp/bioruby-alignment"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Multiple sequence alignments (MSA)}
+  gem.description = %Q{Alignment handler for multiple sequence alignments. Support for any nucleotide, amino acid and codon sequences that are lists. I.e. any list with payload can be used, as long as it can be indexed}
   gem.email = "pjotr.public01@thebird.nl"
   gem.authors = ["Pjotr Prins"]
   # dependencies defined in Gemfile
