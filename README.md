@@ -10,7 +10,7 @@ that the list is iterable and can be indexed.
 
 This work is based on Pjotr's experience designing the BioScala
 Alignment handler and BioRuby's PAML support. See also the
-[design document]()
+[design document](https://github.com/pjotrp/bioruby-alignment/blob/master/doc/bio-alignment-design.md)
 
 Note: this software is under active development.
 
@@ -26,9 +26,7 @@ for code examples see ./spec/*.rb
 
 ## Cite
 
-  If you use this software, please cite
-
-    http://dx.doi.org/10.1093/bioinformatics/btq475
+If you use this software, please cite http://dx.doi.org/10.1093/bioinformatics/btq475
 
 ## Copyright
 
