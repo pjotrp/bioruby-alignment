@@ -22,7 +22,7 @@ To use the library
   require 'bio-alignment'
 ```
 
-for code examples see ./spec/*.rb
+The API doc is online. For more code examples see ./spec/*.rb
 
 ## Cite
 
