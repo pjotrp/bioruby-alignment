@@ -1,4 +1,4 @@
-= bio-alignment
+# bio-alignment
 
 Alignment handler for multiple sequence alignments (MSA).
 
@@ -14,24 +14,26 @@ Alignment handler and BioRuby's PAML support. See also the
 
 Note: this software is under active development.
 
-== Developers
+## Developers
 
 To use the library
 
+```ruby
   require 'bio-alignment'
+```
 
 for code examples see ./spec/*.rb
 
-== Cite
+## Cite
 
   If you use this software, please cite
 
     http://dx.doi.org/10.1093/bioinformatics/btq475
 
-== Copyright
+## Copyright
 
 Copyright (c) 2012 Pjotr Prins. See LICENSE.txt for further details.
 
-== Biogems.info
+## Biogems.info
 
 This exciting Ruby Biogem is published on http://biogems.info/
