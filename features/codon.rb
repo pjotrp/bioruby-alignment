@@ -8,7 +8,7 @@ Given /^I read an MSA nucleotide FASTA file in the test\/data folder$/ do
   aln = Alignment.new
   fasta = FastaReader.new('test/data/fasta/codon/codon-alignment.fa')
   fasta.each do | rec |
-    aln.sequences << CodonSequence.new(rec.id, req.seq)
+    aln.sequences << CodonSequence.new(rec.id, rec.seq)
   end
   p aln
 end

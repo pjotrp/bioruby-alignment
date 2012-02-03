@@ -54,7 +54,7 @@ sequence object, it can be used.
 
 Elements in the list should respond to a gap? method, for an alignment
 gap, and the undefined? method for a position that is either an
-element or a gap.
+element or a gap. Also it should respont to the to_s method.
 
 An element can contain any pay load.  If a list of attributes exists
 in the sequence object, it can be used.
