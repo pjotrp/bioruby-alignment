@@ -27,7 +27,8 @@ Then /^it should contain codons$/ do
 end
 
 Then /^it should translate to an amino acid MSA$/ do
-  pending # express the regexp above with the code you wish you had
+  aaseq = @aln.rows.first.map { | codon | codon.to_aa }.join("")
+  aaseq[0..15].should == 'MPTRLDIVGNLQFSSS'
 end
 
 Then /^it should write a nucleotide alignment$/ do

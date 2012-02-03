@@ -43,9 +43,12 @@ safety throughout.
 ## Row or Sequence
 
 Any sequence for an alignment is simply a list of objects. The
-requirement is that the list should be iterable and can be indexed. In addition,
-elements in the list should respond to certain properties (see below).
-An example of a sequence is CodonSequence.
+requirement is that the list should be enumerable and can be indexed. This means
+it has to include Enumerable and provide 'each' and '[]' methods. CodonSequence 
+is a good example.
+
+In addition, elements in the list should respond to certain properties (see
+below). 
 
 ```ruby
     codons = CodonSequence.new(rec.id,rec.seq)
@@ -54,9 +57,9 @@ An example of a sequence is CodonSequence.
     print codons.seq[0].to_s
 ```
 
-where to_s is defined.
+where to_s is defined as part of the Sequence.
 
-At the sequence level a pay load is possible. This can be a standard
+Normally, at the sequence level a pay load is possible. This can be a standard
 attribute of the class. If a list of attributes exists in the
 sequence object, it can be used. For Codons we can fetch the amino
 acid with
@@ -65,7 +68,7 @@ acid with
     print codons.seq[0].to_aa
 ```
 
-in fact, because Sequence should be indexable we can write
+in fact, because Sequence is indexable we can write directly
 
 ```ruby
     print codons[0].to_aa        # 'M'

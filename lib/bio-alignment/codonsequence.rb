@@ -48,6 +48,8 @@ module Bio
     # nucleotides) for an alignment
     #
     class CodonSequence
+      include Enumerable
+
       attr_reader :id, :seq
       def initialize id, seq
         @id = id
@@ -59,6 +61,10 @@ module Bio
 
       def [] index
         @seq[index]
+      end
+
+      def each
+        @seq.each { | codon | yield codon }
       end
 
       def to_s
