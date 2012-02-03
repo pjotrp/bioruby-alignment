@@ -19,7 +19,9 @@ Note: this software is under active development.
 
 ## Developers
 
-To use the library
+To use the library, load aligned sequences into the Alignment
+matrix. Here we write an amino acid alignment from a codon
+aligmment (note codon gaps are represented by '---')
 
 ```ruby
   require 'bio-alignment'
@@ -29,11 +31,6 @@ To use the library
   fasta = FastaReader.new('codon-alignment.fa')
   fasta.each do | rec |
     @aln.sequences << CodonSequence.new(rec.id, rec.seq)
-  end
-  # write a nucleotide alignment
-  fasta = FastaWriter.new('nt-aln.fa')
-  @aln.rows.each do | row |
-    fasta.write(row)
   end
   # write a matching amino acid alignment
   fasta = FastaWriter.new('aa-aln.fa')
