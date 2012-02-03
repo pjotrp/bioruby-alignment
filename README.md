@@ -9,8 +9,11 @@ nucleotide quality score, codon annotation). The only requirement is
 that the list is iterable and can be indexed. 
 
 This work is based on Pjotr's experience designing the BioScala
-Alignment handler and BioRuby's PAML support. See also the
-[design document](https://github.com/pjotrp/bioruby-alignment/blob/master/doc/bio-alignment-design.md)
+Alignment handler and BioRuby's PAML support. Read the
+Bio::BioAlignment
+[design
+document](https://github.com/pjotrp/bioruby-alignment/blob/master/doc/bio-alignment-design.md)
+for Ruby.
 
 Note: this software is under active development.
 
@@ -20,6 +23,23 @@ To use the library
 
 ```ruby
   require 'bio-alignment'
+  require 'bigbio' # Fasta reader and writer
+
+  aln = Alignment.new
+  fasta = FastaReader.new('codon-alignment.fa')
+  fasta.each do | rec |
+    @aln.sequences << CodonSequence.new(rec.id, rec.seq)
+  end
+  # write a nucleotide alignment
+  fasta = FastaWriter.new('nt-aln.fa')
+  @aln.rows.each do | row |
+    fasta.write(row)
+  end
+  # write a matching amino acid alignment
+  fasta = FastaWriter.new('aa-aln.fa')
+  @aln.rows.each do | row |
+    fasta.write(row.id, row.to_aa.to_s)
+  end
 ```
 
 The API documentation is online. For more code examples see ./spec/*.rb and
