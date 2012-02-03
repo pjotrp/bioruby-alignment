@@ -82,7 +82,7 @@ Write a (simple) version of pal2nal would be something like
   end
 ```
 
-With aln1 and aln2, the library version is the shorter
+Having read aln1 and aln2, the library version is the shorter
 
 ```ruby
   aln3 = aln1.pal2nal(aln2)
