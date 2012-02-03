@@ -57,6 +57,10 @@ module Bio
         end
       end
 
+      def [] index
+        @seq[index]
+      end
+
       def to_s
         @seq.map { |codon| codon.to_s }.join(' ')
       end

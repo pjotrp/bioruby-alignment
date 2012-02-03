@@ -65,6 +65,14 @@ acid with
     print codons.seq[0].to_aa
 ```
 
+in fact, because Sequence should be indexable we can write
+
+```ruby
+    print codons[0].to_aa        # 'M'
+    print codons[0].gap?         # false
+    print codons[0].undefined?   # false
+```
+
 ## Element
 
 Elements in the list should respond to a gap? method, for an alignment

@@ -19,11 +19,11 @@ Given /^I iterate the sequence records$/ do
 end
 
 When /^I check the alignment$/ do
-  pending # express the regexp above with the code you wish you had
 end
 
 Then /^it should contain codons$/ do
-  pending # express the regexp above with the code you wish you had
+  # first sequence, first codon, translate
+  @aln.rows.first[0].to_aa.should == "M"
 end
 
 Then /^it should translate to an amino acid MSA$/ do
@@ -37,5 +37,4 @@ end
 Then /^it should write an amino acid alignment$/ do
   pending # express the regexp above with the code you wish you had
 end
-
 
