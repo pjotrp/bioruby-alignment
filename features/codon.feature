@@ -11,4 +11,3 @@ Feature: Read codon file
     And it should write a nucleotide alignment 
     And it should write an amino acid alignment 
 
-

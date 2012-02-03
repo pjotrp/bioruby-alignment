@@ -3,7 +3,11 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 require 'bigbio'
 include Bio::BioAlignment # Namespace
 
-describe "BioAlignment" do
+describe "BioAlignment::CodonSequence" do
+  it "should support different codon tables"
+end
+
+describe "BioAlignment::Alignment" do
 
   it "should allow for adding FastaRecords that contain and id and seq" do
     aln = Alignment.new
@@ -15,7 +19,7 @@ describe "BioAlignment" do
     aln.sequences.first.seq[0..15].should == "atgcccactcgattgg"
   end
 
-  it "should allow CodonSequence inputs" do
+  it "should allow CodonSequence as an input" do
     aln = Alignment.new
     fasta = FastaReader.new('test/data/fasta/codon/codon-alignment.fa')
     fasta.each do | rec |
@@ -29,4 +33,6 @@ describe "BioAlignment" do
     aln.sequences.first.seq[0].to_aa.should == "M"
     aln.sequences.first.seq[2].to_aa.should == "T"
   end
+
 end
+
