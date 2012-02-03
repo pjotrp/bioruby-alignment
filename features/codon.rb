@@ -1,5 +1,16 @@
+$: << 'lib'
+
+require 'bio-alignment'
+require 'bigbio'
+include Bio::BioAlignment # Namespace
+
 Given /^I read an MSA nucleotide FASTA file in the test\/data folder$/ do
-  true
+  aln = Alignment.new
+  fasta = FastaReader.new('test/data/fasta/codon/codon-alignment.fa')
+  fasta.each do | rec |
+    aln.sequences << CodonSequence.new(rec.id, req.seq)
+  end
+  p aln
 end
 
 Given /^I iterate the sequence records$/ do

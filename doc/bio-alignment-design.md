@@ -40,10 +40,11 @@ project](https://github.com/pjotrp/bioscala/blob/master/doc/design.txt),
 The BioScala library has the additional advantage of having type
 safety throughout.
 
-## Sequence
+## Row or Sequence
 
 Any sequence for an alignment is simply a list of objects. The
-requirement is that the list should be iterable and can be indexed.
+requirement is that the list should be iterable and can be indexed. In addition,
+elements in the list should respond to certain properties (see below).
 
 At the sequence level a pay load is possible. This can be a standard
 attribute of the class. If a list of attributes exists in the
@@ -64,14 +65,35 @@ The column list tracks the columns of the alignment. The requirement
 is that it should be iterable and can be indexed. The Column contains
 no elements, but may point to a list when the alignment is transposed.
 
-## Matrix
+## Matrix or MSA
 
 The Matrix consists of a Column list, multiple Sequences, in turn
 consisting of Elements. Accessing the matrix is by Sequence, followed
-by Element. The Matrix can be accessed in transposed fashion, but
-accessing the normal matrix and transposed matrix at the same time is
-not supported.  Matrix is not designed to be transaction safe - though
-you can copy the Matrix any time.
+by Element.
+
+```ruby
+  require 'bio-alignment'
+  require 'bigbio' # for the Fasta reader
+  include Bio::BioAlignment # Namespace
+  aln = Alignment.new
+  fasta = FastaReader.new('test/data/fasta/codon/codon-alignment.fa')
+  fasta.each do | rec |
+    aln.sequences << rec
+  end
+```
+
+note that MSA understands rec, as long as rec.id and rec.seq exist, and strings
+(req.seq is a String). Alternatively we can convert to a Codon sequence by
+
+```ruby
+  fasta.each do | rec |
+    aln.sequences << CodonSequence.new(rec.id,rec.seq)
+  end
+```
+
+The Matrix can be accessed in transposed fashion, but accessing the normal
+matrix and transposed matrix at the same time is not supported.  Matrix is not
+designed to be transaction safe - though you can copy the Matrix any time.
 
 
 
