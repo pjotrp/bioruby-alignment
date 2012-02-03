@@ -5,15 +5,15 @@ require 'bigbio'
 include Bio::BioAlignment # Namespace
 
 Given /^I read an MSA nucleotide FASTA file in the test\/data folder$/ do
-  aln = Alignment.new
+  @aln = Alignment.new
   fasta = FastaReader.new('test/data/fasta/codon/codon-alignment.fa')
   fasta.each do | rec |
-    aln.sequences << CodonSequence.new(rec.id, rec.seq)
+    @aln.sequences << CodonSequence.new(rec.id, rec.seq)
   end
 end
 
 Given /^I iterate the sequence records$/ do
-  aln.each do | seq |
+  @aln.rows.each do | seq |
     seq.id != nil
   end
 end

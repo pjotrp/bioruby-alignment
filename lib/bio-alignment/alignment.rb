@@ -10,6 +10,7 @@ module Bio
         @sequences = []
       end
 
+      alias rows sequences
     end
   end
 end
