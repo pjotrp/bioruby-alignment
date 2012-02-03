@@ -1,6 +1,10 @@
 
+require 'bio'
+
 module Bio
   module BioAlignment
+
+    CODON_TABLE = Bio::CodonTable[1]  # BioRuby Eukaryote table
 
     # Codon element for the matrix
     class Codon
@@ -13,10 +17,30 @@ module Bio
       end
 
       def undefined?
+        aa = CODON_TABLE[@codon]
+        if aa == nil and not gap?
+          return true
+        end
+        false
       end
 
       def to_s
         @codon
+      end
+
+      # lazily convert to Amino acid (once only)
+      def to_aa
+        @aa ||= CODON_TABLE[@codon]
+        if not @aa 
+          if gap?
+            return '-'
+          elsif undefined?
+            return 'X'
+          else
+            raise 'What?'
+          end
+        end
+        @aa
       end
     end
 
