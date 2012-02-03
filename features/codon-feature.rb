@@ -10,11 +10,12 @@ Given /^I read an MSA nucleotide FASTA file in the test\/data folder$/ do
   fasta.each do | rec |
     aln.sequences << CodonSequence.new(rec.id, rec.seq)
   end
-  p aln
 end
 
 Given /^I iterate the sequence records$/ do
-  pending # express the regexp above with the code you wish you had
+  aln.each do | seq |
+    seq.id != nil
+  end
 end
 
 When /^I check the alignment$/ do
