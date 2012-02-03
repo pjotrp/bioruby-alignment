@@ -45,11 +45,26 @@ safety throughout.
 Any sequence for an alignment is simply a list of objects. The
 requirement is that the list should be iterable and can be indexed. In addition,
 elements in the list should respond to certain properties (see below).
+An example of a sequence is CodonSequence.
+
+```ruby
+    codons = CodonSequence.new(rec.id,rec.seq)
+    print codons.id
+    # get first codon
+    print codons.seq[0].to_s
+```
+
+where to_s is defined.
 
 At the sequence level a pay load is possible. This can be a standard
 attribute of the class. If a list of attributes exists in the
-sequence object, it can be used.
- 
+sequence object, it can be used. For Codons we can fetch the amino
+acid with
+
+```ruby
+    print codons.seq[0].to_aa
+```
+
 ## Element
 
 Elements in the list should respond to a gap? method, for an alignment

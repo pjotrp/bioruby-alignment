@@ -32,6 +32,10 @@ module Bio
           @seq << Codon.new(codon)
         end
       end
+
+      def to_s
+        @seq.map { |codon| codon.to_s }.join(' ')
+      end
     end
 
   end
