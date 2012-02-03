@@ -70,6 +70,17 @@ module Bio
       def to_s
         @seq.map { |codon| codon.to_s }.join(' ')
       end
+
+      # extra methods
+
+      def to_nt
+        @seq.map { |codon| codon.to_s }.join('')
+      end
+        
+      def to_aa
+        @seq.map { |codon| codon.to_aa }.join('')
+      end
+        
     end
 
   end

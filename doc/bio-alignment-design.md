@@ -76,6 +76,13 @@ in fact, because Sequence is indexable we can write directly
     print codons[0].undefined?   # false
 ```
 
+and because CodonSequence is enumerable, and Codon has the to_aa method, we can
+do a fancy
+
+```ruby
+  aaseq = codons.map { | codon | codon.to_aa }.join("")
+```
+
 ## Element
 
 Elements in the list should respond to a gap? method, for an alignment

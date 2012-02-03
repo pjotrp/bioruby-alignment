@@ -32,10 +32,17 @@ Then /^it should translate to an amino acid MSA$/ do
 end
 
 Then /^it should write a nucleotide alignment$/ do
-  pending # express the regexp above with the code you wish you had
+  # Writing is actually handles by a different library
+  fasta = FastaWriter.new('test/data/regression/nt-aln.fa')
+  @aln.rows.each do | row |
+    fasta.write(row)
+  end
 end
 
 Then /^it should write an amino acid alignment$/ do
-  pending # express the regexp above with the code you wish you had
+  fasta = FastaWriter.new('test/data/regression/aa-aln.fa')
+  @aln.rows.each do | row |
+    fasta.write(row.id, row.to_aa.to_s)
+  end
 end
 
