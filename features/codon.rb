@@ -1,5 +1,5 @@
 Given /^I read an MSA nucleotide FASTA file in the test\/data folder$/ do
-  pending # express the regexp above with the code you wish you had
+  true
 end
 
 Given /^I iterate the sequence records$/ do
