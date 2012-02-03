@@ -3,4 +3,5 @@
 #
 
 require 'bio-alignment/alignment'
+require 'bio-alignment/sequence'
 require 'bio-alignment/codonsequence'

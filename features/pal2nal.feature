@@ -5,4 +5,6 @@ Feature: pal2nal
   Scenario: Convert pal2nal
     Given I have an amino acid alignment
     And I have matching nucleotide sequences
-    Then I should be generate a codon alignment
+    Then I should be able to generate a codon alignment
+    Then I should be able to generate a codon alignment directly with pal2nal
+
