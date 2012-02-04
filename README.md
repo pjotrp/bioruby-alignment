@@ -91,8 +91,9 @@ includes validation, and is the shorter command
 
 resulting in the codon alignment.
 
-The API documentation is online. For more code examples see ./spec/*.rb and
-./features/*
+The API documentation is online. For more code examples see
+[https://github.com/pjotrp/bioruby-alignment/tree/master/spec](./spec/*.rb) and
+[https://github.com/pjotrp/bioruby-alignment/tree/master/features](./features/*)
 
 ## Cite
 
