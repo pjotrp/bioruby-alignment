@@ -1,10 +1,13 @@
 # Alignment
 
+require 'bio-alignment/pal2nal'
+
 module Bio
   module BioAlignment
 
     class Alignment
       include Enumerable
+      include Pal2Nal
 
       attr_accessor :sequences
 

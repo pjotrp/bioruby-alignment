@@ -39,6 +39,6 @@ Then /^I should be able to generate a codon alignment$/ do
 end
 
 Then /^I should be able to generate a codon alignment directly with pal2nal$/ do
-  # pal2nal = @aln.pal2nal(@aln1)
-  pending
+  aln3 = @aln.pal2nal(@aln2)
+  aln3.sequences[1].to_s.size.should == 1615
 end
