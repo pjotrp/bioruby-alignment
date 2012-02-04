@@ -82,13 +82,14 @@ Write a (simple) version of pal2nal would be something like
   end
 ```
 
-With amino acid aln1 and nucleotide aln2 loaded, the library version is the shorter
+With amino acid aln1 and nucleotide aln2 loaded, the library version
+includes validation, and is the shorter command 
 
 ```ruby
-  aln3 = aln1.pal2nal(aln2)
+  aln3 = aln1.pal2nal(aln2, :codon_table => 3)
 ```
 
-aln3 containing the codon alignment.
+resulting in the codon alignment.
 
 The API documentation is online. For more code examples see ./spec/*.rb and
 ./features/*
