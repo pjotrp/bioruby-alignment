@@ -82,13 +82,13 @@ Write a (simple) version of pal2nal would be something like
   end
 ```
 
-Having read aln1 and aln2, the library version is the shorter
+With amino acid aln1 and nucleotide aln2 loaded, the library version is the shorter
 
 ```ruby
   aln3 = aln1.pal2nal(aln2)
-  fasta3 = FastaWriter.new('nt-aln.fa')
-  aln3.each { | rec | fasta3.write(rec) }
 ```
+
+aln3 containing the codon alignment.
 
 The API documentation is online. For more code examples see ./spec/*.rb and
 ./features/*
