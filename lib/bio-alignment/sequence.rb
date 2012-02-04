@@ -9,6 +9,9 @@ module Bio
       def gap?
         @c == '-'
       end
+      def to_s
+        @c
+      end
     end
 
     # A Sequence is a simple container for String sequences/lists
