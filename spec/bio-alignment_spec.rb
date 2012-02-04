@@ -4,7 +4,23 @@ require 'bigbio'
 include Bio::BioAlignment # Namespace
 
 describe "BioAlignment::CodonSequence" do
-  it "should support different codon tables"
+  it "should support different codon tables" do
+    seq = CodonSequence.new("test", "atgcccagacgattgg")
+    seq[0].to_aa.should == "M"
+    seq[2].to_s.should == "aga"
+    seq[2].to_aa.should == "R"
+
+    seq5 = CodonSequence.new("test", "atgcccagacgattgg", :codon_table => 5)
+    seq5[2].codon_table.should == 5
+    seq5[0].to_aa.should == "M"
+    seq5[2].to_s.should == "aga"
+    seq5[2].to_aa.should == "S"
+
+    seq2 = CodonSequence.new("test", "atgcccagacgattgg", :codon_table => 2)
+    seq2[2].codon_table.should == 2
+    seq2[0].to_aa.should == "M"
+    seq2[2].to_aa.should == "*"
+  end
 end
 
 describe "BioAlignment::Alignment" do

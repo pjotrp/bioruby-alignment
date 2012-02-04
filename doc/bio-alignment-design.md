@@ -1,5 +1,7 @@
 # Bio-alignment design
 
+''A well designed library should be simple and elegant to use...''
+
 ## Introduction
 
 Biological multi-sequence alignments (MSA) are normally matrices of

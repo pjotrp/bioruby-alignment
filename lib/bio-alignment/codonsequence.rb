@@ -4,12 +4,13 @@ require 'bio'
 module Bio
   module BioAlignment
 
-    CODON_TABLE = Bio::CodonTable[1]  # BioRuby Eukaryote table
-
-    # Codon element for the matrix
+    # Codon element for the matrix, used by CodonSequence.
     class Codon
-      def initialize codon
+      attr_reader :codon_table
+
+      def initialize codon, codon_table = 1
         @codon = codon
+        @codon_table = codon_table
       end
 
       def gap?
@@ -17,7 +18,7 @@ module Bio
       end
 
       def undefined?
-        aa = CODON_TABLE[@codon]
+        aa = translate
         if aa == nil and not gap?
           return true
         end
@@ -30,8 +31,8 @@ module Bio
 
       # lazily convert to Amino acid (once only)
       def to_aa
-        @aa ||= CODON_TABLE[@codon]
-        if not @aa 
+        aa = translate
+        if not aa
           if gap?
             return '-'
           elsif undefined?
@@ -40,22 +41,32 @@ module Bio
             raise 'What?'
           end
         end
+        aa
+      end
+
+    private
+
+      def translate
+        @aa ||= Bio::CodonTable[@codon_table][@codon]
         @aa
       end
     end
 
     # A CodonSequence supports the concept of codons (triple
-    # nucleotides) for an alignment
+    # nucleotides) for an alignment. A codon table number can be passed
+    # in for translation of nucleotide sequences. This is the same 
+    # table used in BioRuby.
     #
     class CodonSequence
       include Enumerable
 
       attr_reader :id, :seq
-      def initialize id, seq
+      def initialize id, seq, options = { :codon_table => 1 }
         @id = id
         @seq = []
+        @codon_table = options[:codon_table]
         seq.scan(/\S\S\S/).each do | codon |
-          @seq << Codon.new(codon)
+          @seq << Codon.new(codon, @codon_table)
         end
       end
 
