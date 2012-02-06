@@ -3,6 +3,7 @@
 require 'bio-alignment/pal2nal'
 
 module Bio
+ 
   module BioAlignment
 
     class Alignment
@@ -16,6 +17,10 @@ module Bio
       end
 
       alias rows sequences
+
+      # def [] index  <- need matrix
+      #   rows[index]
+      # end
 
       def each
         rows.each { | seq | yield seq }

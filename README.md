@@ -41,6 +41,19 @@ aligmment (note codon gaps are represented by '---')
   end
 ```
 
+### BioRuby Sequence objects
+
+The BioAlignment supports BioRuby's Bio::Sequence objects:
+
+```ruby
+  require 'bio'  # BioRuby
+  require 'bio-alignment/bioruby' # make Bio::Sequence enumerable
+  
+  aln = Alignment.new
+  aln << Bio::Sequence::NA.new("atgcatgcaaaa")
+  aln << Bio::Sequence::NA.new("atg---tcaaaa")
+```
+
 ### Pal2nal
 
 A protein (amino acid) to nucleotide alignment would first load
