@@ -17,7 +17,7 @@ Feature: BioAlignment should play with BioRuby
     And and return a partial AA sequence
     And be AA indexable
 
-  Scenario: Convert BioAlignment to Bio::Alignment
+  Scenario: Convert BioAlignment to BioRuby Bio::Alignment
     Given I have a BioAlignment
     When I convert
-    Then I should have a Bio::Alignment
+    Then I should have a BioRuby Bio::Alignment

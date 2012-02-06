@@ -43,7 +43,7 @@ aligmment (note codon gaps are represented by '---')
 
 ### BioRuby Sequence objects
 
-The BioAlignment supports BioRuby's Bio::Sequence objects:
+The BioAlignment supports adding BioRuby's Bio::Sequence objects:
 
 ```ruby
   require 'bio'  # BioRuby
@@ -52,6 +52,14 @@ The BioAlignment supports BioRuby's Bio::Sequence objects:
   aln = Alignment.new
   aln << Bio::Sequence::NA.new("atgcatgcaaaa")
   aln << Bio::Sequence::NA.new("atg---tcaaaa")
+```
+
+and we can transform BioAlignment into BioRuby's Bio::Alignment and
+use BioRuby functions
+
+```ruby
+  bioruby_aln = aln.to_bioruby_alignment
+  bioruby_aln.consensus_iupac
 ```
 
 ### Pal2nal

@@ -67,14 +67,18 @@ end
 # ----
 
 Given /^I have a BioAlignment$/ do
-  pending # express the regexp above with the code you wish you had
+  @aln1 = Alignment.new
+  fasta = FastaReader.new('test/data/fasta/codon/aa-alignment.fa')
+  fasta.each do | rec |
+    @aln1.sequences << Sequence.new(rec.id, rec.seq)
+  end
 end
 
 When /^I convert$/ do
-  pending # express the regexp above with the code you wish you had
+  @bioruby_alignment = @aln1.to_bioruby_alignment
 end
 
-Then /^I should have a Bio::Alignment$/ do
-  pending # express the regexp above with the code you wish you had
+Then /^I should have a BioRuby Bio::Alignment$/ do
+  @bioruby_alignment.consensus_iupac[0..8].should == '???????v?'
 end
 

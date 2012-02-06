@@ -18,5 +18,14 @@ module Bio
       end
     end
   end
+
+  # Here we add a BioRuby converter
+  module BioAlignment
+    class Alignment
+      def to_bioruby_alignment
+        Bio::Alignment.new(self)
+      end
+    end
+  end
 end
 
