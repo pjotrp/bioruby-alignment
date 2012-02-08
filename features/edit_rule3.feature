@@ -17,7 +17,7 @@ Feature: Alignment editing rule 3 (Island rule)
 
   Scenario: Apply rule 3 to an amino acid alignment
     Given I have an alignment
-      '''
+      """
       ----SNSFSRPTIIFSGCSTACSGK--SELVCGFRSFMLSDV
       SSIISNSFSRPTIIFSGCSTACSGK--SEQVCGFR---LSDV
       SSIISNSFSRPTIIFSGCSTACSGKLTSEQVCGFR---LSDV
@@ -27,10 +27,10 @@ Feature: Alignment editing rule 3 (Island rule)
       ----------PTIIFSGCSKACSGK-----VCGIFHAVRSFM
       ----------PTIIFSGCSKACSGK--SELVCGFRSFMLSAV
       -------------IFHAVR-TC-HP-----------------
-      '''
+      """
     When I apply rule 3 with max_gap_size 4
     Then it should have removed 2 islands
-      '''
+      """
       ----SNSFSRPTIIFSGCSTACSGK--SELVCGFRSFMLSDV
       SSIISNSFSRPTIIFSGCSTACSGK--SEQVCGFR---LSDV
       SSIISNSFSRPTIIFSGCSTACSGKLTSEQVCGFR---LSDV
@@ -40,5 +40,5 @@ Feature: Alignment editing rule 3 (Island rule)
       ----------PTIIFSGCSKACSGK-----------------
       ----------PTIIFSGCSKACSGK--SELVCGFRSFMLSAV
       ------------------------------------------
-      '''
+      """
 
