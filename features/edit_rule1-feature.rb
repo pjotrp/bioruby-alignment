@@ -1,5 +1,8 @@
+require 'bio-alignment'
+
 Given /^I have an alignment$/ do |string|
-  pending # express the regexp above with the code you wish you had
+  @aln = Alignment.new(string.split(/\n/))
+  p @aln
 end
 
 When /^I apply rule (\d+) with max_gap_size (\d+)$/ do |arg1, arg2|
