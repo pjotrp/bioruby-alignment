@@ -10,10 +10,13 @@ module Bio
           ntseq = nt_aln.sequences[i]
           raise "pal2nal sequence IDs do not match (for #{aaseq.id} != #{ntseq.id})" if aaseq.id != ntseq.id
           raise "pal2nal sequence size does not match (for #{aaseq.id}'s #{aaseq.to_s.size}!= #{ntseq.to_s.size * 3})" if aaseq.id != ntseq.id
+          # create a Codon sequence out of the nucleotide sequence (no gaps)
           codonseq = CodonSequence.new(ntseq.id, ntseq.seq, options)
 
           codon_pos = 0
           result = []
+
+          # now fill the result array by finding codons and gaps, and testing for valid amino acids
           aaseq.each do | aa |
             result <<
               if aa.gap?
@@ -26,6 +29,7 @@ module Bio
                 codon.to_s
               end
           end
+          # the new result is transformed to a gapped CodonSequence
           codon_seq = CodonSequence.new(aaseq.id, result.join(''), options)
           codon_aln.sequences << codon_seq
         end
