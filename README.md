@@ -80,7 +80,7 @@ the sequences
   end
 ```
 
-Write a (simple) version of pal2nal would be something like
+Writing a (simple) version of pal2nal would be something like
 
 ```ruby
   fasta3 = FastaWriter.new('nt-aln.fa')
@@ -103,11 +103,11 @@ Write a (simple) version of pal2nal would be something like
   end
 ```
 
-With amino acid aln1 and nucleotide aln2 loaded, the library version
-includes validation, and is the shorter command 
+With amino acid aa_aln and nucleotide nt_aln loaded, the library
+version of pal2nal includes validation
 
 ```ruby
-  aln3 = aln1.pal2nal(aln2, :codon_table => 3)
+  aln = aa_aln.pal2nal(nt_aln, :codon_table => 3, :do_validate => true)
 ```
 
 resulting in the codon alignment.

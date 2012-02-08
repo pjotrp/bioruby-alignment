@@ -3,7 +3,11 @@
 module Bio
   module BioAlignment
     module Pal2Nal
-      def pal2nal nt_aln, options = { :codon_table => 1 }
+
+      # Protein to nucleotide alignment, using a codon table for testing. If :do_validate is
+      # false, translation for validation is skipped (note CodonSequence translation is lazy).
+      def pal2nal nt_aln, options = { :codon_table => 1, :do_validate => true }
+        do_validate = options[:do_validate]
         aa_aln = self
         codon_aln = Alignment.new
         aa_aln.each_with_index do | aaseq, i |
@@ -24,7 +28,7 @@ module Bio
               else
                 codon = codonseq[codon_pos]
                 # validate codon translates to amino acid
-                raise "codon does not match amino acid (for #{aaseq.id}, position #{codon_pos}, #{codon} translates to #{codon.to_aa} instead of #{aa.to_s})" if codon.to_aa != aa.to_s
+                raise "codon does not match amino acid (for #{aaseq.id}, position #{codon_pos}, #{codon} translates to #{codon.to_aa} instead of #{aa.to_s})" if do_validate and codon.to_aa != aa.to_s
                 codon_pos += 1
                 codon.to_s
               end
