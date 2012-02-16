@@ -1,13 +1,13 @@
-Feature: Alignment editing rule 1
+Feature: Alignment editing masking serial mutations
   Edit an alignment removing or masking unique elements column-wise. 
   
   If a sequence has a unique AA in a column it is a single mutation event. If
   multiple neighbouring AA's are also unique we suspect the sequence is an
-  outlier. Rule 1 masks, or deletes, stretches of unique AAs. The stretch of
+  outlier. This rule masks, or deletes, stretches of unique AAs. The stretch of
   unique AA's is defined in 'max_serial_unique' (default 5, so two bordering
   unique AA's are allowed).
 
-  Scenario: Apply rule 1 to an amino acid alignment
+  Scenario: Apply rule to an amino acid alignment
     Given I have an alignment
       """
       ----SNSFSRPTIIFSGCSTACSGK--SELVCGFRSFMLSDV
@@ -20,7 +20,7 @@ Feature: Alignment editing rule 1
       ----------PTIIFSGCSKACSGK--SELVCGFRSFMLSAV
       -------------IFHAVR-TC-HP-----------------
       """
-    When I apply rule 1 masking with X and max_gap_size 5
+    When I apply rule masking with X and max_gap_size 5
     Then it should result in
       """
       ----SNSFSRPTIIFSGCSTACSGK--SELVCGFRSFMLSDV

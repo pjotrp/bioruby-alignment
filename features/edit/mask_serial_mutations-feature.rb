@@ -5,7 +5,7 @@ Given /^I have an alignment$/ do |string|
   p @aln
 end
 
-When /^I apply rule (\d+) with max_gap_size (\d+)$/ do |arg1, arg2|
+When /^I apply rule masking with X and max_gap_size (\d+)$/ do |arg1|
   pending # express the regexp above with the code you wish you had
 end
 

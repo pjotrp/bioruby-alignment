@@ -5,7 +5,7 @@ Feature: Alignment editing, the bridge rule
 
   The dropped columns are tracked by the table columns.
 
-  Scenario: Apply rule 4 to an amino acid alignment
+  Scenario: Apply bridge rule to an amino acid alignment
     Given I have an alignment
       """
       ----SNSFSRPTIIFSGCSTACSGK--SELVCGFRSFMLSDV
@@ -18,7 +18,7 @@ Feature: Alignment editing, the bridge rule
       ----------PTIIFSGCSKACSGK--SELVCGFRSFMLSAV
       -------------IFHAVR-TC-HP-----------------
       """
-    When I apply rule 3 with max_gap_size 4
+    When I apply the bridge rule
     Then it should have removed 4 bridges
       """
       SNSFSRPTIIFSGCSTACSGKSELVCGFRSFMLSDV

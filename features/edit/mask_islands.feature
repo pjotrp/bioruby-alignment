@@ -1,4 +1,4 @@
-Feature: Alignment editing rule 3 (Island rule)
+Feature: Alignment editing with the Island rule
   The idea is to drop hypervariable floating sequences, as they are probably
   misaligned.
 
@@ -15,7 +15,7 @@ Feature: Alignment editing rule 3 (Island rule)
   island should have a 'min_island_column_matched' (default 1) somewhere in the
   element's column.
 
-  Scenario: Apply rule 3 to an amino acid alignment
+  Scenario: Apply island rule to an amino acid alignment
     Given I have an alignment
       """
       ----SNSFSRPTIIFSGCSTACSGK--SELVCGFRSFMLSDV
@@ -28,7 +28,7 @@ Feature: Alignment editing rule 3 (Island rule)
       ----------PTIIFSGCSKACSGK--SELVCGFRSFMLSAV
       -------------IFHAVR-TC-HP-----------------
       """
-    When I apply rule 3 with max_gap_size 4
+    When I apply island rule with max_gap_size 4
     Then it should have removed 2 islands
       """
       ----SNSFSRPTIIFSGCSTACSGK--SELVCGFRSFMLSDV
