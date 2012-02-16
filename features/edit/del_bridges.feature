@@ -1,4 +1,4 @@
-Feature: Alignment editing rule 4 (Bridge rule)
+Feature: Alignment editing, the bridge rule
   Remove columns that contain too many gaps
 
   Drop all bridges in less than 'min_bridges_fraction' (default 1/3 or 33%).
