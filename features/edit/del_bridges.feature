@@ -31,4 +31,5 @@ Feature: Alignment editing rule 4 (Bridge rule)
       ------PTIIFSGCSKACSGKSELVCGFRSFMLSAV
       ---------IFHAVR-TC-HP---------------
       """
+    Then I should be able to track removed columns
 
