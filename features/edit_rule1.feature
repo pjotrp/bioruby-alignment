@@ -1,9 +1,11 @@
 Feature: Alignment editing rule 1
   Edit an alignment removing or masking unique elements column-wise. 
   
-  If a sequence has a unique AA in a column it is suspect. If the neighbouring
-AA's are also unique rule 1 drops it. The stretch of unique AA's is defined in
-'max_serial_unique' (default 5, so two bordering uniqe AA's are allowed).
+  If a sequence has a unique AA in a column it is a single mutation event. If
+  multiple neighbouring AA's are also unique we suspect the sequence is an
+  outlier. Rule 1 masks, or deletes, stretches of unique AAs. The stretch of
+  unique AA's is defined in 'max_serial_unique' (default 5, so two bordering
+  unique AA's are allowed).
 
   Scenario: Apply rule 1 to an amino acid alignment
     Given I have an alignment
