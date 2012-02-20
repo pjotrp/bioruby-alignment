@@ -142,8 +142,8 @@ use an alignment editor named DelBridges, which has a method named clean:
   require 'bio-alignment/edit/del_bridges'
 
   aln = Alignment.new(string.split(/\n/))
-  aln.extend DelBridges
-  aln2 = @aln.clean
+  aln.extend DelBridges   # bring the module into scope
+  aln2 = aln.clean
 ```
 
 in other words, the functionality in DelBridges gets attached to the aln

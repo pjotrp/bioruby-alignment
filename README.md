@@ -112,6 +112,24 @@ version of pal2nal includes validation
 
 resulting in the codon alignment.
 
+### Alignment editing
+
+BioAlignment supports multiple alignment editing features, which are
+listed
+[here](https://github.com/pjotrp/bioruby-alignment/tree/master/features/edit).
+Each edition feature is added at runtime(!) Example:
+
+```ruby
+  require 'bio-alignment/edit/del_bridges'
+
+  aln.extend DelBridges   # bring the module into scope
+  aln2 = aln.clean(50)    # execute the alignment editor
+```
+
+
+
+### See also
+
 The API documentation is online. For more code examples see
 [./spec/*.rb](https://github.com/pjotrp/bioruby-alignment/tree/master/spec) and
 [./features/*](https://github.com/pjotrp/bioruby-alignment/tree/master/features).
