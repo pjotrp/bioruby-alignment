@@ -5,8 +5,9 @@ Feature: Alignment editing, the bridge rule
 
   The dropped columns are tracked by the table columns.
 
+  @dev
   Scenario: Apply bridge rule to an amino acid alignment
-    Given I have an alignment
+    Given I have a bridged alignment
       """
       ----SNSFSRPTIIFSGCSTACSGK--SELVCGFRSFMLSDV
       SSIISNSFSRPTIIFSGCSTACSGK--SEQVCGFR---LSDV

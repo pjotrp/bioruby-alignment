@@ -22,13 +22,13 @@ say we have a nucleotide sequence with pay load
     5   9   *    1
 
 most library implementations will have two strings "AGTA" and "59*1".
-Removing the third nucleodide would mean removing it twice, into first
+Removing the third nucleotide would mean removing it twice, into first
 "AGA", and second "591". With bio-alignment this is one action because we
 have one object for each element that contains both values, e.g. the
 payload of 'T' is '*'. Moving 'T' automatically moves '*'.
 
 In addition the bio-alignment library deals with codons and codon translation.
-Rather than track mulitiple matrices, the codon is viewed as an element,
+Rather than track multiple matrices, the codon is viewed as an element,
 and the translated codon as the pay load. Again, when an alignment gets
 reordered the code only has to do it in one place.
 
@@ -89,7 +89,7 @@ do a fancy
 
 Elements in the list should respond to a gap? method, for an alignment
 gap, and the undefined? method for a position that is either an
-element or a gap. Also it should respont to the to_s method.
+element or a gap. Also it should respond to the to_s method.
 
 An element can contain any pay load.  If a list of attributes exists
 in the sequence object, it can be used.
@@ -130,6 +130,26 @@ The Matrix can be accessed in transposed fashion, but accessing the normal
 matrix and transposed matrix at the same time is not supported.  Matrix is not
 designed to be transaction safe - though you can copy the Matrix any time.
 
+## Adding functionality
+
+To ascertain that the basic BioAlignment does not get polluted, extra functionality
+is added by Modules. These modules can be added at run time(!) One advantage is
+that there is less name space pollution, the other is that different implementations
+can be plugged in - using the same interface. For example, here we are going to
+use an alignment editor named DelBridges, which has a method named clean:
+
+```ruby
+  require 'bio-alignment/edit/del_bridges'
+
+  aln = Alignment.new(string.split(/\n/))
+  aln.extend DelBridges
+  aln2 = @aln.clean
+```
+
+in other words, the functionality in DelBridges gets attached to the aln
+instance at run time, without affecting any other Alignment object(!) Also,
+when not requiring 'bio-alignment/edit/del_bridges', the functionality is never
+visible, and never added to the environment.
 
 
 Copyright (C) 2012 Pjotr Prins <pjotr.prins@thebird.nl>

@@ -1,5 +1,13 @@
+require 'bio-alignment'
+require 'bio-alignment/edit/del_bridges'
+
+Given /^I have a bridged alignment$/ do |string|
+  @aln = Alignment.new(string.split(/\n/))
+end
+
 When /^I apply the bridge rule$/ do
-  pending # express the regexp above with the code you wish you had
+  @aln.extend DelBridges
+  aln2 = @aln.clean
 end
 
 Then /^it should have removed (\d+) bridges$/ do |arg1, string|
