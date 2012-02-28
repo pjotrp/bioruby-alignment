@@ -22,11 +22,12 @@ list = []
 When /^I iterate a column$/ do
   column10 = @aln.columns[10]
   column10.each do | element | 
-    list << element
+    list << element.to_s
   end
 end
 
 Then /^I should get the column elements$/ do
-  list[0..10].to_s.should == "[ctt, gcg, ctt, ttt, gcg, ttt, ttt, agt, ttt, atg, agt]"
+  list[0..10].should == 
+  ["ctt", "gcg", "ctt", "ttt", "gcg", "ttt", "ttt", "agt", "ttt", "atg", "agt"]
 end
 
