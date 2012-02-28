@@ -40,6 +40,7 @@ module Bio
       def each
         rows.each { | seq | yield seq }
       end
+
     end
   end
 end
