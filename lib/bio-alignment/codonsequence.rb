@@ -74,6 +74,10 @@ module Bio
         @seq[index]
       end
 
+      def length
+        @seq.length
+      end
+
       def each
         @seq.each { | codon | yield codon }
       end

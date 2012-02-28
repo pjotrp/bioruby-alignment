@@ -1,6 +1,7 @@
 # Alignment
 
 require 'bio-alignment/pal2nal'
+require 'bio-alignment/column'
 
 module Bio
  
@@ -9,6 +10,7 @@ module Bio
     class Alignment
       include Enumerable
       include Pal2Nal
+      include Columns
 
       attr_accessor :sequences
 
@@ -31,9 +33,9 @@ module Bio
 
       alias rows sequences
 
-      # def [] index  <- need matrix
-      #   rows[index]
-      # end
+      def [] index
+        rows[index]
+      end
 
       def each
         rows.each { | seq | yield seq }
