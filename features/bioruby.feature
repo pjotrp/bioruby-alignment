@@ -3,6 +3,7 @@ Feature: BioAlignment should play with BioRuby
   I want to convert BioAlignment to Bio::Alignment
   And I want to support Bio::Sequence objects
 
+  @bioruby
   Scenario: Use Bio::Sequence to fill BioAlignment
     Given I have multiple Bio::Sequence objects
     When I assign BioAlignment
