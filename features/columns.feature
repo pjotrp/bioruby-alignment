@@ -3,7 +3,6 @@ Feature: Alignment column support
   I want to access column state
   I want to get all elements in a column
 
-  @dev
   @columns
   Scenario: Access column information in an alignment
     Given I read an MSA nucleotide FASTA file in the test/data folder

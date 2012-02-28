@@ -41,6 +41,16 @@ aligmment (note codon gaps are represented by '---')
   end
 ```
 
+Now add some state - you can define your own row state
+
+```ruby
+  # mark the first row for deletion
+  aln[0].state = MyStateDeleteObject.new
+  if aln.rows[0].state.deleted?
+    # do something
+  end
+```
+
 ### Accessing columns
 
 BioAlignment has a module for handling columns in an alignment. As
