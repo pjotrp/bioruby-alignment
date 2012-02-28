@@ -100,6 +100,11 @@ The column list tracks the columns of the alignment. The requirement
 is that it should be iterable and can be indexed. The Column contains
 no elements, but may point to a list when the alignment is transposed.
 
+One of the 'features' of this library is that the Column access logic is 
+split out into a separate module, which accesses the data in a lazy fashion. 
+Also column state is stored as an 'any object'. I.e. a column can contain
+any state.
+
 ## Matrix or MSA
 
 The Matrix consists of a Column list, multiple Sequences, in turn

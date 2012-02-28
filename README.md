@@ -41,9 +41,31 @@ aligmment (note codon gaps are represented by '---')
   end
 ```
 
+### Accessing columns
+
+BioAlignment has a module for handling columns in an alignment. As
+long as the contained sequence objects have the [] and length methods,
+they can lazily be iterated by column. To get a column and iterate it
+
+```ruby
+  column = aln.columns[3]
+  column.each do |element|
+    p element
+  end
+```
+
+Now add some state - you can define your own column state
+
+```ruby
+  aln.columns[3].state = MyStateDeleteObject.new
+  if aln.columns[3].state.deleted?
+    # do something
+  end
+```
+
 ### BioRuby Sequence objects
 
-The BioAlignment supports adding BioRuby's Bio::Sequence objects:
+BioAlignment supports adding BioRuby's Bio::Sequence objects:
 
 ```ruby
   require 'bio'  # BioRuby
