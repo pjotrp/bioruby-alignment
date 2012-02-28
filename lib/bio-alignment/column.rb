@@ -1,3 +1,5 @@
+require 'bio-alignment/state'
+
 module Bio
  
   module BioAlignment
@@ -20,7 +22,7 @@ module Bio
     # Support the notion of columns in an alignment. A column
     # can have state by attaching state objects
     class Column
-      attr_accessor :state
+      include State
 
       def initialize aln, col
         @aln = aln
@@ -39,15 +41,6 @@ module Bio
       end
     end
 
-    # Convenience class for tracking state. Note you can add
-    # any class you like
-    class ColumnState
-      attr_accessor :deleted
-
-      def deleted?
-        deleted == true
-      end
-    end
   end
 
 end

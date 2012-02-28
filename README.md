@@ -44,6 +44,8 @@ aligmment (note codon gaps are represented by '---')
 Now add some state - you can define your own row state
 
 ```ruby
+  # tell the row to handle state
+  aln[0].extend(State)
   # mark the first row for deletion
   aln[0].state = MyStateDeleteObject.new
   if aln.rows[0].state.deleted?

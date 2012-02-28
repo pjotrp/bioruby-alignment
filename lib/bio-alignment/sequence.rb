@@ -18,6 +18,7 @@ module Bio
     #
     class Sequence
       include Enumerable
+      include State
 
       attr_reader :id, :seq
       def initialize id, seq
