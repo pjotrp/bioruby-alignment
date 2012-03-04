@@ -45,6 +45,10 @@ module Bio
       def << element
         @seq += element.to_s
       end
+
+      def empty_copy
+        Sequence.new(@id,"")
+      end
     end
   end
 end

@@ -22,11 +22,12 @@ module Bio
         rows.first.length
       end
 
-      # Return an alignment which match columns
+      # Return an alignment which match columns. The originating
+      # sequences should have methods 'empty_copy' and '<<'
       def columns_where &block
         seqs = []
         rows.each do | seq | 
-          new_seq = Sequence.new(seq.id,"")
+          new_seq = seq.empty_copy
           seq.each_with_index do | e,i |
             new_seq << e if block.call(columns[i])
           end
