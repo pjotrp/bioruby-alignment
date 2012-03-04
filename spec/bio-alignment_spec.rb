@@ -84,4 +84,8 @@ describe "BioAlignment::DelBridges" do
   columns2.count { |e| e.state.deleted? }.should == 6
   aln2.columns[0].state.should == columns2[0].state
   aln2.columns[0].state.should_not == columns[0].state
+
+  # now write out the alignment without deleted columns
+  aln3 = aln2.columns_where { |col| !col.state.deleted? }
+  print aln3.to_s,"\n"
 end
