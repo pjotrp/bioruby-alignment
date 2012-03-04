@@ -4,12 +4,13 @@ module Bio
 
     module DelBridges
    
-      # Return a new alignment with columns marked for deletion, i.e. mark columns
-      # that mostly contain gaps (threshold +percentage+)
+      # Return a new alignment with columns marked for deletion, i.e. mark
+      # columns that mostly contain gaps (threshold +percentage+). The 
+      # alignment returned is a cloned copy
       def mark_bridges percentage = 30
-        aln = self.clone # not deep clone
+        aln = self.clone # not so deep clone
         # clone column state as we are going to change that
-        aln.columns.each_with_index do | column |
+        aln.columns.each do | column |
           new_state =
             if column.state
               column.state.clone
@@ -22,6 +23,8 @@ module Bio
           end
           column.state = new_state
         end
+        p self.columns[0].state
+        p aln.columns[0].state
         aln
       end
     end

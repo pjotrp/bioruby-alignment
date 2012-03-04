@@ -51,6 +51,18 @@ module Bio
         res
       end
 
+      # Return a deep cloned alignment
+      def clone
+        aln = super
+        # clone the sequences
+        aln.sequences = []
+        each do | seq |
+          aln.sequences << seq
+        end
+        aln.clone_columns! if @columns
+        aln
+      end
+
     end
   end
 end

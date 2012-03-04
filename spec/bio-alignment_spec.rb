@@ -79,9 +79,9 @@ describe "BioAlignment::DelBridges" do
   aln2 = aln.mark_bridges
   print aln2.to_s,"\n"
   columns2 = aln2.columns
-  # columns2.should_not == nil
-  # columns2.should_not == [] 
-  # columns2.size.should == 42
-  # aln2.columns.should == columns2
-  # aln2.columns.should_not == columns
+  columns2.should_not == nil
+  columns2.should_not == [] 
+  columns2.count { |e| e.state.deleted? }.should == 6
+  aln2.columns[0].state.should == columns2[0].state
+  aln2.columns[0].state.should_not == columns[0].state
 end

@@ -135,6 +135,7 @@ The Matrix can be accessed in transposed fashion, but accessing the normal
 matrix and transposed matrix at the same time is not supported.  Matrix is not
 designed to be transaction safe - though you can copy the Matrix any time.
 
+
 ## Adding functionality
 
 To ascertain that the basic BioAlignment implementation does not get
@@ -163,5 +164,13 @@ in a dynamic language.
 Note: if we wanted only to allow one plugin per instance at a time, we can
 create a generic interface with a method of the same name for every
 plugged in module. 
+
+## Methods returning alignments
+
+When an alignment gets changed, e.g. by one of the editing modules, the
+original is copied using the 'clone' method. The idea is never to share
+data. Ruby does not have immutable data, so the only safe way to write
+concurrent code is to copy all data that changes. The 'clone' methods
+implemented in the Alignment class are 'deep' clones.
 
 Copyright (C) 2012 Pjotr Prins <pjotr.prins@thebird.nl>

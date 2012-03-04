@@ -14,12 +14,25 @@ module Bio
         @columns ||= (0..num_columns-1).map { | col | Column.new(self,col) }
       end
 
+      # def columns= list
+      #   @columns = list
+      # end
+
       def num_columns
         rows.first.length
       end
 
       def columns_to_s
         columns.map { |c| (c.state ? c.state.to_s : '?') }.join
+      end
+       
+      def clone_columns!
+        # clone the columns
+        old_columns = @columns
+        @columns = []
+        old_columns.each do | old_column |
+          @columns << old_column.clone
+        end
       end
     end
 
