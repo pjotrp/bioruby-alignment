@@ -20,7 +20,7 @@ module Bio
       end
 
       def to_s
-        (deleted? ? 'X' : ' ')
+        (deleted? ? 'X' : '.')
       end
     end
 
