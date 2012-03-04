@@ -88,4 +88,5 @@ describe "BioAlignment::DelBridges" do
   # now write out the alignment without deleted columns
   aln3 = aln2.columns_where { |col| !col.state.deleted? }
   print aln3.to_s,"\n"
+  aln3.rows.first.to_s.should == "SNSFSRPTIIFSGCSTACSGKSELVCGFRSFMLSDV"
 end

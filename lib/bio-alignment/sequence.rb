@@ -39,21 +39,11 @@ module Bio
       end
 
       def to_s
-        map { |e| e.to_s }.join("")
-      end
-
-      def empty_copy
-        obj = self.clone
-        obj.empty_sequence!
-        obj
-      end
-
-      def empty_sequence!
-        @seq = []
+        @seq.to_s
       end
 
       def << element
-        @seq << element
+        @seq += element.to_s
       end
     end
   end

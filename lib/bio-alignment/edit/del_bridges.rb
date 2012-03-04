@@ -23,8 +23,8 @@ module Bio
           end
           column.state = new_state
         end
-        p self.columns[0].state
-        p aln.columns[0].state
+        # p self.columns[0].state
+        # p aln.columns[0].state
         aln
       end
     end

@@ -26,7 +26,7 @@ module Bio
       def columns_where &block
         seqs = []
         rows.each do | seq | 
-          new_seq = seq.empty_copy
+          new_seq = Sequence.new(seq.id,"")
           seq.each_with_index do | e,i |
             new_seq << e if block.call(columns[i])
           end
