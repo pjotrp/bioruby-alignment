@@ -137,24 +137,31 @@ designed to be transaction safe - though you can copy the Matrix any time.
 
 ## Adding functionality
 
-To ascertain that the basic BioAlignment does not get polluted, extra functionality
-is added by Modules. These modules can be added at run time(!) One advantage is
-that there is less name space pollution, the other is that different implementations
-can be plugged in - using the same interface. For example, here we are going to
-use an alignment editor named DelBridges, which has a method named clean:
+To ascertain that the basic BioAlignment implementation does not get
+polluted, extra functionality is added by using extra Modules. These
+modules can be added at run time(!) One advantage is that there is
+less name space pollution, the other is that different implementations
+can be plugged in - using the same interface. For example, here we are
+going to use an alignment editor named DelBridges, which has a method
+named del_bridges:
 
 ```ruby
   require 'bio-alignment/edit/del_bridges'
 
   aln = Alignment.new(string.split(/\n/))
   aln.extend DelBridges   # bring the module into scope
-  aln2 = aln.clean
+  aln2 = aln.del_bridges
 ```
 
-in other words, the functionality in DelBridges gets attached to the aln
-instance at run time, without affecting any other Alignment object(!) Also,
-when not requiring 'bio-alignment/edit/del_bridges', the functionality is never
-visible, and never added to the environment.
+in other words, the functionality in DelBridges gets attached to the
+aln instance at run time, without affecting any other instatiated
+object(!) Also, when not requiring 'bio-alignment/edit/del_bridges',
+the functionality is never visible, and never added to the
+environment. This type of runtime plugin is something you can only do
+in a dynamic language.
 
+Note: if we wanted only to allow one plugin per instance at a time, we can
+create a generic interface with a method of the same name for every
+plugged in module. 
 
 Copyright (C) 2012 Pjotr Prins <pjotr.prins@thebird.nl>

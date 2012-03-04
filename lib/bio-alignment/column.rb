@@ -11,10 +11,11 @@ module Bio
       # Return a list of Column objects. The contents of the  
       # columns are accessed lazily
       def columns
-        (0..num_columns-1).map { | col | Column.new(self,col) }
+        @columns ||= (0..num_columns-1).map { | col | Column.new(self,col) }
       end
 
       def num_columns
+        p ["HERE",rows.first,rows.first.length]
         rows.first.length
       end
     end

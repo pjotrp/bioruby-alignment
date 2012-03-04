@@ -156,8 +156,8 @@ Each edition feature is added at runtime(!) Example:
 ```ruby
   require 'bio-alignment/edit/del_bridges'
 
-  aln.extend DelBridges   # bring the module into scope
-  aln2 = aln.clean(50)    # execute the alignment editor
+  aln.extend DelBridges         # bring the module into scope
+  aln2 = aln.del_bridges        # execute the alignment editor
 ```
 
 

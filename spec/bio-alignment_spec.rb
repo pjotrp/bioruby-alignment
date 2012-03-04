@@ -1,6 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-require 'bigbio'
+require 'bio-alignment'
+require 'bigbio'  # for the FastaReader
 include Bio::BioAlignment # Namespace
 
 describe "BioAlignment::CodonSequence" do
@@ -49,6 +50,34 @@ describe "BioAlignment::Alignment" do
     aln.sequences.first.seq[0].to_aa.should == "M"
     aln.sequences.first.seq[2].to_aa.should == "T"
   end
-
 end
 
+
+describe "BioAlignment::DelBridges" do
+  require 'bio-alignment/edit/del_bridges'
+    string = 
+      """
+      ----SNSFSRPTIIFSGCSTACSGK--SELVCGFRSFMLSDV
+      SSIISNSFSRPTIIFSGCSTACSGK--SEQVCGFR---LSDV
+      SSIISNSFSRPTIIFSGCSTACSGKLTSEQVCGFR---LSDV
+      ----PKLFSRPTIIFSGCSTACSGK--SEPVCGFRSFMLSDV
+      ----------PTIIFSGCSKACSGKGLSELVCGFRSFMLSDV
+      ----------PTIIFSGCSKACSGK-----FRSFRSFMLSAV
+      ----------PTIIFSGCSKACSGK-----VCGIFHAVRSFM
+      ----------PTIIFSGCSKACSGK--SELVCGFRSFMLSAV
+      -------------IFHAVR-TC-HP-----------------
+      """
+  aln = Alignment.new(string.split(/\n/))
+  print aln.to_s
+  columns = aln.columns
+  columns.should_not == nil
+  columns.should_not == [] 
+  aln.columns.should == columns
+  aln.extend DelBridges
+  aln2, cols = aln.del_bridges
+  print aln2.to_s
+  columns2 = aln2.columns
+  columns2.should_not == nil
+  columns2.should_not == [] 
+  aln2.columns.should == columns
+end
