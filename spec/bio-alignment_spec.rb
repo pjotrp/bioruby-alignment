@@ -81,7 +81,7 @@ describe "BioAlignment::DelBridges" do
   columns2 = aln2.columns
   columns2.should_not == nil
   columns2.should_not == [] 
-  columns2.count { |e| e.state.deleted? }.should == 6
+  columns2.count { |col| col.state.deleted? }.should == 6
   aln2.columns[0].state.should == columns2[0].state
   aln2.columns[0].state.should_not == columns[0].state
   aln2.rows.first.to_s.should == "----SNSFSRPTIIFSGCSTACSGK--SELVCGFRSFMLSDV"
