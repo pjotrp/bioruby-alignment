@@ -4,22 +4,25 @@ module Bio
 
     module DelBridges
    
-      # Mark all columns for deletion that mostly contain
-      # gaps (threshold +percentage+) and return the 
-      # alignment with updated columns
-      def mark_del_bridges percentage = 30
-      end
-
-      # Return an alignment with the columns removed that mostly contain
-      # gaps (threshold +percentage). Returns a tuple of the new alignment,
-      # and a list of column objects marked for deletion
-      def del_bridges percentage = 30
-        aln = self
-        p aln.columns.size
-        aln.columns.each do | column |
-          p column[1]
+      # Return a new alignment with columns marked for deletion, i.e. mark columns
+      # that mostly contain gaps (threshold +percentage+)
+      def mark_bridges percentage = 30
+        aln = self.clone # not deep clone
+        # clone column state as we are going to change that
+        aln.columns.each_with_index do | column |
+          new_state =
+            if column.state
+              column.state.clone
+            else
+              ColumnState.new
+            end
+          gap_num = column.count { |e| e.gap? }
+          if (gap_num.to_f/rows.size) > 1.0-percentage/100.0
+            new_state.delete!
+          end
+          column.state = new_state
         end
-        return self, "test"
+        aln
       end
     end
   end

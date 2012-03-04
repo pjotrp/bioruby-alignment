@@ -11,8 +11,16 @@ module Bio
     class ColumnState
       attr_accessor :deleted
 
+      def delete!
+        @deleted = true
+      end
+
       def deleted?
-        deleted == true
+        @deleted == true
+      end
+
+      def to_s
+        (deleted? ? 'X' : ' ')
       end
     end
 

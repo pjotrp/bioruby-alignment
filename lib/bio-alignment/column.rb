@@ -15,8 +15,11 @@ module Bio
       end
 
       def num_columns
-        p ["HERE",rows.first,rows.first.length]
         rows.first.length
+      end
+
+      def columns_to_s
+        columns.map { |c| (c.state ? c.state.to_s : '?') }.join
       end
     end
 
@@ -40,6 +43,21 @@ module Bio
           yield seq[@col]
         end
       end
+
+      def count &block
+        counter = 0
+        each do | e |
+          found = 
+            if e.kind_of?(String)
+              block.call(Element.new(e))
+            else
+              block.call(e)
+            end
+          counter += 1 if found
+        end
+        counter
+      end
+
     end
 
   end

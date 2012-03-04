@@ -68,16 +68,20 @@ describe "BioAlignment::DelBridges" do
       -------------IFHAVR-TC-HP-----------------
       """
   aln = Alignment.new(string.split(/\n/))
-  print aln.to_s
+  print aln.to_s,"\n"
   columns = aln.columns
   columns.should_not == nil
-  columns.should_not == [] 
+  columns.should_not == []
+  columns.size.should == 42
+  # make sure we are using the same columns
   aln.columns.should == columns
   aln.extend DelBridges
-  aln2, cols = aln.del_bridges
-  print aln2.to_s
+  aln2 = aln.mark_bridges
+  print aln2.to_s,"\n"
   columns2 = aln2.columns
-  columns2.should_not == nil
-  columns2.should_not == [] 
-  aln2.columns.should == columns
+  # columns2.should_not == nil
+  # columns2.should_not == [] 
+  # columns2.size.should == 42
+  # aln2.columns.should == columns2
+  # aln2.columns.should_not == columns
 end

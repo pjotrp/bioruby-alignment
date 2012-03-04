@@ -25,7 +25,7 @@ module Bio
             next if seq == nil or seq.to_s.strip == ""
             @sequences << 
               if seq.kind_of?(String)
-                Sequence.new(i,seq)
+                Sequence.new(i,seq.strip)
               else
                 seq
               end
@@ -45,7 +45,10 @@ module Bio
       end
 
       def to_s
-        map { | seq | seq.to_s }.join("\n")
+        res = ""
+        res += columns_to_s + "\n" if @columns
+        res += map { | seq | seq.to_s }.join("\n")
+        res
       end
 
     end
