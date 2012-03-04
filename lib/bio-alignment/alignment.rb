@@ -20,13 +20,16 @@ module Bio
       def initialize seqs = nil
         @sequences = []
         if seqs 
-          seqs.each_with_index do | seq, i |
+          i = 0
+          seqs.each do | seq |
+            next if seq == nil or seq.to_s.strip == ""
             @sequences << 
               if seq.kind_of?(String)
                 Sequence.new(i,seq)
               else
                 seq
               end
+            i += 1
           end
         end
       end
@@ -39,6 +42,10 @@ module Bio
 
       def each
         rows.each { | seq | yield seq }
+      end
+
+      def to_s
+        map { | seq | seq.to_s }.join("\n")
       end
 
     end
