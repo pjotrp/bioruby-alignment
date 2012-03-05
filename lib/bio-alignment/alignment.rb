@@ -1,7 +1,8 @@
 # Alignment
 
 require 'bio-alignment/pal2nal'
-require 'bio-alignment/column'
+require 'bio-alignment/columns'
+require 'bio-alignment/rows'
 
 module Bio
  
@@ -10,6 +11,7 @@ module Bio
     class Alignment
       include Enumerable
       include Pal2Nal
+      include Rows
       include Columns
 
       attr_accessor :sequences

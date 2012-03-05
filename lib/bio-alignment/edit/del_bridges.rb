@@ -8,8 +8,8 @@ module Bio
       # columns that mostly contain gaps (threshold +percentage+). The 
       # alignment returned is a cloned copy
       def mark_bridges percentage = 30
-        aln = self.clone # not so deep clone
-        # clone column state as we are going to change that
+        aln = self.clone # deep clone
+        # clone column state
         aln.columns.each do | column |
           new_state =
             if column.state

@@ -6,9 +6,7 @@ module Bio
       attr_accessor :state
     end
 
-    # Convenience class for tracking state. Note you can add
-    # any class you like
-    class ColumnState
+    module DeleteState
       attr_accessor :deleted
 
       def delete!
@@ -26,12 +24,14 @@ module Bio
 
     # Convenience class for tracking state. Note you can add
     # any class you like
-    class RowState
-      attr_accessor :deleted
+    class ColumnState
+      include DeleteState
+    end
 
-      def deleted?
-        deleted == true
-      end
+    # Convenience class for tracking state. Note you can add
+    # any class you like
+    class RowState
+      include DeleteState
     end
 
   end
