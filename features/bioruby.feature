@@ -1,9 +1,9 @@
+@bioruby
 Feature: BioAlignment should play with BioRuby 
   In order to use BioRuby functionality
   I want to convert BioAlignment to Bio::Alignment
   And I want to support Bio::Sequence objects
 
-  @bioruby
   Scenario: Use Bio::Sequence to fill BioAlignment
     Given I have multiple Bio::Sequence objects
     When I assign BioAlignment
@@ -22,3 +22,8 @@ Feature: BioAlignment should play with BioRuby
     Given I have a BioAlignment
     When I convert
     Then I should have a BioRuby Bio::Alignment
+
+  Scenario: Give deletion state to a Bio::Sequence object
+    Given I have a BioRuby sequence object
+    When I add RowState
+    Then I should be able to change the delete state

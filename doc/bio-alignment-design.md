@@ -139,7 +139,7 @@ designed to be transaction safe - though you can copy the Matrix any time.
 ## Adding functionality
 
 To ascertain that the basic BioAlignment implementation does not get
-polluted, extra functionality is added by using extra Modules. These
+polluted, extra functionality is added by using modules. These
 modules can be added at run time(!) One advantage is that there is
 less name space pollution, the other is that different implementations
 can be plugged in - using the same interface. For example, here we are
@@ -161,9 +161,27 @@ the functionality is never visible, and never added to the
 environment. This type of runtime plugin is something you can only do
 in a dynamic language.
 
+Likewise you may have your own sequence objects in an alignment. To register
+deletion state, simply extend the sequence with the RowState module:
+
+```ruby
+  require 'bio-alignment/state'
+  bioseq = Bio::Sequence::NA.new("AGCT")
+  bioseq.extend(State)          # add state
+  bioseq.state = RowState.new   # set state
+  p mysequence.state.deleted?   # query state
+  > false
+```
+
+That is impressive - the BioRuby Sequence has no deletion state facility. We
+just added that, and it can even be used in BioAlignment editors which require
+such a state object. See also the scenario "Give deletion state to a
+Bio::Sequence object" in the bioruby.feature.
+
 Note: if we wanted only to allow one plugin per instance at a time, we can
 create a generic interface with a method of the same name for every
-plugged in module. 
+plugged in module. This ascertains that the same method can not be invoked from
+multiple plugins (by default).
 
 ## Methods returning alignments and concurrency
 

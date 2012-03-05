@@ -82,3 +82,20 @@ Then /^I should have a BioRuby Bio::Alignment$/ do
   @bioruby_alignment.consensus_iupac[0..8].should == '???????v?'
 end
 
+Given /^I have a BioRuby sequence object$/ do
+  @bioseq = Bio::Sequence::NA.new("AGCT")
+end
+
+When /^I add RowState$/ do
+  require 'bio-alignment/state'
+  @bioseq.extend State
+  @bioseq.state = RowState.new
+  @bioseq.state.deleted?.should == false
+end
+
+Then /^I should be able to change the delete state$/ do
+  @bioseq.state.delete!
+  @bioseq.state.deleted?.should == true
+end
+
+
