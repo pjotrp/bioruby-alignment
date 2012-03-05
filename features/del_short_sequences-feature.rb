@@ -1,13 +1,20 @@
+require 'bio-alignment/edit/del_short_sequences'
+
 When /^I apply the short sequence rule$/ do
-  pending # express the regexp above with the code you wish you had
+  @aln.extend DelShortSequences
+  @aln2 = @aln.mark_short_sequences
 end
 
 Then /^it should have removed one row$/ do |string|
-  pending # express the regexp above with the code you wish you had
+  check_aln = Alignment.new(string.split(/\n/))
+  new_aln = @aln.del_short_sequences
+  new_aln.to_s.should == check_aln.to_s
 end
 
 Then /^I should be able to track removed rows$/ do
-  pending # express the regexp above with the code you wish you had
+  @aln2.rows.count { |row| row.state.deleted? }.should == 1
+  @aln2.rows[0].state.deleted?.should_be false
+  @aln2.rows[8].state.deleted?.should_be true
 end
 
 
