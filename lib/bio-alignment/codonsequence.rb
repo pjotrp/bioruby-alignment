@@ -95,6 +95,14 @@ module Bio
       def to_aa
         @seq.map { |codon| codon.to_aa }.join('')
       end
+
+      def empty_copy
+        CodonSequence.new(@id,"")
+      end
+
+      def << codon
+        @seq << codon
+      end
         
     end
 

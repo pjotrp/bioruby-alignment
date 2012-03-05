@@ -89,7 +89,22 @@ describe "BioAlignment::DelBridges" do
   aln3 = aln2.columns_where { |col| !col.state.deleted? }
   print aln3.to_s,"\n"
   aln3.rows.first.to_s.should == "SNSFSRPTIIFSGCSTACSGKSELVCGFRSFMLSDV"
+end
 
+describe "BioAlignment::DelBridges for codons" do
   # We are going to do the same for a codon alignment
-  test == false
+  aln = Alignment.new
+  fasta = FastaReader.new('test/data/fasta/codon/codon-alignment.fa')
+  fasta.each do | rec |
+    aln.sequences << CodonSequence.new(rec.id, rec.seq)
+  end
+  aln.extend DelBridges
+  aln2 = aln.mark_bridges
+  # print aln2[0].to_s,"\n"
+  aln2.columns.size.should == 404
+  # count deleted columns
+  aln2.columns.count { |col| col.state.deleted? }.should == 5
+  # create new alignment
+  aln3 = aln2.columns_where { |col| !col.state.deleted? }
+  aln3.columns.size.should == 399
 end

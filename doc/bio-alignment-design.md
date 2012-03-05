@@ -70,7 +70,7 @@ acid with
     print codons.seq[0].to_aa
 ```
 
-in fact, because Sequence is indexable we can write directly
+in fact, because Sequence is index-able we can write directly
 
 ```ruby
     print codons[0].to_aa        # 'M'
@@ -155,7 +155,7 @@ named del_bridges:
 ```
 
 in other words, the functionality in DelBridges gets attached to the
-aln instance at run time, without affecting any other instatiated
+aln instance at run time, without affecting any other instantiated
 object(!) Also, when not requiring 'bio-alignment/edit/del_bridges',
 the functionality is never visible, and never added to the
 environment. This type of runtime plugin is something you can only do
@@ -165,12 +165,12 @@ Note: if we wanted only to allow one plugin per instance at a time, we can
 create a generic interface with a method of the same name for every
 plugged in module. 
 
-## Methods returning alignments
+## Methods returning alignments and concurrency
 
 When an alignment gets changed, e.g. by one of the editing modules, the
-original is copied using the 'clone' method. The idea is never to share
-data. Ruby does not have immutable data, so the only safe way to write
-concurrent code is to copy all data that changes. The 'clone' methods
-implemented in the Alignment class are 'deep' clones.
+original is copied using the 'clone' method. The idea is never to share data in
+this library. Ruby does not really have guaranteed immutable data, so the only
+safe way to write concurrent code is to copy all data before changing. The
+'clone' methods implemented in the Alignment class are 'deep' clones.
 
 Copyright (C) 2012 Pjotr Prins <pjotr.prins@thebird.nl>
