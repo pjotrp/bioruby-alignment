@@ -20,7 +20,7 @@ Feature: Alignment editing, the bridge rule
       -------------IFHAVR-TC-HP-----------------
       """
     When I apply the bridge rule
-    Then it should have removed 4 bridges
+    Then it should have removed 6 bridges
       """
       SNSFSRPTIIFSGCSTACSGKSELVCGFRSFMLSDV
       SNSFSRPTIIFSGCSTACSGKSEQVCGFR---LSDV

@@ -8,7 +8,7 @@ When /^I fetch a column$/ do
   column.should_not be_nil
   column[0].to_s.should == 'cga'
   # ascertain the columns are the same
-  assert(@aln.columns[3] == column)
+  @aln.columns[3].should == column
 end
 
 When /^I inject column state$/ do

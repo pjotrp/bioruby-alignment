@@ -27,6 +27,11 @@ module Bio
         # p aln.columns[0].state
         aln
       end
+
+      # Return an alignment with the bridges removed
+      def del_bridges percentage=30
+        mark_bridges.columns_where { |col| !col.state.deleted? }
+      end
     end
   end
 end
