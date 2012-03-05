@@ -18,13 +18,11 @@ module Bio
               RowState.new
             end
           gap_num = row.count { |e| e.gap? }
-          if (gap_num.to_f/rows.size) > 1.0-percentage/100.0
+          if (gap_num.to_f/row.length) > 1.0-percentage/100.0
             new_state.delete!
           end
           row.state = new_state
         end
-        p self.rows[0].state
-        p aln.rows[0].state
         aln
       end
 
