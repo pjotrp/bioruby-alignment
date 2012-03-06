@@ -1,9 +1,8 @@
 Feature: Alignment editing; remove short sequences
   Remove rows that are too short (short sequences)
 
-  The dropped columns are tracked by the table rows.
+  The dropped sequences are tracked by the row state objects
 
-  @dev
   Scenario: Apply short sequence rule to an amino acid alignment
     Given I have a bridged alignment
       """

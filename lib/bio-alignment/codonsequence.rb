@@ -6,6 +6,9 @@ module Bio
 
     # Codon element for the matrix, used by CodonSequence.
     class Codon
+      GAP = '---'
+      UNDEFINED = 'X'
+
       attr_reader :codon_table
 
       def initialize codon, codon_table = 1
@@ -14,7 +17,7 @@ module Bio
       end
 
       def gap?
-        @codon == '---'
+        @codon == GAP
       end
 
       def undefined?
@@ -36,7 +39,7 @@ module Bio
           if gap?
             return '-'
           elsif undefined?
-            return 'X'
+            return UNDEFINED
           else
             raise 'What?'
           end
@@ -46,6 +49,7 @@ module Bio
 
     private
 
+      # lazy translation of codon to amino acid
       def translate
         @aa ||= Bio::CodonTable[@codon_table][@codon]
         @aa

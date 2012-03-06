@@ -3,11 +3,17 @@ module Bio
 
     # Simple element that can be queried
     class Element
+      GAP = '-'
+      UNDEFINED = 'X'
+
       def initialize c
         @c = c
       end
       def gap?
-        @c == '-'
+        @c == GAP
+      end
+      def undefined?
+        @c == 'X'
       end
       def to_s
         @c
