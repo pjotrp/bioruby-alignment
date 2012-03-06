@@ -14,7 +14,6 @@ end
 Then /^it should have removed two rows$/ do |string|
   check_aln = Alignment.new(string.split(/\n/))
   new_aln = @aln.del_non_informative_sequences
-  print new_aln.to_s,"\n"
   new_aln.to_s.should == check_aln.to_s
 end
 
