@@ -2,14 +2,13 @@
 module Bio
   module BioAlignment
 
-    module DelNonInformativeSequences
-   
-      # Return a new alignment with rows marked for deletion, i.e. mark rows
-      # that mostly contain undefined elements and gaps (threshold
-      # +percentage+). The alignment returned is a cloned copy
-      def mark_non_informative_sequences percentage = 30
+    # Function for marking rows (sequences) and returning a newly
+    # cloned alignment
+    module MarkRow
+      # Mark each seq
+      def mark_rows
         aln = self.clone 
-        # clone row state 
+        # clone row state, or add a state object 
         aln.rows.each do | row |
           new_state =
             if row.state
@@ -24,6 +23,17 @@ module Bio
           row.state = new_state
         end
         aln
+      end
+    end
+
+    module DelNonInformativeSequences
+      include MarkRow
+   
+      # Return a new alignment with rows marked for deletion, i.e. mark rows
+      # that mostly contain undefined elements and gaps (threshold
+      # +percentage+). The alignment returned is a cloned copy
+      def mark_non_informative_sequences percentage = 30
+        mark_row
       end
 
       def del_non_informative_sequences percentage=30
