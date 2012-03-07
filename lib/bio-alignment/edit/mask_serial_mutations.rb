@@ -5,7 +5,8 @@ module Bio
 
     module MaskSerialMutations
       include MarkRows
-   
+
+      # edit copied alignment and mark elements
       def mark_serial_mutations 
         mark_row_elements { |row| 
           row.each { |e| 
@@ -16,6 +17,7 @@ module Bio
           #   state.delete!
           # end
           # state
+          row  # return changed sequence
         }
       end
 

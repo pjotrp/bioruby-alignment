@@ -27,8 +27,7 @@ module Bio
       end
     end
 
-    # A Sequence is a simple and efficient container for String sequences. To
-    # add state to elements unpack it into an Elements object with to_elements.
+    # Elements is a container for Element sequences. 
     #
     class Elements
       include Enumerable
@@ -37,7 +36,18 @@ module Bio
       attr_reader :id, :seq
       def initialize id, seq
         @id = id
-        @seq = seq
+        @seq = []
+        if seq.kind_of?(Elements)
+          @seq = seq.clone
+        elsif seq.kind_of?(String)
+          seq.each_char do |c|
+            @seq << Element.new(c)
+          end
+        else
+          seq.each do |s|
+            @seq << Element.new(s)
+          end
+        end
       end
 
       def [] index
@@ -48,32 +58,30 @@ module Bio
         @seq.length
       end
 
-      # Return each element in the Sequence as an Element opbject, so it
-      # can be queried for gap? and undefined?
       def each
-        @seq.each_char { | c | yield Element.new(c) }
+        @seq.each { |e| yield e }
       end
 
       def to_s
-        @seq.to_s
+        @seq.map { |e| e.to_s }.join("")
       end
 
       def << element
-        @seq += element.to_s
+        @seq << element
       end
 
       def empty_copy
-        Sequence.new(@id,"")
+        Elements.new(@id,"")
       end
 
       def clone
-        Sequence.new(@id,@seq.clone)
+        copy = Elements.new(@id,"")
+        @seq.each do |e|
+          copy << e.dup
+        end
+        copy
       end
 
-      # Return Sequence (string) as an Elements object
-      def to_elements
-        Elements.new(@id,@seq)
-      end
     end
   end
 

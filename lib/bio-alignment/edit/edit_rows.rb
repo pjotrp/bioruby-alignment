@@ -14,8 +14,16 @@ module Bio
         aln
       end
 
+      # allow the marking of elements in a copied alignment, making sure 
+      # each element is a proper Element object that can contain state.
+      # A Sequence alignment will be turned into an Elements alignment.
       def mark_row_elements &block
         aln = markrows_clone
+        aln.rows.each_with_index do | row,i |
+          new_seq = block.call(row.to_elements)
+          aln.rows[i] = new_seq
+        end
+        aln
       end
 
     protected 
