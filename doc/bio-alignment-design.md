@@ -94,6 +94,16 @@ element or a gap. Also it should respond to the to_s method.
 An element can contain any pay load.  If a list of attributes exists
 in the sequence object, it can be used.
 
+## Elements and CodonSequence
+
+Where the Sequence class is the most basic String representation of a sequence, we
+also have the Elements class, which allows each element in a coding sequence to 
+carry state.
+
+The third list type we normally use in an Alignment, next to Sequence and
+Elements, is the CodonSequence (remember, you can easily roll your own Sequence
+type).
+
 ## Column
 
 The column list tracks the columns of the alignment. The requirement
