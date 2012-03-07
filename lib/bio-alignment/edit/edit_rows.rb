@@ -13,30 +13,29 @@ module Bio
         end
         aln
       end
-    end
 
-    def mark_row_elements &block
-      aln = markrows_clone
-    end
-
-  protected 
-
-    def markrows_clone
-      aln = self.clone 
-      # clone row state, or add a state object 
-      aln.rows.each do | row |
-        new_state =
-          if row.state
-            row.state.clone
-          else
-            RowState.new
-          end
-        row.state = new_state
+      def mark_row_elements &block
+        aln = markrows_clone
       end
-      aln
+
+    protected 
+
+      def markrows_clone
+        aln = self.clone 
+        # clone row state, or add a state object 
+        aln.rows.each do | row |
+          new_state =
+            if row.state
+              row.state.clone
+            else
+              RowState.new
+            end
+          row.state = new_state
+        end
+        aln
+      end
+
     end
-
-
   end
 end
 

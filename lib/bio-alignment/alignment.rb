@@ -11,6 +11,7 @@ module Bio
     class Alignment
       include Enumerable
       include Pal2Nal
+      include Elements
       include Rows
       include Columns
 
