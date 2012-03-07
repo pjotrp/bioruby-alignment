@@ -174,12 +174,13 @@ that are not marked for deletion
   aln2 = aln.rows_where { |row| !row.state.deleted? }
 ```
 
-The general idea is that there are many potential ways of selecting rows,
-and changing some state. The 'mark_rows' function/iterator takes care
-of the plumbing. All the programmer needs to do is to set the
+The general idea is that there are many potential ways of selecting
+rows, and changing some state. The 'mark_rows' function/iterator takes
+care of the plumbing. All the programmer needs to do is to set the
 criterion, in this case a gap percentage, and tell the library what
-state has to change. You won't be surprised that marking columns looks 
-much the same
+state has to change. In this example we only access one row, but you
+can also access the other rows. You won't be surprised that marking
+columns looks much the same
 
 ```ruby
   include MarkColumns
@@ -192,14 +193,20 @@ much the same
   }
 ```
 
-Note that, instead of directly editing alignments, this module always uses
-a two step process. First items are marked through a state, next the alignment
-is rewritten using this state. The advantage of using an intermediate state is 
-that the state can be queried for creating nice output/graphics, using both 
-the original and changed alignments. For example, it is really easy to create 
-a nice output showing which columns were deleted in the original alignment, or
-which amino acids were masked. Still, methods are available, which
-hide the two step process, as seen in the next example.
+Next to modifying the state of rows and columns, you can also access
+the state of alignment elements (i.e. codons, amino acids, nucleotide
+acids).  
+
+Note that, instead of directly editing alignments, this module always
+makes it a two step process. First items are marked through the state,
+next the alignment is rewritten using this state. The advantage of
+using an intermediate state is that the state can be queried for
+creating (for example) nice output/graphics, using both the original
+and changed alignments. For example, it is really easy to create a
+nice output showing which columns were deleted in the original
+alignment, or which amino acids were masked. Still, methods are
+available, which hide the two step process, as seen in the next
+example.
 
 BioAlignment supports many alignment editing features, which are
 listed
