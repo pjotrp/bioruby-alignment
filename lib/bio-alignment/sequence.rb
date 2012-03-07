@@ -57,7 +57,7 @@ module Bio
       end
 
       def clone
-        Sequence.new(@id,@seq)
+        Sequence.new(@id.clone,@seq.clone)
       end
     end
   end
