@@ -1,27 +1,29 @@
+@dev
 Feature: Alignment editing masking serial mutations
   Edit an alignment removing or masking unique elements column-wise. 
   
   If a sequence has a unique AA in a column it is a single mutation event. If
-  multiple neighbouring AA's are also unique we suspect the sequence is an
-  outlier. This rule masks, or deletes, stretches of unique AAs. The stretch of
-  unique AA's is defined in 'max_serial_unique' (default 5, so two bordering
-  unique AA's are allowed).
+  multiple neighbouring AA's are also unique we suspect the (partial) sequence
+  may be an outlier. This rule masks, or deletes, stretches of totally unique
+  AAs. The stretch of unique AA's is defined in 'max_serial_unique' (default 5,
+  so two bordering unique AA's are allowed). We also allow small gaps (default
+  max 2) to allow for small deletions.
 
   Scenario: Apply rule to an amino acid alignment
     Given I have an alignment
       """
       ----SNSFSRPTIIFSGCSTACSGK--SELVCGFRSFMLSDV
       SSIISNSFSRPTIIFSGCSTACSGK--SEQVCGFR---LSDV
-      SSIISNSFSRPTIIFSGCSTACSQQKLTSEQVCFR---LSDV
+      SSIISNSFSRPTIIFSGCSTACSQQKKTSEQVCFR---LSDV
       ----PKLFSRPTIIFSGCSTACSGK--SEPVCGFRSFMLSDV
       ----------PTIIFSGCSKACSGKGLSELVCGFRSFMLSDV
       ----------PTIIFSGCSKACSGK-----FRSFRSFMLSAV
       ----------PTIIFSGCSKACSGK-----VCGIFHAVRSFM
       ----------PTIIFSGCSKACSGK--SELVCGFRSFMLSAV
-      -------------IFHAVR-TC-HP-----------------
+      -------------TTTTTT-TT-HP-----------------
       """
-    When I apply rule masking with X and max_gap_size 5
-    Then it should result in
+    When I apply rule masking with X and max_gap_size 2
+    Then mask serial mutations should result in
       """
       ----SNSFSRPTIIFSGCSTACSGK--SELVCGFRSFMLSDV
       SSIISNSFSRPTIIFSGCSTACSGK--SEQVCGFR---LSDV
