@@ -191,15 +191,18 @@ this library. Ruby does not really have guaranteed immutable data, so the only
 safe way to write concurrent code is to copy all data before changing. The
 'clone' methods implemented in the Alignment class are 'deep' clones.
 
-Not only is copying a good idea for concurrency, but it also allows one
-to write succinct and descriptive code in functional style, such as
+Not only is copying a good idea for concurrency (and lazy caching of
+values), but it also allows one to write succinct and descriptive code
+in functional style, such as
 
 ```ruby
     aln2 = aln.mark_bridges.columns_where { |col| !col.state.deleted? }
 ```
 
 where aln2 is a copy (of aln) with columns removed that were marked for
-deletion.
-
+deletion.  I.e. ''Functional programming in Ruby.'' If functions can be easily
+'piped', and code can be easily copy and pasted into different
+algorithms, it is likely that the module is written in a
+functional style.
 
 Copyright (C) 2012 Pjotr Prins <pjotr.prins@thebird.nl>

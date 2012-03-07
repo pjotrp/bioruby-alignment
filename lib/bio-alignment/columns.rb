@@ -71,6 +71,10 @@ module Bio
         end
       end
 
+      def length
+        @length ||= @aln.rows.size
+      end
+
       def count &block
         counter = 0
         each do | e |
