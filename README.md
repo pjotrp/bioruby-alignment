@@ -195,7 +195,11 @@ columns looks much the same
 
 Next to modifying the state of rows and columns, you can also access
 the state of alignment elements (i.e. codons, amino acids, nucleotide
-acids).  
+acids). For example
+
+```ruby
+  # coming
+```
 
 Note that, instead of directly editing alignments, this module always
 makes it a two step process. First items are marked through the state,
