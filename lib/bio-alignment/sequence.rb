@@ -55,6 +55,10 @@ module Bio
       def empty_copy
         Sequence.new(@id,"")
       end
+
+      def clone
+        Sequence.new(@id,@seq)
+      end
     end
   end
 end

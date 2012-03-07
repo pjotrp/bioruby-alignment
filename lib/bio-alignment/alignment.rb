@@ -54,13 +54,14 @@ module Bio
         res
       end
 
-      # Return a deep cloned alignment
+      # Return a deep cloned alignment. This method clones sequences,
+      # and the state objects
       def clone
         aln = super
         # clone the sequences
         aln.sequences = []
         each do | seq |
-          aln.sequences << seq
+          aln.sequences << seq.clone
         end
         aln.clone_columns! if @columns
         aln
