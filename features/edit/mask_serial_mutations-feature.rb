@@ -1,4 +1,5 @@
 require 'bio-alignment'
+require 'bio-alignment/edit/mask_serial_mutations'
 
 Given /^I have an alignment$/ do |string|
   @aln = Alignment.new(string.split(/\n/))

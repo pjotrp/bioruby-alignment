@@ -7,12 +7,15 @@ module Bio
       include MarkRows
    
       def mark_serial_mutations 
-        mark_rows { |state,row| 
-          num = row.count { |e| e.gap? }
-          if (num.to_f/row.length) > 1.0-percentage/100.0
-            state.delete!
-          end
-          state
+        mark_row_elements { |row| 
+          row.each { |e| 
+            p e
+          }
+          # num = row.count { |e| e.gap? }
+          # if (num.to_f/row.length) > 1.0-percentage/100.0
+          #   state.delete!
+          # end
+          # state
         }
       end
 

@@ -4,8 +4,8 @@ module Bio
     # Function for marking rows (sequences), when a row block returns the new
     # state, and returning a newly cloned alignment
     module MarkRows
-      # Mark each seq
-      def mark_rows &block
+
+      def markrows_clone
         aln = self.clone 
         # clone row state, or add a state object 
         aln.rows.each do | row |
@@ -15,11 +15,25 @@ module Bio
             else
               RowState.new
             end
-          row.state = block.call(new_state,row)
+          row.state = new_state
+        end
+        aln
+      end
+
+      # Mark each seq
+      def mark_rows &block
+        aln = markrows_clone
+        aln.rows.each do | row |
+          row.state = block.call(row.state,row)
         end
         aln
       end
     end
+
+    def mark_row_elements &block
+
+    end
+
   end
 end
 
