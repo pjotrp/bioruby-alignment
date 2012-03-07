@@ -22,6 +22,22 @@ module Bio
       end
     end
 
+    module MaskState
+      attr_accessor :masked
+
+      def mask!
+        @masked = true
+      end
+
+      def masked?
+        @masked == true
+      end
+
+      def to_s
+        (masked? ? 'X' : '.')
+      end
+    end
+
     # Convenience class for tracking state. Note you can add
     # any class you like
     class ColumnState
@@ -32,6 +48,10 @@ module Bio
     # any class you like
     class RowState
       include DeleteState
+    end
+
+    class ElementState
+      include MaskState
     end
 
   end

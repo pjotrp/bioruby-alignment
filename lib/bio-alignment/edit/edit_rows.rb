@@ -19,9 +19,9 @@ module Bio
       # A Sequence alignment will be turned into an Elements alignment.
       def mark_row_elements &block
         aln = markrows_clone
-        aln.rows.each_with_index do | row,i |
-          new_seq = block.call(row.to_elements)
-          aln.rows[i] = new_seq
+        aln.rows.each_with_index do | row,rownum |
+          new_seq = block.call(row.to_elements,rownum)
+          aln.rows[rownum] = new_seq
         end
         aln
       end

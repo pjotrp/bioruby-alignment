@@ -54,6 +54,7 @@ module Bio
     # can have state by attaching state objects
     class Column
       include State
+      include Enumerable
 
       def initialize aln, col
         @aln = aln
@@ -64,7 +65,7 @@ module Bio
         @aln[index][@col] 
       end
 
-      # iterator fetches a column on demand
+      # iterator fetches a column on demand, yielding column elements
       def each
         @aln.each do | seq |
           yield seq[@col]
@@ -87,6 +88,10 @@ module Bio
           counter += 1 if found
         end
         counter
+      end
+
+      def to_s
+        map{|e| e.to_s}.join('')
       end
 
     end
