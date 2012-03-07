@@ -1,31 +1,22 @@
+require 'bio-alignment/edit/edit_columns'
 
 module Bio
   module BioAlignment
 
     module DelBridges
+      include MarkColumns
    
       # Return a new alignment with columns marked for deletion, i.e. mark
       # columns that mostly contain gaps (threshold +percentage+). The 
       # alignment returned is a cloned copy
       def mark_bridges percentage = 30
-        aln = self.clone # deep clone
-        # clone column state
-        aln.columns.each do | column |
-          new_state =
-            if column.state
-              column.state.clone
-            else
-              ColumnState.new
-            end
-          gap_num = column.count { |e| e.gap? }
-          if (gap_num.to_f/rows.size) > 1.0-percentage/100.0
-            new_state.delete!
+        mark_columns { |state,column| 
+          num = column.count { |e| e.gap? or e.undefined? }
+          if (num.to_f/column.length) > 1.0-percentage/100.0
+            state.delete!
           end
-          column.state = new_state
-        end
-        # p self.columns[0].state
-        # p aln.columns[0].state
-        aln
+          state
+        }
       end
 
       # Return an alignment with the bridges removed

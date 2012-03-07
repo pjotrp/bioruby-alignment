@@ -178,7 +178,19 @@ The general idea is that there are many potential ways of selecting rows,
 and changing some state. The 'mark_rows' function/iterator takes care
 of the plumbing. All the programmer needs to do is to set the
 criterion, in this case a gap percentage, and tell the library what
-state has to change.
+state has to change. You won't be surprised that marking columns looks 
+much the same
+
+```ruby
+  include MarkColumns
+  mark_columns { |colstate,col|  # for every row/sequence
+    num = col.count { |e| e.gap? }
+    if (num.to_f/col.length) > 0.5
+      colstate.delete! 
+    end
+    colstate
+  }
+```
 
 Note that, instead of directly editing alignments, this module always uses
 a two step process. First items are marked through a state, next the alignment
