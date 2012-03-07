@@ -148,19 +148,60 @@ resulting in the codon alignment.
 
 ### Alignment editing
 
-BioAlignment supports multiple alignment editing features, which are
+One of the primary reasons for creating BioAlignment is to provide
+easy ways of editing alignments using a functional style of
+programming. Primitives are provided which take out much of the
+plumbing, such as maintaining row/column/element state, and allow
+copy-on-edit (so no conflicts arise in concurrent code). For example,
+to walk an alignment by row, and update the row state, you can mark
+all rows for deletion which contain many gaps
+
+```ruby
+  include MarkRows
+  mark_rows { |rowstate,row|  # for every row/sequence
+    num = row.count { |e| e.gap? }
+    if (num.to_f/row.length) > 0.5
+      rowstate.delete!  # mark row for deletion
+    end
+    rowstate   # returns the updated row state
+  }
+```
+
+next, return a (deep) copy of the original alignment with the rows
+that are not marked for deletion
+
+```ruby
+  aln2 = aln.rows_where { |row| !row.state.deleted? }
+```
+
+The general idea is that there are many potential ways of selecting rows,
+and changing some state. The 'mark_rows' function/iterator takes care
+of the plumbing. All the programmer needs to do is to set the
+criterion, in this case a gap percentage, and tell the library what
+state has to change.
+
+Note that, instead of directly editing alignments, this module always uses
+a two step process. First items are marked through a state, next the alignment
+is rewritten using this state. The advantage of using an intermediate state is 
+that the state can be queried for creating nice output/graphics, using both 
+the original and changed alignments. For example, it is really easy to create 
+a nice output showing which columns were deleted in the original alignment, or
+which amino acids were masked. Still, methods are available, which
+hide the two step process, as seen in the next example.
+
+BioAlignment supports many alignment editing features, which are
 listed
 [here](https://github.com/pjotrp/bioruby-alignment/tree/master/features/edit).
-Each edition feature is added at runtime(!) Example:
+An edit feature is added at runtime(!) Example:
 
 ```ruby
   require 'bio-alignment/edit/del_bridges'
 
-  aln.extend DelBridges         # bring the module into scope
+  aln.extend DelBridges         # mix the module into the object 
   aln2 = aln.del_bridges        # execute the alignment editor
 ```
 
-
+where aln2 is a copy of aln with bridging columns deleted.
 
 ### See also
 
