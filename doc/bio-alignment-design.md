@@ -210,9 +210,9 @@ in functional style, such as
 ```
 
 where aln2 is a copy (of aln) with columns removed that were marked for
-deletion.  I.e. ''Functional programming in Ruby.'' If functions can be easily
-'piped', and code can be easily copy and pasted into different
-algorithms, it is likely that the module is written in a
-functional style.
+deletion.  In other words, we apply ''Functional programming in Ruby.'' If
+functions can be easily 'piped', and code can be easily copy and pasted into
+different algorithms, it is likely that the module is written in a functional
+style.
 
 Copyright (C) 2012 Pjotr Prins <pjotr.prins@thebird.nl>
