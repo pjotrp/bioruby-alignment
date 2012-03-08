@@ -44,14 +44,18 @@ module Bio
 
       def each
         rows.each { | seq | yield seq }
+        self
       end
 
       def each_element
         each { |seq| seq.each { |e| yield e }}
+        self
       end
-      
-      def each_element!
-        each { |seq| seq.each_with_index { |e,i| seq.seq[i] = yield e }}
+     
+      # clopy alignment and allow updating elements
+      def update_each_element
+        aln = self.clone
+        aln.each { |seq| seq.each_with_index { |e,i| seq.seq[i] = yield e }}
       end
 
       def to_s

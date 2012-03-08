@@ -6,8 +6,10 @@ module Bio
     module MaskSerialMutations
       include MarkRows
 
-      # edit copied alignment and mark elements
-      def mark_serial_mutations 
+      # edit copied alignment and mark elements if they are a continuous of
+      # unique mutations in the alignment. The default is at least 5 mutations
+      # in a row.
+      def mark_serial_mutations min_serial=5
         mark_row_elements { |row,rownum| 
           # if an element is unique, mask it
           row.each_with_index do |e,colnum|
@@ -24,7 +26,7 @@ module Bio
             if e.state.masked?
               group << e
             else
-              if group.length <= 5
+              if group.length <= min_serial
                 # the group is too small
                 group.each do | e2 |
                   e2.state.unmask!

@@ -6,8 +6,7 @@ Feature: Alignment editing masking serial mutations
   multiple neighbouring AA's are also unique we suspect the (partial) sequence
   may be an outlier. This rule masks, or deletes, stretches of totally unique
   AAs. The stretch of unique AA's is defined in 'max_serial_unique' (default 5,
-  so two bordering unique AA's are allowed). We also allow small gaps (default
-  max 2) to allow for small deletions.
+  so two bordering unique AA's are allowed). Gaps within a series are allowed.
 
   Scenario: Apply rule to an amino acid alignment
     Given I have an alignment
@@ -22,7 +21,7 @@ Feature: Alignment editing masking serial mutations
       ----------PTIIFSGCSKACSGK--SELVCGFRSFMLSAV
       -------------TTTTTT-TT-HP-----------------
       """
-    When I apply rule masking with X and max_gap_size 2
+    When I apply rule masking with X
     Then mask serial mutations should result in
       """
       ----SNSFSRPTIIFSGCSTACSGK--SELVCGFRSFMLSDV
