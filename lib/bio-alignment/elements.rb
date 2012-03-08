@@ -2,12 +2,6 @@
 module Bio
   module BioAlignment
 
-    module MaskElements
-      def mask_with value
-        self.clone
-      end
-    end
-
     # Simple element that can be queried
     class Element
       GAP = '-'
@@ -67,7 +61,7 @@ module Bio
       end
 
       def to_s
-        @seq.map { |e| e.to_s }.join("")
+        @seq.map{|e| e.to_s }.join("")
       end
 
       def << element

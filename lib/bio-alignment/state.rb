@@ -29,6 +29,10 @@ module Bio
         @masked = true
       end
 
+      def unmask!
+        @masked = false
+      end
+
       def masked?
         @masked == true
       end

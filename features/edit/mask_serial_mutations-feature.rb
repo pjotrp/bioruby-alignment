@@ -12,7 +12,10 @@ end
 
 Then /^mask serial mutations should result in$/ do |string|
   check_aln = Alignment.new(string.split(/\n/))
-  new_aln = @marked_aln.mask_with "X"
+  # change in place - should we do this?
+  @marked_aln.each_element! { |e| e = Element.new("X") if e.state.masked? ; e}
+  new_aln = @marked_aln
+  print 'final:',new_aln.class,new_aln.to_s
   new_aln.to_s.should == check_aln.to_s
 end
 

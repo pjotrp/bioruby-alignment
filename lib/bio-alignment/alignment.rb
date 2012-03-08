@@ -11,7 +11,6 @@ module Bio
     class Alignment
       include Enumerable
       include Pal2Nal
-      include MaskElements
       include Rows
       include Columns
 
@@ -47,10 +46,18 @@ module Bio
         rows.each { | seq | yield seq }
       end
 
+      def each_element
+        each { |seq| seq.each { |e| yield e }}
+      end
+      
+      def each_element!
+        each { |seq| seq.each_with_index { |e,i| seq.seq[i] = yield e }}
+      end
+
       def to_s
         res = ""
         res += columns_to_s + "\n" if @columns
-        res += map { | seq | seq.to_s }.join("\n")
+        res += map{ |seq| seq.to_s }.join("\n")
         res
       end
 
