@@ -4,7 +4,7 @@ Feature: Alignment editing with the Island rule
   they are possibly/probably misaligned.
 
   Drop all 'islands' in a sequence with low consensus, that show a gap larger
-  than 'max_gap_size' (default 3) on both sides, and are shorter than
+  than 'min_gap_size' (default 3) on both sides, and are shorter than
   'max_island_size' (default 30). An island larger than 30 elements is arguably
   no longer an island, and low consensus stretches may be loops - it is up to
   the alignment procedure to get that right. We also allow for micro deletions
@@ -12,10 +12,10 @@ Feature: Alignment editing with the Island rule
   
   The island consensus is calculated by column. If more than 50% of the island
   shows consensus, the island is retained. Consensus for each element is
-  defined as the number of matches in the column (default 1).
+  defined here as the number of matches in the column (default 1).
 
   Scenario: Apply island rule to an amino acid alignment
-    Given I have an alignment
+    Given I have an alignment with islands
       """
       ----SNSFSRPTIIFSGCSTACSGK--SELVCGFRSFMLSDV
       SSIISNSFSRPTIIFSGCSTACSGK--SEQVCGFR---LSDV
@@ -35,9 +35,21 @@ Feature: Alignment editing with the Island rule
       SSIISNSFSRPTIIFSGCSTACSGKLTSEQVCGFR---LSDV
       ----PKLFSRPTIIFSGCSTACSGK--SEPVCGFRSFMLSDV
       ----------PTIIFSGCSKACSGKGLSELVCGFRSFMLSDV
+      ----------PTIIFSGCSKACSGK-----XXXXXXXXXXXX
+      ----------PTIIFSGCSKACSGK-----XXXXXXXXXXXX
+      ----------PTIIFSGCSKACSGK--SELVCGFRSFMLSAV
+      -------------XXXXXX-XX-XX-----------------
+      """
+    Then it should also be able to delete islands
+      """
+      ----SNSFSRPTIIFSGCSTACSGK--SELVCGFRSFMLSDV
+      SSIISNSFSRPTIIFSGCSTACSGK--SEQVCGFR---LSDV
+      SSIISNSFSRPTIIFSGCSTACSGKLTSEQVCGFR---LSDV
+      ----PKLFSRPTIIFSGCSTACSGK--SEPVCGFRSFMLSDV
+      ----------PTIIFSGCSKACSGKGLSELVCGFRSFMLSDV
       ----------PTIIFSGCSKACSGK-----------------
-      ----------PTIIFSGCSKACSGK-----VCGFRSFMLSAV
+      ----------PTIIFSGCSKACSGK-----------------
       ----------PTIIFSGCSKACSGK--SELVCGFRSFMLSAV
       ------------------------------------------
       """
-    Then it should also be able to delete islands
+
