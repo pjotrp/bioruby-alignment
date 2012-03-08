@@ -1,4 +1,3 @@
-@dev
 Feature: Alignment editing masking serial mutations
   Edit an alignment removing or masking unique elements column-wise. 
   

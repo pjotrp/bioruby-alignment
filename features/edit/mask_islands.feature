@@ -1,14 +1,14 @@
+@dev
 Feature: Alignment editing with the Island rule
   The idea is to drop hypervariable 'floating' sequences, or islands, as 
   they are possibly/probably misaligned.
 
   Drop all 'islands' in a sequence with low consensus, that show a gap larger
   than 'max_gap_size' (default 3) on both sides, and are shorter than
-  'min_island_size' (default 30). The latter may be a large size, as an island
-  needs to loop in and out several times to be (arguably) functional. We also
-  add a parameter 'max_gap_size_inside' (default 2) which allows for small gaps
-  inside the island - the total island size is calculated including
-  those small gaps. 
+  'max_island_size' (default 30). An island larger than 30 elements is arguably
+  no longer an island, and low consensus stretches may be loops - it is up to
+  the alignment procedure to get that right. We also allow for micro deletions
+  inside an alignment (1 or 2 elements).
   
   The island consensus is calculated by column. If more than 50% of the island
   shows consensus, the island is retained. Consensus for each element is
@@ -28,7 +28,7 @@ Feature: Alignment editing with the Island rule
       -------------IFHAVR-TC-HP-----------------
       """
     When I apply island rule with max_gap_size 4
-    Then it should have removed 2 islands
+    Then it should have masked islands
       """
       ----SNSFSRPTIIFSGCSTACSGK--SELVCGFRSFMLSDV
       SSIISNSFSRPTIIFSGCSTACSGK--SEQVCGFR---LSDV
@@ -40,4 +40,4 @@ Feature: Alignment editing with the Island rule
       ----------PTIIFSGCSKACSGK--SELVCGFRSFMLSAV
       ------------------------------------------
       """
-
+    Then it should also be able to delete islands
