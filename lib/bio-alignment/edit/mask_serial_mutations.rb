@@ -20,13 +20,14 @@ module Bio
           # start unmasking. First group all elements
           group = []
           row.each_with_index do |e,colnum|
+            next if e.gap?
             if e.state.masked?
               group << e
             else
               if group.length <= 5
                 # the group is too small
                 group.each do | e2 |
-                  e.state.unmask!
+                  e2.state.unmask!
                 end
               end
               group = []
