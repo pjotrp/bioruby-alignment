@@ -29,6 +29,7 @@ aligmment (note codon gaps are represented by '---')
   require 'bio-alignment'
   require 'bigbio' # Fasta reader and writer
 
+  include Bio::BioAlignment
   aln = Alignment.new
   fasta = FastaReader.new('codon-alignment.fa')
   fasta.each do | rec |
