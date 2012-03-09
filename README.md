@@ -82,11 +82,13 @@ BioAlignment supports adding BioRuby's Bio::Sequence objects:
 
 ```ruby
   require 'bio'  # BioRuby
+  require 'bio-alignment'
   require 'bio-alignment/bioruby' # make Bio::Sequence enumerable
-  
+  include Bio::BioAlignment
+
   aln = Alignment.new
-  aln << Bio::Sequence::NA.new("atgcatgcaaaa")
-  aln << Bio::Sequence::NA.new("atg---tcaaaa")
+  aln.sequences << Bio::Sequence::NA.new("atgcatgcaaaa")
+  aln.sequences << Bio::Sequence::NA.new("atg---tcaaaa")
 ```
 
 and we can transform BioAlignment into BioRuby's Bio::Alignment and
