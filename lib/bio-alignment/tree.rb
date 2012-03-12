@@ -52,6 +52,11 @@ module Bio
       def parent
         @tree.parent(self)
       end
+
+      # Get the distance to another node (FIXME: write test)
+      def distance other
+        @tree.distance(self,other)
+      end
     end
   end
 end
