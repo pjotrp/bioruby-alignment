@@ -196,13 +196,26 @@ columns looks much the same
   }
 ```
 
+''count'' is one of the universal functions that counts elements in a
+row, column, or alignment.
+
 Next to modifying the state of rows and columns, you can also access
 the state of alignment elements (i.e. codons, amino acids, nucleotide
-acids). For example
+acids). For example, here we mask every element that has a masked
+state
 
 ```ruby
-  # coming
+  aln = marked_aln.update_each_element { |e| (e.state.masked? ?  Element.new("X"):e)}
 ```
+
+and, here we remove every masked element by turning it into a gap
+
+```ruby
+  aln = marked_aln.update_each_element { |e| (e.state.masked? ? Element.new("-"):e)}
+```
+
+''update_each_element'' visits every element in the MSA, and replaces
+the old with the new. 
 
 Note that, instead of directly editing alignments, this module always
 makes it a two step process. First items are marked through the state,
