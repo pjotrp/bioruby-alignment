@@ -28,6 +28,7 @@ Then /^I should be able to traverse the tree$/ do
   seq7 = children.last
   seq7.name.should == 'seq7'
   seq7.leaf?.should == true
+  seq7.parent.should == root
 end
 
 Then /^fetch elements from the MSA from each end node in the tree$/ do

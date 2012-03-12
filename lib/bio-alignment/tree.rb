@@ -13,7 +13,7 @@ module Bio
 
       def Tree::init tree
         if tree.kind_of?(Bio::Tree)
-          # walk all nodes
+          # walk all nodes and add the tree info
           tree.each_node do | node |
             node.set_tree(tree)
           end
@@ -40,7 +40,6 @@ module Bio
       end
 
       def leaf?
-        p [:children,@tree.children(self)]
         children.size == 0
       end
 
@@ -48,6 +47,9 @@ module Bio
         @tree.children(self)
       end
 
+      def parent
+        @tree.parent(self)
+      end
     end
   end
 end
