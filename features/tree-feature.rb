@@ -20,8 +20,14 @@ Given /^I have a phylogenetic tree in Newick format$/ do |string|
 end
 
 Then /^I should be able to traverse the tree$/ do
-  # @aln.extend AlignmentTree
-  pending # express the regexp above with the code you wish you had
+  @aln.link_tree(@tree)
+  root = @aln.root # get the root of the tree
+  root.leaf?.should == false
+  children = root.children
+  children.map { |n| n.name }.sort.should == ["","seq7"]
+  seq7 = children.last
+  seq7.name.should == 'seq7'
+  seq7.leaf?.should == true
 end
 
 Then /^fetch elements from the MSA from each end node in the tree$/ do

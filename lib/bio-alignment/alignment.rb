@@ -78,6 +78,14 @@ module Bio
         aln
       end
 
+      # extend BioAlignment with Tree functionality - this method adds 
+      # a tree and pulls in the functionality of the Tree module. Returns
+      # the tree traverser
+      def link_tree tree
+        extend Tree
+        @tree = Tree::init(tree)
+        @tree
+      end
     end
   end
 end
