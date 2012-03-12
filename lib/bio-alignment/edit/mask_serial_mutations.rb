@@ -13,7 +13,7 @@ module Bio
         mark_row_elements { |row,rownum| 
           # if an element is unique, mask it
           row.each_with_index do |e,colnum|
-            e.state = ElementState.new
+            e.state = ElementMaskedState.new
             column = columns[colnum]
             e.state.mask! if column.count{|e2| !e2.gap? and e2 == e } == 1
             # print e,',',e.state,';'

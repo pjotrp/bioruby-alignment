@@ -22,6 +22,26 @@ module Bio
       end
     end
 
+    module MarkState
+      attr_accessor :marked
+
+      def mark!
+        @marked = true
+      end
+
+      def unmark!
+        @marked = false
+      end
+
+      def marked?
+        @marked == true
+      end
+
+      def to_s
+        (marked? ? 'X' : '.')
+      end
+    end
+
     module MaskState
       attr_accessor :masked
 
@@ -55,6 +75,10 @@ module Bio
     end
 
     class ElementState
+      include MarkState
+    end
+
+    class ElementMaskedState
       include MaskState
     end
 

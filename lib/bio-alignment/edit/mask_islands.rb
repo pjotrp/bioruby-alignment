@@ -6,7 +6,7 @@ module Bio
     module MaskIslands
       include MarkRows
 
-      class IslandElementState < ElementState
+      class IslandElementState < ElementMaskedState
         attr_accessor :unique
         def to_s
           super + (@unique?'U':' ')

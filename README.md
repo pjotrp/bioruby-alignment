@@ -205,28 +205,28 @@ acids). For example, here we mask every element that has a masked
 state
 
 ```ruby
-  aln = marked_aln.update_each_element { |e| (e.state.masked? ?  Element.new("X"):e)}
+  aln = masked_aln.update_each_element { |e| (e.state.masked? ?  Element.new("X"):e)}
 ```
 
-and, here we remove every masked element by turning it into a gap
+and, here we remove every marked element by turning it into a gap
 
 ```ruby
-  aln = marked_aln.update_each_element { |e| (e.state.masked? ? Element.new("-"):e)}
+  aln = marked_aln.update_each_element { |e| (e.state.marked? ? Element.new("-"):e)}
 ```
 
 ''update_each_element'' visits every element in the MSA, and replaces
 the old with the new. 
 
-Note that, instead of directly editing alignments, this module always
-makes it a two step process. First items are marked through the state,
-next the alignment is rewritten using this state. The advantage of
-using an intermediate state is that the state can be queried for
-creating (for example) nice output/graphics, using both the original
-and changed alignments. For example, it is really easy to create a
-nice output showing which columns were deleted in the original
-alignment, or which amino acids were masked. Still, methods are
-available, which hide the two step process, as seen in the next
-example.
+It is important to note that, instead of directly editing alignments
+in place, this module always makes it a two step process. First items
+are masked/marked through the state of the rows/columns/elements, next
+the alignment is rewritten using this state. The advantage of using an
+intermediate state is that the state can be queried for creating (for
+example) nice output/graphics, using both the original and changed
+alignments. For example, it is really easy to create a nice output
+showing which columns were deleted in the original alignment, or which
+amino acids were masked. Still, methods are available, which hide the
+two step process, as seen in the next example.
 
 BioAlignment supports many alignment editing features, which are
 listed
