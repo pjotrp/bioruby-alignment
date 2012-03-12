@@ -149,7 +149,7 @@ version of pal2nal includes validation
 
 resulting in the codon alignment.
 
-### Alignment editing
+### Alignment marking/masking/editing
 
 One of the primary reasons for creating BioAlignment is to provide
 easy ways of editing alignments using a functional style of
