@@ -149,6 +149,11 @@ version of pal2nal includes validation
 
 resulting in the codon alignment.
 
+### Phylogeny
+
+BioAlignment has support for attaching a phylogentic tree to an
+alignment, and traversing the tree.
+
 ### Alignment marking/masking/editing
 
 One of the primary reasons for creating BioAlignment is to provide

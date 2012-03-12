@@ -11,6 +11,7 @@ Given /^I have a phylogenetic tree in Newick format$/ do |string|
 end
 
 Then /^I should be able to traverse the tree$/ do
+  @aln.extend AlignmentTree
   pending # express the regexp above with the code you wish you had
 end
 
