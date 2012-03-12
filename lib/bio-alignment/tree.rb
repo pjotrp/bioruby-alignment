@@ -11,17 +11,19 @@ module Bio
       class Node
       end
 
+      # Make all nodes in the Bio::Tree aware of the tree object so we can use
+      # its methods
       def Tree::init tree
         if tree.kind_of?(Bio::Tree)
-          # walk all nodes and add the tree info
+          # walk all nodes and infect the tree info
           tree.each_node do | node |
-            node.set_tree(tree)
+            node.inject_tree(tree)
           end
-          tree.root.set_tree(tree)
-          return tree
+          # tree.root.set_tree(tree)
         else
           raise "BioAlignment::Tree does not understand tree type "+tree.class.to_s
         end
+        return tree
       end
 
       def root
@@ -35,7 +37,7 @@ module Bio
   # Here we add to BioRuby's Bio::Tree classes
   class Tree
     class Node
-      def set_tree tree
+      def inject_tree tree
         @tree = tree
       end
 
