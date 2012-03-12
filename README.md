@@ -184,7 +184,7 @@ columns looks much the same
 
 ```ruby
   include MarkColumns
-  mark_columns { |colstate,col|  # for every row/sequence
+  mark_columns { |colstate,col|  # for every column
     num = col.count { |e| e.gap? }
     if (num.to_f/col.length) > 0.5
       colstate.delete! 
