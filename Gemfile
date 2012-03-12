@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 gem "bio-logger"
-gem "bio", ">= 1.4.2"      # for translation tables 
+gem "bio", ">= 1.4.2"      # for translation tables, BioRuby compat and Newick parser
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
