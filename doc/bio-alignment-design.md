@@ -193,6 +193,12 @@ create a generic interface with a method of the same name for every
 plugged in module. This ascertains that the same method can not be invoked from
 multiple plugins (by default).
 
+## Adding Phylogenetic support
+
+MSAs often come with phylogenetic trees. Not to add this functionality by default,
+we extend BioAlignment with BioAlignment::AlignmentTree when a tree is plugged in
+with the add_tree method.
+
 ## Methods returning alignments and concurrency
 
 When an alignment gets changed, e.g. by one of the editing modules, the

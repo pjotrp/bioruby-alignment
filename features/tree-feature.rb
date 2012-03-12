@@ -7,11 +7,20 @@ Given /^I have a multiple sequence alignment \(MSA\)$/ do |string|
 end
 
 Given /^I have a phylogenetic tree in Newick format$/ do |string|
-  pending # express the regexp above with the code you wish you had
+  @tree = Bio::Newick.new(string).tree
+  tree = @tree
+  tree.children(tree.root).size.should == 2
+  tree.descendents(tree.root).size.should == 14
+  tree.leaves.size.should == 8
+  leaf = tree.get_node_by_name('seq8')
+  leaf.name.should == "seq8"
+  tree.ancestors(leaf).size.should == 5
+  tree.get_edge(leaf, tree.parent(leaf)).distance.should == 1.1904755
+  tree.get_edge(tree.parent(leaf), tree.parent(tree.parent(leaf))).distance.should == 1.7857151
 end
 
 Then /^I should be able to traverse the tree$/ do
-  @aln.extend AlignmentTree
+  # @aln.extend AlignmentTree
   pending # express the regexp above with the code you wish you had
 end
 
