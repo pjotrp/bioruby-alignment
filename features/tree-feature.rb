@@ -20,7 +20,7 @@ Given /^I have a phylogenetic tree in Newick format$/ do |string|
 end
 
 Then /^I should be able to traverse the tree$/ do
-  @aln.link_tree(@tree)
+  tree = @aln.link_tree(@tree)
   root = @aln.root # get the root of the tree
   root.leaf?.should == false
   children = root.children
@@ -29,6 +29,9 @@ Then /^I should be able to traverse the tree$/ do
   seq7.name.should == 'seq7'
   seq7.leaf?.should == true
   seq7.parent.should == root
+  seq4 = tree.find("seq4")
+  seq4.leaf?.should == true
+  seq4.distance(seq7).should == 19.387756600000003  # that is nice!
 end
 
 Then /^fetch elements from the MSA from each end node in the tree$/ do
