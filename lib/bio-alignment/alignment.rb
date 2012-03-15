@@ -51,6 +51,13 @@ module Bio
         each { |seq| seq.each { |e| yield e }}
         self
       end
+
+      def find name
+        each do | seq |
+          return seq if seq.id == name
+        end
+        raise "ERROR: Sequence not found by its name #{name}"
+      end
      
       # clopy alignment and allow updating elements
       def update_each_element
@@ -60,8 +67,8 @@ module Bio
 
       def to_s
         res = ""
-        res += columns_to_s + "\n" if @columns
-        res += map{ |seq| seq.to_s }.join("\n")
+        res += "\t" + columns_to_s + "\n" if @columns
+        res += map{ |seq| seq.id.to_s + "\t" + seq.to_s }.join("\n")
         res
       end
 

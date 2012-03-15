@@ -62,5 +62,16 @@ module Bio
     def find name
       get_node_by_name(name)
     end
+
+    # Walk the leaves
+    def map 
+      res = []
+      leaves.each do | leaf |
+        item = yield leaf
+        res << item
+      end
+      res
+    end
+
   end
 end

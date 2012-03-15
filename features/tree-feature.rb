@@ -35,7 +35,19 @@ Then /^I should be able to traverse the tree$/ do
 end
 
 Then /^fetch elements from the MSA from each end node in the tree$/ do
-  pending # express the regexp above with the code you wish you had
+  # walk the tree
+  tree = @aln.link_tree(@tree)
+  ids = []
+  column20 = tree.map { | leaf |
+    leaf.name =~ /(\d+)/
+    id = $1.to_i-1
+    ids << id
+    seq = @aln.find(id) 
+    # p seq
+    seq[19]
+  }
+  ids.should == [5, 3, 7, 4, 2, 1, 0, 6]
+  column20.should == ["K", "T", "K", "K", "T", "T", "T", "K"]
 end
 
 Then /^calculate the phylogenetic distance between each element$/ do
