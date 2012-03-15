@@ -63,7 +63,7 @@ module Bio
       get_node_by_name(name)
     end
 
-    # Walk the leaves
+    # Walk the ordered tree leaves, calling into the block, and return an array 
     def map 
       res = []
       leaves.each do | leaf |
