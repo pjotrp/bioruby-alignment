@@ -55,3 +55,8 @@ Then /^calculate the phylogenetic distance between each element$/ do
   pending # express the regexp above with the code you wish you had
 end
 
+Then /^draw the MSA with the tree$/ do
+  # textual drawing, like tabtree, or http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/149701
+  pending # express the regexp above with the code you wish you had
+end
+

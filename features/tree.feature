@@ -21,3 +21,4 @@ Feature: Tree support for alignments
     Then I should be able to traverse the tree
     And fetch elements from the MSA from each end node in the tree
     And calculate the phylogenetic distance between each element
+    And draw the MSA with the tree
