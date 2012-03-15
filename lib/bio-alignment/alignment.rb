@@ -19,19 +19,22 @@ module Bio
       # Create alignment. seqs can be a list of sequences. If these
       # are String types, they get converted to the library Sequence 
       # container
-      def initialize seqs = nil
+      def initialize seqs = nil, ids = nil
         @sequences = []
         if seqs 
-          i = 0
-          seqs.each do | seq |
+          num = 0
+          seqs.each_with_index do | seq, i |
             next if seq == nil or seq.to_s.strip == ""
+            id = num
+            id = ids[i] if ids and ids[i]
             @sequences << 
               if seq.kind_of?(String)
-                Sequence.new(i,seq.strip)
+                seq1 = Sequence.new(id,seq.strip)
+                seq1
               else
                 seq
               end
-            i += 1
+            num += 1
           end
         end
       end

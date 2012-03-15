@@ -2,7 +2,10 @@ require 'bio'  # for the Newick tree parser
 require 'bio-alignment'
 
 Given /^I have a multiple sequence alignment \(MSA\)$/ do |string|
-  @aln = Alignment.new(string.split(/\n/))
+  list = string.split(/\n/) 
+  seqs = list.map { | line | line.split('  ')[1] }
+  ids = list.map { | line | line.split('  ')[0] }
+  @aln = Alignment.new(seqs, ids)
   print @aln
 end
 
@@ -39,14 +42,12 @@ Then /^fetch elements from the MSA from each end node in the tree$/ do
   tree = @aln.link_tree(@tree)
   ids = []
   column20 = tree.map { | leaf |
-    leaf.name =~ /(\d+)/
-    id = $1.to_i-1
-    ids << id
-    seq = @aln.find(id) 
+    ids << leaf.name
+    seq = @aln.find(leaf.name) 
     # p seq
     seq[19]
   }
-  ids.should == [5, 3, 7, 4, 2, 1, 0, 6]
+  ids.should == ["seq6", "seq4", "seq8", "seq5", "seq3", "seq2", "seq1", "seq7"]
   column20.should == ["K", "T", "K", "K", "T", "T", "T", "K"]
 end
 
