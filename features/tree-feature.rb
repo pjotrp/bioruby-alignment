@@ -23,7 +23,7 @@ Given /^I have a phylogenetic tree in Newick format$/ do |string|
 end
 
 Then /^I should be able to traverse the tree$/ do
-  tree = @aln.link_tree(@tree)
+  tree = @aln.attach_tree(@tree)
   root = @aln.root # get the root of the tree
   root.leaf?.should == false
   children = root.children
@@ -39,7 +39,7 @@ end
 
 Then /^fetch elements from the MSA from each end node in the tree$/ do
   # walk the tree
-  tree = @aln.link_tree(@tree)
+  tree = @aln.attach_tree(@tree)
   ids = []
   column20 = tree.map { | leaf |
     ids << leaf.name
@@ -55,8 +55,12 @@ Then /^calculate the phylogenetic distance between each element$/ do
   pending # express the regexp above with the code you wish you had
 end
 
-Then /^draw the MSA with the tree$/ do
+Then /^draw the MSA with the tree$/ do | string |
   # textual drawing, like tabtree, or http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/149701
+  print string
   pending # express the regexp above with the code you wish you had
 end
 
+Then /^draw MSA with the short tree$/ do |string|
+  pending # express the regexp above with the code you wish you had
+end
