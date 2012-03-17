@@ -57,6 +57,8 @@ end
 
 Then /^draw the MSA with the tree$/ do | string |
   # textual drawing, like tabtree, or http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/149701
+  # or BioPythons http://biopython.org/DIST/docs/api/Bio.Phylo._utils-pysrc.html#draw_ascii
+  # hg clone https://bitbucket.org/keesey/namesonnodes-sa
   print string
   pending # express the regexp above with the code you wish you had
 end
