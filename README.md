@@ -151,8 +151,22 @@ resulting in the codon alignment.
 
 ### Phylogeny
 
-BioAlignment has support for attaching a phylogentic tree to an
-alignment, and traversing the tree.
+BioAlignment has support for attaching a phylogenetic tree to an
+alignment, and traversing the tree using an intuitive interface
+
+```ruby
+  sole_tree = Bio::Newick.new(string).tree  # use BioRuby's tree parser
+  tree = aln.attach_tree(sole_tree)         # attach the tree
+  # now do stuff with the tree, which has improved bio-align support
+  root = tree.root 
+  children = root.children
+  children.map { |n| n.name }.sort.should == ["","seq7"]
+  seq7 = children.last
+  seq4 = tree.find("seq4")
+  seq4.distance(seq7).should == 19.387756600000003  
+```
+
+more examples can be found in the tests and features.
 
 ### Alignment marking/masking/editing
 
