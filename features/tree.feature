@@ -28,7 +28,7 @@ Feature: Tree support for alignments
       |                          ,--1.79--|        ,-- seq2  SSIISNSFSRPTIIFSGCSTACSGK--SEQVCGFR---LSDV
       |                 ,--1.07--+        `--1.19--+-- seq3  SSIISNSFSRPTIIFSGCSTACSGKLTSEQVCGFR---LSDV
       |                 |        |--1.79--+--1.19----- seq5  ----------PTIIFSGCSKACSGKGLSELVCGFRSFMLSDV
-      |        ,--1.31--|                 `--1.19----- seq8  --------PTIIFSGCSKACSGK--SELVCGFRSFMLSAV
+      |        ,--1.31--|                 `--1.19----- seq8  ----------PTIIFSGCSKACSGK--SELVCGFRSFMLSAV
       |--4.34--|        `--4.05----------------------- seq4  ----PKLFSRPTIIFSGCSTACSGK--SEPVCGFRSFMLSDV
                `--5.36-------------------------------- seq6  ----------PTIIFSGCSKACSGK-----FRSFRSFMLSAV
       """
@@ -39,7 +39,7 @@ Feature: Tree support for alignments
       |        ,--|  ,-- seq2  SSIISNSFSRPTIIFSGCSTACSGK--SEQVCGFR---LSDV
       |     ,--+  `--+-- seq3  SSIISNSFSRPTIIFSGCSTACSGKLTSEQVCGFR---LSDV
       |     |  |--+----- seq5  ----------PTIIFSGCSKACSGKGLSELVCGFRSFMLSDV
-      |  ,--|     `----- seq8  --------PTIIFSGCSKACSGK--SELVCGFRSFMLSAV
+      |  ,--|     `----- seq8  ----------PTIIFSGCSKACSGK--SELVCGFRSFMLSAV
       |--|  `----------- seq4  ----PKLFSRPTIIFSGCSTACSGK--SEPVCGFRSFMLSDV
          `-------------- seq6  ----------PTIIFSGCSKACSGK-----FRSFRSFMLSAV
       """
