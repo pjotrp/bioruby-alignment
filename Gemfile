@@ -8,7 +8,7 @@ group :development do
   gem "rake"
   gem "bio-bigbio", "> 0.1.3"         # for reading FASTA files in tests
   gem "cucumber", ">= 0"
-  gem "rspec", "~> 2.3.0"
+  gem "rspec", "~> 2.10.0"
   gem "bundler", ">= 1.0.21"
   gem "jeweler"
 end
