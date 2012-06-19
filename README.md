@@ -1,21 +1,31 @@
 # bio-alignment
 
-Alignment handler for multiple sequence alignments (MSA).
+Matrix style alignment handler for multiple sequence alignments (MSA).
+
+[![Build Status](https://secure.travis-ci.org/pjotrp/bioruby-alignment.png)](http://travis-ci.org/pjotrp/bioruby-alignment)
 
 This alignment handler makes no assumptions about the underlying
-sequence object.  Support for any nucleotide, amino acid and codon
-sequences that are lists. Any list with payload can be used (e.g.
-nucleotide quality score, codon annotation). The only requirement is
-that the list is iterable and can be indexed. 
+sequence object. It supports any nucleotide, amino acid and codon
+sequences that are lists. Any list with payload or state, can be used
+(e.g.  nucleotide quality score, codon annotation). The only
+requirement is that the list is Enumerable and can be indexed, i.e.
+inherit Ruby Enumerable and have the [] method.
 
-This work is based on Pjotr's experience designing the BioScala
+Features are:
+
+* Matrix notation for alignment object
+* Functional style alignment access and editing
+* Support for BioRuby Sequences
+* Support for (Newick) trees and node distance calculation
+* bio-alignment interacts well with BioRuby structures,
+  including sequence objects and alignment/tree parsers
+
+bio-alignment is based on Pjotr's experience designing the BioScala
 Alignment handler and BioRuby's PAML support. Read the
 Bio::BioAlignment
 [design
 document](https://github.com/pjotrp/bioruby-alignment/blob/master/doc/bio-alignment-design.md)
 for Ruby.
-
-Note: this software is under active development.
 
 ## Developers
 
@@ -40,6 +50,8 @@ aligmment (note codon gaps are represented by '---')
   aln.rows.each do | row |
     fasta.write(row.id, row.to_aa.to_s)
   end
+  # get first codon element of the fourth sequence
+  p aln[3][0]
 ```
 
 Now add some state - you can define your own row state
@@ -263,18 +275,27 @@ where aln2 is a copy of aln with bridging columns deleted.
 
 ### See also
 
-The API documentation is online. For more code examples see
+For more on the design of bio-alignment, read the
+Bio::BioAlignment
+[design
+document](https://github.com/pjotrp/bioruby-alignment/blob/master/doc/bio-alignment-design.md).
+
+The API documentation is online. For more examples see the files in
 [./spec/*.rb](https://github.com/pjotrp/bioruby-alignment/tree/master/spec) and
 [./features/*](https://github.com/pjotrp/bioruby-alignment/tree/master/features).
 
 ## Cite
 
-If you use this software, please cite http://dx.doi.org/10.1093/bioinformatics/btq475
+If you use this software, please cite one of
+  
+* [BioRuby: bioinformatics software for the Ruby programming language](http://dx.doi.org/10.1093/bioinformatics/btq475)
+* [Biogem: an effective tool-based approach for scaling up open source software development in bioinformatics](http://dx.doi.org/10.1093/bioinformatics/bts080)
+
+## Biogems.info
+
+This Biogem is published at [#bio-alignment](http://biogems.info/index.html)
 
 ## Copyright
 
 Copyright (c) 2012 Pjotr Prins. See LICENSE.txt for further details.
 
-## Biogems.info
-
-This exciting Ruby Biogem is published on http://biogems.info/
