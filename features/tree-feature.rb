@@ -57,7 +57,12 @@ Then /^fetch elements from the MSA from each end node in the tree$/ do
 end
 
 Then /^calculate the phylogenetic distance between each element$/ do
-  pending # express the regexp above with the code you wish you had
+  # we did this earlier with
+  tree = @aln.attach_tree(@tree)
+  seq7 = tree.find("seq7")
+  seq4 = tree.find("seq4")
+  # total distance to seq7 9.69+4.34+1.31+4.05 ~ 19.38
+  seq4.distance(seq7).should == 19.387756600000003  # BioRuby does this!
 end
 
 Then /^draw the MSA with the tree$/ do | string |
