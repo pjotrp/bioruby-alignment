@@ -27,24 +27,29 @@ Then /^I should be able to traverse the tree$/ do
   root = @aln.root # get the root of the tree
   root.leaf?.should == false
   children = root.children
+  # root has one direct leaf
   children.map { |n| n.name }.sort.should == ["","seq7"]
   seq7 = children.last
   seq7.name.should == 'seq7'
   seq7.leaf?.should == true
   seq7.parent.should == root
+  # find leaf seq4
   seq4 = tree.find("seq4")
   seq4.leaf?.should == true
-  seq4.distance(seq7).should == 19.387756600000003  # that is nice!
+  # total distance to seq7 9.69+4.34+1.31+4.05 ~ 19.38
+  seq4.distance(seq7).should == 19.387756600000003  # BioRuby does this!
 end
 
 Then /^fetch elements from the MSA from each end node in the tree$/ do
   # walk the tree
   tree = @aln.attach_tree(@tree)
   ids = []
+  # Walk the ordered tree and fetch the sequence from the alignment
   column20 = tree.map { | leaf |
     ids << leaf.name
+    # we have the ID, now find the alignment
     seq = @aln.find(leaf.name) 
-    # p seq
+    # Return the 18th nucleotide, just for show
     seq[19]
   }
   ids.should == ["seq6", "seq4", "seq8", "seq5", "seq3", "seq2", "seq1", "seq7"]

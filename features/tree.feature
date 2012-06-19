@@ -1,6 +1,8 @@
 @tree
 Feature: Tree support for alignments
-  Alignments are often accompanied by phylogenetic trees.
+  Alignments are often accompanied by phylogenetic trees. When we 
+  have an alignment with its tree, we want to traverse the tree
+  and calculate distances.
 
   Scenario: Get ordered elements from a tree
     Given I have a multiple sequence alignment (MSA)
