@@ -1,10 +1,10 @@
-@tree
-Feature: Tree support for alignments
-  Alignments are often accompanied by phylogenetic trees. When we 
-  have an alignment with its tree, we want to traverse the tree
-  and calculate distances.
+@split
+Feature: Splitting phylogenetic trees on distance
+  Alignments are often accompanied by phylogenetic trees. When we have an
+  alignment with its tree, we want to greedily split the alignment, based on
+  the number of items in a branch. 
 
-  Scenario: Get ordered elements from a tree
+  Scenario: Split out branches from a tree
     Given I have a multiple sequence alignment (MSA)
       """
       seq1  ----SNSFSRPTIIFSGCSTACSGK--SELVCGFRSFMLSDV
@@ -20,15 +20,7 @@ Feature: Tree support for alignments
       """
       ((seq6:5.3571434,(seq4:4.04762,((seq8:1.1904755,seq5:1.1904755):1.7857151,((seq3:0.0,seq2:0.0):1.1904755,seq1:1.1904755):1.7857151):1.0714293):1.3095236):4.336735,seq7:9.693878);
       """
-    Then I should be able to traverse the tree
-    And fetch elements from the MSA from each end node in the tree
-    And calculate the phylogenetic distance between each element
-    And find that the nearest sequence to "seq2" is "seq3"
-    And find that the nearest sequence to "seq5" is "seq8"
-    And find that the nearest sequence to "seq1" is "seq2,seq3"
-    And find that "seq1" is on the same branch as "seq2,seq3"
-    And find that "seq4" is on the same branch as "seq1,seq2,seq3,seq5,seq8"
-    And draw the MSA with the tree
+    When I split out branches with a maximum of 5 sequences from
       """
       ,--9.69----------------------------------------- seq7  ----------PTIIFSGCSKACSGK-----VCGIFHAVRSFM
       |                                   ,--1.19----- seq1  ----SNSFSRPTIIFSGCSTACSGK--SELVCGFRSFMLSDV
@@ -39,14 +31,7 @@ Feature: Tree support for alignments
       `--4.34--|        `--4.05----------------------- seq4  ----PKLFSRPTIIFSGCSTACSGK--SEPVCGFRSFMLSDV
                `--5.36-------------------------------- seq6  ----------PTIIFSGCSKACSGK-----FRSFRSFMLSAV
       """
-    Then draw MSA with the short tree
-      """
-      ,----------------- seq7  ----------PTIIFSGCSKACSGK-----VCGIFHAVRSFM
-      |           ,----- seq1  ----SNSFSRPTIIFSGCSTACSGK--SELVCGFRSFMLSDV
-      |        ,--|  ,-- seq2  SSIISNSFSRPTIIFSGCSTACSGK--SEQVCGFR---LSDV
-      |     ,--|  `--+-- seq3  SSIISNSFSRPTIIFSGCSTACSGKLTSEQVCGFR---LSDV
-      |     |  `--+----- seq5  ----------PTIIFSGCSKACSGKGLSELVCGFRSFMLSDV
-      |  ,--|     `----- seq8  ----------PTIIFSGCSKACSGK--SELVCGFRSFMLSAV
-      `--|  `----------- seq4  ----PKLFSRPTIIFSGCSTACSGK--SEPVCGFRSFMLSDV
-         `-------------- seq6  ----------PTIIFSGCSKACSGK-----FRSFRSFMLSAV
-      """
+    Then I should have found "seq1,seq2,seq3,seq5,seq8" and "seq4,seq6,seq7"
+    When I split out branches with a minimum of 3 and maximum of 3 sequences 
+    Then I should have found "seq1,seq2,seq3" and "seq5,seq8,seq4"
+

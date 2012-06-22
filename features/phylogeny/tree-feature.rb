@@ -65,6 +65,16 @@ Then /^calculate the phylogenetic distance between each element$/ do
   seq4.distance(seq7).should == 19.387756600000003  # BioRuby does this!
 end
 
+Then /^find that the nearest sequence to "([^"]*)" is "([^"]*)"$/ do |arg1, arg2|
+  tree = @aln.attach_tree(@tree)
+  seq7 = tree.find("seq7")
+end
+
+Then /^find that "([^"]*)" is on the same branch as "([^"]*)"$/ do |arg1, arg2|
+  pending # express the regexp above with the code you wish you had
+end
+
+
 Then /^draw the MSA with the tree$/ do | string |
   # textual drawing, like tabtree, or http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/149701
   # or BioPythons http://biopython.org/DIST/docs/api/Bio.Phylo._utils-pysrc.html#draw_ascii
