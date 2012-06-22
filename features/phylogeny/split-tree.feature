@@ -1,10 +1,19 @@
 @split
-Feature: Splitting phylogenetic trees on distance
-  Alignments are often accompanied by phylogenetic trees. When we have an
-  alignment with its tree, we want to greedily split the alignment, based on
-  the number of items in a branch. 
+Feature: Splitting alignments into equal sized branches using phylogenetic tree info
 
-  Scenario: Split out branches from a tree
+  Sometimes we want to split a large alignment into sub-sets.  When an
+  alignment is accompanied by a phylogenetic tree, we can greedily split the
+  tree. With a rooted tree, we start from the root, and walk the tree, taking
+  the shortest edge at every node (a tie may favour splitting). If the tree can
+  be split, so that both sides are similar sized, the job is done. This is a
+  crude method, but has the advantage of being quick to calculate and
+  reproducible. If there is no root, we start from the point next to the
+  longest edge. 
+
+  In below example the tree will be split in a branch with similar sequences, and
+  a branch with sequences that are somewhat removed.
+
+  Scenario: Split a tree
     Given I have a multiple sequence alignment (MSA)
       """
       seq1  ----SNSFSRPTIIFSGCSTACSGK--SELVCGFRSFMLSDV
@@ -20,7 +29,7 @@ Feature: Splitting phylogenetic trees on distance
       """
       ((seq6:5.3571434,(seq4:4.04762,((seq8:1.1904755,seq5:1.1904755):1.7857151,((seq3:0.0,seq2:0.0):1.1904755,seq1:1.1904755):1.7857151):1.0714293):1.3095236):4.336735,seq7:9.693878);
       """
-    When I split out branches with a maximum of 5 sequences from
+    When I split the tree
       """
       ,--9.69----------------------------------------- seq7  ----------PTIIFSGCSKACSGK-----VCGIFHAVRSFM
       |                                   ,--1.19----- seq1  ----SNSFSRPTIIFSGCSTACSGK--SELVCGFRSFMLSDV
@@ -31,7 +40,5 @@ Feature: Splitting phylogenetic trees on distance
       `--4.34--|        `--4.05----------------------- seq4  ----PKLFSRPTIIFSGCSTACSGK--SEPVCGFRSFMLSDV
                `--5.36-------------------------------- seq6  ----------PTIIFSGCSKACSGK-----FRSFRSFMLSAV
       """
-    Then I should have found "seq1,seq2,seq3,seq5,seq8" and "seq4,seq6,seq7"
-    When I split out branches with a minimum of 3 and maximum of 3 sequences 
-    Then I should have found "seq1,seq2,seq3" and "seq5,seq8,seq4"
+    Then I should have found sub-trees "seq7,seq6,seq4" and "seq1,seq2,seq3,seq5,seq8"
 
