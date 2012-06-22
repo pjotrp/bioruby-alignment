@@ -280,7 +280,8 @@ Bio::BioAlignment
 [design
 document](https://github.com/pjotrp/bioruby-alignment/blob/master/doc/bio-alignment-design.md).
 
-The API documentation is online. For more examples see the files in
+The API documentation can be found
+[online](http://rubygems.org/gems/bio-alignment). For examples see the files in
 [./spec/*.rb](https://github.com/pjotrp/bioruby-alignment/tree/master/spec) and
 [./features/*](https://github.com/pjotrp/bioruby-alignment/tree/master/features).
 
