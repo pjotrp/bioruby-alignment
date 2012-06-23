@@ -67,7 +67,9 @@ end
 
 Then /^find that the nearest sequence to "([^"]*)" is "([^"]*)"$/ do |arg1, arg2|
   tree = @aln.attach_tree(@tree)
-  seq7 = tree.find("seq7")
+  seq = tree.find(arg1)
+  p arg2
+  seq.siblings.join(',').should == arg2
 end
 
 Then /^find that "([^"]*)" is on the same branch as "([^"]*)"$/ do |arg1, arg2|

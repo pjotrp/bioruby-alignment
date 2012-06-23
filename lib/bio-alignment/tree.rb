@@ -41,23 +41,31 @@ module Bio
         @tree = tree
       end
 
+      # Is this Node a leaf?
       def leaf?
         children.size == 0
       end
 
+      # Get the children of this Node
       def children
         @tree.children(self)
       end
 
+      # Get the parents of this Node
       def parent
         @tree.parent(self)
+      end
+
+      # Get the siblings of this Node
+      def siblings
+        @tree.adjacent_nodes(self)
       end
   
       # Get the distance to another node (FIXME: write test)
       def distance other
         @tree.distance(self,other)
       end
-    end
+    end  # End of injecting Node functionality
 
     def find name
       get_node_by_name(name)
