@@ -58,9 +58,15 @@ module Bio
         @tree.parent(self)
       end
 
-      # Get the siblings of this Node
+      # Get the direct sibling nodes (i.e. parent.children)
       def siblings
         parent.children - [self]
+      end
+
+      # Find the nearest and dearest, i.e. the leafs attached to the parent
+      # node
+      def nearest
+        @tree.leaves(parent) - [self]
       end
   
       # Get the distance to another node (FIXME: write test)
