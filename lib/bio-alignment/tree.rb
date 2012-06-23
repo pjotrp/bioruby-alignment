@@ -37,8 +37,10 @@ module Bio
   # Here we add to BioRuby's Bio::Tree classes
   class Tree
     class Node
+      # Add tree information to this node, so it can be queried 
       def inject_tree tree
         @tree = tree
+        self
       end
 
       # Is this Node a leaf?
@@ -58,7 +60,7 @@ module Bio
 
       # Get the siblings of this Node
       def siblings
-        @tree.adjacent_nodes(self)
+        parent.children - [self]
       end
   
       # Get the distance to another node (FIXME: write test)
