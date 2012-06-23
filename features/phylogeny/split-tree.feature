@@ -5,13 +5,20 @@ Feature: Splitting alignments into equal sized branches using phylogenetic tree 
   alignment is accompanied by a phylogenetic tree, we can greedily split the
   tree. With a rooted tree, we start from the root, and walk the tree, taking
   the shortest edge at every node (a tie may favour splitting). If the tree can
-  be split, so that both sides are similar sized, the job is done. This is a
-  crude method, but has the advantage of being quick to calculate and
-  reproducible. If there is no root, we start from the point next to the
-  longest edge. 
+  be split, so that both sides are similar sized, the job is done (if you want
+  more splits, just repeat the exercise). Essentially one subset shows
+  relatively high homology, the other relatively low homology. This is a crude
+  method, but has the advantage of being quick to calculate and reproducible.
+  If there is no root, we start from the point next to the longest edge. 
 
-  In below example the tree will be split in a branch with similar sequences, and
-  a branch with sequences that are somewhat removed.
+  We add one 'max' parameter to allow for leaving more sequences in the high
+  homology subset. 'max' sets the allowed size of the high-homology alignment.
+  For example, setting it to 10 in a 15 sequence alignment, will stop the
+  splitting at 5 sequences, leaving (approx.) 10 sequences in the high homology
+  group.
+
+  In below example the tree will be split in a branch with similar sequences,
+  and a branch with sequences that are somewhat removed.
 
   Scenario: Split a tree
     Given I have a multiple sequence alignment (MSA)
@@ -41,4 +48,8 @@ Feature: Splitting alignments into equal sized branches using phylogenetic tree 
                `--5.36-------------------------------- seq6  ----------PTIIFSGCSKACSGK-----FRSFRSFMLSAV
       """
     Then I should have found sub-trees "seq7,seq6,seq4" and "seq1,seq2,seq3,seq5,seq8"
+    When I split the tree with a max of 7
+    Then I should have found low-homology sub-tree "seq7"
+    When I split the tree with a max of 6
+    Then I should have found low-homology sub-tree "seq7,seq6"
 
