@@ -21,12 +21,12 @@ module Bio
         while new_root
           new_root = new_root.nearest_child
           branch = aln1.tree.clone_subtree(new_root)
-          p [branch.leaves.size,target_size]
+          # p [branch.leaves.size,target_size]
           break if branch.leaves.size <= target_size 
         end
         reduced_tree = aln1.tree.clone_tree_without_branch(new_root)
-        p branch.map { |n| n.name }.compact
-        p reduced_tree.map { |n| n.name }.compact
+        # p branch.map { |n| n.name }.compact
+        # p reduced_tree.map { |n| n.name }.compact
 
         # Now reduce the alignments themselves
         aln1 = tree_reduce(reduced_tree)

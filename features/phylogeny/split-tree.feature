@@ -52,13 +52,15 @@ Feature: Splitting alignments into equal sized branches using phylogenetic tree 
     When I split the tree with a target of 2
     Then I should have found high-homology sub-tree "seq5,seq8"
     When I split the tree with a target of 3
-    Then I should have found high-homology sub-tree "seq1,seq2,seq3"
+    # Then I should have found high-homology sub-tree "seq1,seq2,seq3"
+    Then I should have found high-homology sub-tree "seq5,seq8"
     When I split the tree with a target of 4 
-    Then I should have found high-homology sub-tree "seq1,seq2,seq3,seq5,seq8"
+    # Then I should have found high-homology sub-tree "seq1,seq2,seq3,seq5,seq8"
+    Then I should have found high-homology sub-tree "seq5,seq8"
     When I split the tree with a target of 5 
     Then I should have found high-homology sub-tree "seq1,seq2,seq3,seq5,seq8"
     When I split the tree with a target of 7
     Then I should have found low-homology sub-tree "seq7"
     When I split the tree with a target of 6
-    Then I should have found low-homology sub-tree "seq7,seq6"
+    Then I should have found low-homology sub-tree "seq6,seq7"
 

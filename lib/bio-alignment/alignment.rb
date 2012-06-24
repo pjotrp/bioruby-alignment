@@ -113,7 +113,7 @@ module Bio
       # Reduce an alignment, based on the new tree
       def tree_reduce new_tree
         names = new_tree.map { | node | node.name }.compact
-        p names
+        # p names
         nrows = []
         names.each do | name |
           nrows << find(name).clone
