@@ -16,11 +16,21 @@ module Bio
         target_size = size/2 if not target_size
 
         aln1 = clone
-        new_root = aln1.tree.root.children.first.children.last
-        tree2 = aln1.tree.clone_subtree(new_root)
-        p new_root,tree2
-        aln2 = aln1.tree_reduce(tree2)
-        p aln2
+        new_root = aln1.tree.root
+        p [new_root, new_root.children]
+        new_root = aln1.tree.root.children.first
+        p [new_root, new_root.children]
+        new_root = new_root.children.last
+        p [new_root, new_root.children]
+        new_root = new_root.children.last
+        p [new_root, new_root.children]
+        branch = aln1.tree.clone_subtree(new_root)
+        reduced_tree = aln1.tree.clone_tree_without_branch(new_root)
+        p branch.map { |n| n.name }.compact
+        p reduced_tree.map { |n| n.name }.compact
+ 
+        aln1 = tree_reduce(reduced_tree)
+        aln2 = tree_reduce(branch)
         return aln1,aln2
       end
 

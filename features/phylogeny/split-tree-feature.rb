@@ -10,8 +10,8 @@ When /^I split the tree$/ do |string|
 end
 
 Then /^I should have found sub\-trees "([^"]*)" and "([^"]*)"$/ do |arg1, arg2|
-  @split2.names.join(",").should == arg2
-  @split1.names.join(",").should == arg1
+  @split2.ids.sort.join(",").should == arg2
+  @split1.ids.sort.join(",").should == arg1
 end
 
 

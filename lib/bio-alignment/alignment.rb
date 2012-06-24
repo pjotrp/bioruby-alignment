@@ -42,6 +42,11 @@ module Bio
 
       alias rows sequences
 
+      # return an array of sequence ids
+      def ids
+        rows.map { |r| r.id }
+      end
+
       def size
         rows.size
       end
@@ -65,7 +70,7 @@ module Bio
         each do | seq |
           return seq if seq.id == name
         end
-        raise "ERROR: Sequence not found by its name #{name}"
+        raise "ERROR: Sequence not found by its name, looking for <#{name}>"
       end
      
       # clopy alignment and allow updating elements
@@ -107,7 +112,8 @@ module Bio
 
       # Reduce an alignment, based on the new tree
       def tree_reduce new_tree
-        names = new_tree.map { | node | node.name }
+        names = new_tree.map { | node | node.name }.compact
+        p names
         nrows = []
         names.each do | name |
           nrows << find(name).clone

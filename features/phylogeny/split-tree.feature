@@ -48,7 +48,7 @@ Feature: Splitting alignments into equal sized branches using phylogenetic tree 
       `--4.34--|        `--4.05----------------------- seq4  ----PKLFSRPTIIFSGCSTACSGK--SEPVCGFRSFMLSDV
                `--5.36-------------------------------- seq6  ----------PTIIFSGCSKACSGK-----FRSFRSFMLSAV
       """
-    Then I should have found sub-trees "seq7,seq6,seq4" and "seq1,seq2,seq3,seq5,seq8"
+    Then I should have found sub-trees "seq4,seq6,seq7" and "seq1,seq2,seq3,seq5,seq8"
     When I split the tree with a max of 7
     Then I should have found low-homology sub-tree "seq7"
     When I split the tree with a max of 6

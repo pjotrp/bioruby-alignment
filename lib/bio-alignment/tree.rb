@@ -96,7 +96,7 @@ module Bio
     # Create a deep clone of the tree
     def clone_subtree start_node 
       new_tree = self.class.new
-      list = start_node.descendents
+      list = [start_node] + start_node.descendents
       list.each do |x|
         new_tree.add_node(x)
       end
@@ -105,6 +105,32 @@ module Bio
           new_tree.add_edge(node1, node2, edge)
         end
       end
+      new_tree
+    end
+
+    # Clone a tree without the branch starting at node
+    def clone_tree_without_branch node
+      new_tree = self.class.new
+      original = [root] + root.descendents
+      p "Original",original
+      skip = [node] + node.descendents
+      p "Skip",skip
+      p "Retain",root.descendents - skip
+      nodes.each do |x|
+        p x
+        if not skip.include?(x)
+          new_tree.add_node(x) 
+          print " INC"
+        else
+          print " NO"
+        end
+      end
+      each_edge do |node1, node2, edge|
+        if new_tree.include?(node1) and new_tree.include?(node2) 
+          new_tree.add_edge(node1, node2, edge)
+        end
+      end
+      p new_tree
       new_tree
     end
 
