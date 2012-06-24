@@ -77,6 +77,15 @@ module Bio
       def distance other
         @tree.distance(self,other)
       end
+
+      # Get closest child node
+      def nearest_child
+        c = nil
+        children.each do |n|
+          c=n if not c or distance(n)<distance(c)
+        end
+        c
+      end
     end  # End of injecting Node functionality
 
     def find name

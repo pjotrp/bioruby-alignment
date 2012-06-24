@@ -18,10 +18,14 @@ module Bio
         aln1 = clone
         new_root = aln1.tree.root
         p [new_root, new_root.children]
+        aln1.tree.each_out_edge(new_root) { |s,k,e| p ["edge",k,e] }
+        new_root2 = new_root.nearest_child
         new_root = aln1.tree.root.children.first
-        p [new_root, new_root.children]
+        p [new_root,new_root2, new_root.children]
+        new_root2 = new_root.nearest_child
+        aln1.tree.each_out_edge(new_root) { |s,k,e| p ["edge",k,e] }
         new_root = new_root.children.last
-        p [new_root, new_root.children]
+        p [new_root, new_root2, new_root.children]
         new_root = new_root.children.last
         p [new_root, new_root.children]
         branch = aln1.tree.clone_subtree(new_root)
