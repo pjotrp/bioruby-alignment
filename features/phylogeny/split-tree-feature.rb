@@ -34,4 +34,11 @@ When /^I split the tree with a max of (\d+)$/ do |arg1|
   pending # express the regexp above with the code you wish you had
 end
 
+When /^I split the tree with a target of (\d+)$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I should have found high\-homology sub\-tree "([^"]*)"$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
 
