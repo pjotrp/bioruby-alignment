@@ -11,11 +11,12 @@ Feature: Splitting alignments into equal sized branches using phylogenetic tree 
   method, but has the advantage of being quick to calculate and reproducible.
   If there is no root, we start from the point next to the longest edge. 
 
-  We add one 'max' parameter to allow for leaving more sequences in the high
-  homology subset. 'max' sets the allowed size of the high-homology alignment.
-  For example, setting it to 10 in a 15 sequence alignment, will stop the
-  splitting at 5 sequences, leaving (approx.) 10 sequences in the high homology
-  group.
+  We add one 'target_size' parameter to allow for leaving more sequences in the
+  high homology subset. 'target_size' sets the allowed size of the
+  high-homology alignment.  For example, setting it to 10 in a 15 sequence
+  alignment, will stop the splitting at 5 sequences, leaving (approx.) 10
+  sequences in the high homology group. Likewise, setting it to 5 will continue
+  splitting until that number is reached.
 
   In below example the tree will be split in a branch with similar sequences,
   and a branch with sequences that are somewhat removed.

@@ -178,10 +178,11 @@ alignment, and traversing the tree using an intuitive interface
   seq4.distance(seq7).should == 19.387756600000003  
 ```
 
-more examples can be found in the tests and features. The underlying 
-implementation of Bio::Tree is that of BioRuby. We have added an OOP
-layer for traversing the tree by injecting methods into the BioRuby
-object itself. 
+There are methods for finding sibling nodes, splitting the tree, and
+locating sequences on the same branch. More examples can be found in
+the tests and features.  The underlying implementation of Bio::Tree is
+that of BioRuby. We have added an OOP layer for traversing the tree by
+injecting methods into the BioRuby object itself. 
 
 ### Alignment marking/masking/editing
 

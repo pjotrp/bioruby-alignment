@@ -1,5 +1,6 @@
 When /^I split out branches with a maximum of (\d+) sequences from$/ do |arg1, string|
-  pending # express the regexp above with the code you wish you had
+  tree = @aln.attach_tree(@tree)
+  p tree
 end
 
 Then /^I should have found "([^"]*)" and "([^"]*)"$/ do |arg1, arg2|
