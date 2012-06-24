@@ -15,6 +15,7 @@ module Bio
       include Columns
 
       attr_accessor :sequences
+      attr_reader :tree
 
       # Create alignment. seqs can be a list of sequences. If these
       # are String types, they get converted to the library Sequence 
@@ -40,6 +41,10 @@ module Bio
       end
 
       alias rows sequences
+
+      def size
+        rows.size
+      end
 
       def [] index
         rows[index]

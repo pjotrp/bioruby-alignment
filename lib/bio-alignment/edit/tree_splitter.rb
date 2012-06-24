@@ -12,9 +12,12 @@ module Bio
       # set. If target_size is nil, the set will be split in half.
       #
       # Returns two alignments with their matching trees attached
-      def split_on_distance aln, target_size = nil
+      def split_on_distance target_size = nil
+        aln = self
+        p aln
+        p aln.tree
         target_size = aln.size/2 if not target_size
-        return (nil,nil)
+        return nil
       end
 
     end
