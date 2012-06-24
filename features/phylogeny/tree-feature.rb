@@ -72,7 +72,10 @@ Then /^find that the nearest sequence to "([^"]*)" is "([^"]*)"$/ do |arg1, arg2
 end
 
 Then /^find that "([^"]*)" is on the same branch as "([^"]*)"$/ do |arg1, arg2|
-  pending # express the regexp above with the code you wish you had
+  # really the same as the above
+  tree = @aln.attach_tree(@tree)
+  seq = tree.find(arg1)
+  seq.nearest.map{|n|n.to_s}.sort.join(',').should == arg2
 end
 
 
