@@ -53,6 +53,10 @@ module Bio
         @tree.children(self)
       end
 
+      def descendents
+        @tree.descendents(self)
+      end
+
       # Get the parents of this Node
       def parent
         @tree.parent(self)
@@ -90,6 +94,20 @@ module Bio
     end
 
     # Create a deep clone of the tree
+    def clone_subtree start_node 
+      new_tree = self.class.new
+      list = start_node.descendents
+      list.each do |x|
+        new_tree.add_node(x)
+      end
+      each_edge do |node1, node2, edge|
+        if new_tree.include?(node1) and new_tree.include?(node2) 
+          new_tree.add_edge(node1, node2, edge)
+        end
+      end
+      new_tree
+    end
+
     def clone
       new_tree = self.class.new
       nodes.each do |x|

@@ -46,6 +46,7 @@ module Bio
         rows.size
       end
 
+      # Return a sequence by index
       def [] index
         rows[index]
       end
@@ -102,6 +103,18 @@ module Bio
         extend Tree
         @tree = Tree::init(tree)
         @tree
+      end
+
+      # Reduce an alignment, based on the new tree
+      def tree_reduce new_tree
+        names = new_tree.map { | node | node.name }
+        nrows = []
+        names.each do | name |
+          nrows << find(name).clone
+        end
+        new_aln = Alignment.new(nrows)
+        new_aln.attach_tree(new_tree.clone)
+        new_aln
       end
     end
   end
