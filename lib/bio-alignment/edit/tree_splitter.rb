@@ -27,7 +27,8 @@ module Bio
         reduced_tree = aln1.tree.clone_tree_without_branch(new_root)
         p branch.map { |n| n.name }.compact
         p reduced_tree.map { |n| n.name }.compact
- 
+
+        # Now reduce the alignments themselves
         aln1 = tree_reduce(reduced_tree)
         aln2 = tree_reduce(branch)
         return aln1,aln2

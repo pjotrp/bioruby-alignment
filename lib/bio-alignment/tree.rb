@@ -73,12 +73,12 @@ module Bio
         @tree.leaves(parent) - [self]
       end
   
-      # Get the distance to another node (FIXME: write test)
+      # Get the distance to another node
       def distance other
         @tree.distance(self,other)
       end
 
-      # Get closest child node
+      # Get child node with the shortest edge
       def nearest_child
         c = nil
         children.each do |n|
@@ -121,17 +121,14 @@ module Bio
     def clone_tree_without_branch node
       new_tree = self.class.new
       original = [root] + root.descendents
-      p "Original",original
+      # p "Original",original
       skip = [node] + node.descendents
-      p "Skip",skip
-      p "Retain",root.descendents - skip
+      # p "Skip",skip
+      # p "Retain",root.descendents - skip
       nodes.each do |x|
-        p x
         if not skip.include?(x)
           new_tree.add_node(x) 
-          print " INC"
         else
-          print " NO"
         end
       end
       each_edge do |node1, node2, edge|
@@ -139,7 +136,6 @@ module Bio
           new_tree.add_edge(node1, node2, edge)
         end
       end
-      p new_tree
       new_tree
     end
 
