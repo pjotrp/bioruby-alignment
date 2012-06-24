@@ -90,6 +90,8 @@ module Bio
           aln.sequences << seq.clone
         end
         aln.clone_columns! if @columns
+        # clone the tree
+        @tree = @tree.clone if @tree
         aln
       end
 

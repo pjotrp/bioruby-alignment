@@ -13,11 +13,13 @@ module Bio
       #
       # Returns two alignments with their matching trees attached
       def split_on_distance target_size = nil
-        aln = self
-        p aln
-        p aln.tree
+        aln = clone
         target_size = aln.size/2 if not target_size
-        return nil
+        tree = aln.tree
+        aln1 = aln
+        aln2 = aln
+        print aln1.tree.output_newick(indent: false)
+        return aln1,aln2
       end
 
     end

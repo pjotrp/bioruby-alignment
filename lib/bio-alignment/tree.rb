@@ -89,5 +89,19 @@ module Bio
       res
     end
 
+    # Create a deep clone of the tree
+    def clone
+      new_tree = self.class.new
+      nodes.each do |x|
+        new_tree.add_node(x)
+      end
+      self.each_edge do |node1, node2, edge|
+        if new_tree.include?(node1) and new_tree.include?(node2) then
+          new_tree.add_edge(node1, node2, edge)
+        end
+      end
+      new_tree
+    end
+
   end
 end

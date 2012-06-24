@@ -175,7 +175,8 @@ alignment, and traversing the tree using an intuitive interface
   children.map { |n| n.name }.sort.should == ["","seq7"]
   seq7 = children.last
   seq4 = tree.find("seq4")
-  seq4.distance(seq7).should == 19.387756600000003  
+  seq4.distance(seq7).should == 19.387756600000003 
+  print tree.output_newick                  # BioRuby Newick output
 ```
 
 There are methods for finding sibling nodes, splitting the tree, and

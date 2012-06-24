@@ -3,8 +3,9 @@ require 'bio-alignment/edit/tree_splitter.rb'
 When /^I split the tree$/ do |string|
   tree = @aln.attach_tree(@tree)
   @aln.extend TreeSplitter
-  res = @aln.split_on_distance
-  p "HERE",res
+  (aln1,aln2) = @aln.split_on_distance
+  p "HERE",aln2
+  aln2.size.should == @aln.size/2
 end
 
 When /^I split out branches with a maximum of (\d+) sequences from$/ do |arg1, string|
