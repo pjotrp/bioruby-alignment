@@ -13,15 +13,17 @@ module Bio
       #
       # Returns two alignments with their matching trees attached
       def split_on_distance target_size = nil
-        target_size = size/2 if not target_size
+        target_size = size/2+1 if not target_size
 
         aln1 = clone
         new_root = aln1.tree.root
-        new_root = new_root.nearest_child
-        new_root = new_root.nearest_child
-        new_root = new_root.nearest_child
-        p [new_root, new_root.children]
-        branch = aln1.tree.clone_subtree(new_root)
+        branch = nil
+        while new_root
+          new_root = new_root.nearest_child
+          branch = aln1.tree.clone_subtree(new_root)
+          p [branch.leaves.size,target_size]
+          break if branch.leaves.size <= target_size 
+        end
         reduced_tree = aln1.tree.clone_tree_without_branch(new_root)
         p branch.map { |n| n.name }.compact
         p reduced_tree.map { |n| n.name }.compact
