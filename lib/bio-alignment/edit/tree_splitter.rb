@@ -18,13 +18,12 @@ module Bio
         aln1 = clone
         # Start from the root of the tree (FIXME: what if there is no root?)
         new_root = aln1.tree.root
-        branch = nil
         while new_root
           # find the nearest child (shortest edge)
           near_children = new_root.nearest_children
-          # We have multiple matches, so we are going to split on the 
-          # number of leafs, or we leave it like it is, if the split 
-          # will be too far from the target
+          # We possibly have multiple matches, so we are going to split on the
+          # number of leafs, or we leave it like it is, if the split will be
+          # too far from the target
           new_root = near_children.first
           near_children.each do |c|
             next if c == new_root
@@ -33,11 +32,10 @@ module Bio
               new_root = c 
             end
           end
-          branch = aln1.tree.clone_subtree(new_root)
-          # p [branch.leaves.size,target_size]
           # Break out of the loop when we hit the target
-          break if branch.leaves.size <= target_size 
+          break if new_root.leaves.size <= target_size 
         end
+        branch = aln1.tree.clone_subtree(new_root)
         reduced_tree = aln1.tree.clone_tree_without_branch(new_root)
         # p branch.map { |n| n.name }.compact
         # p reduced_tree.map { |n| n.name }.compact
