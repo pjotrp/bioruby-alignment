@@ -67,6 +67,11 @@ module Bio
         parent.children - [self]
       end
 
+      # Return the leaves of this node
+      def leaves
+        @tree.leaves(self)
+      end
+
       # Find the nearest and dearest, i.e. the leafs attached to the parent
       # node
       def nearest
@@ -78,13 +83,24 @@ module Bio
         @tree.distance(self,other)
       end
 
-      # Get child node with the shortest edge
+      # Get child node with the shortest edge - note that if there are more
+      # than one, the first will be picked
       def nearest_child
         c = nil
         children.each do |n|
           c=n if not c or distance(n)<distance(c)
         end
         c
+      end
+
+      # Get the child nodes with the shortest edge - returns an Array
+      def nearest_children
+        min_distance = distance(nearest_child)
+        cs = []
+        children.each do |n|
+          cs << n if distance(n) == min_distance
+        end
+        cs
       end
     end  # End of injecting Node functionality
 
@@ -94,12 +110,7 @@ module Bio
 
     # Walk the ordered tree leaves, calling into the block, and return an array 
     def map 
-      res = []
-      leaves.each do | leaf |
-        item = yield leaf
-        res << item
-      end
-      res
+      leaves.map { | leaf | yield leaf }
     end
 
     # Create a deep clone of the tree

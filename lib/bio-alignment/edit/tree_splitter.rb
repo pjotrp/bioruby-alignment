@@ -16,10 +16,26 @@ module Bio
         target_size = size/2+1 if not target_size
 
         aln1 = clone
+        # Get the root of the tree
         new_root = aln1.tree.root
         branch = nil
         while new_root
-          new_root = new_root.nearest_child
+          # find the nearest child (shortest edge)
+          near_children = new_root.nearest_children
+          if (near_children.size == 1)
+            new_root = near_children.first
+          else
+            # We have multiple matches, so we are going to split on the 
+            # number of leafs, or we leave it like it is, if the split 
+            # will be too far from the target
+            new_root = near_children.first
+            near_children.each do |c|
+              # find the nearest match
+              if (c.leaves.size-target_size).abs < (new_root.leaves.size-target_size).abs
+                new_root = c 
+              end
+            end
+          end
           branch = aln1.tree.clone_subtree(new_root)
           # p [branch.leaves.size,target_size]
           break if branch.leaves.size <= target_size 
