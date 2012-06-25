@@ -16,9 +16,16 @@ Features are:
 * Matrix notation for alignment object
 * Functional style alignment access and editing
 * Support for BioRuby Sequences
-* Support for (Newick) trees and node distance calculation
+* Support for BioRuby trees and node distance calculation
 * bio-alignment interacts well with BioRuby structures,
   including sequence objects and alignment/tree parsers
+
+When possible, BioRuby functionality is merged in. For example, by
+supporting Bio::Sequence objects, standard BioRuby alignment
+functions, sequence readers and writers can be used. By supporting the
+BioRuby Tree object, standard BioRuby tree parsers and writers can be
+used. bio-alignment takes alignment handling with phylogenetic tree
+support to a new level.
 
 bio-alignment is based on Pjotr's experience designing the BioScala
 Alignment handler and BioRuby's PAML support. Read the
@@ -179,11 +186,12 @@ alignment, and traversing the tree using an intuitive interface
   print tree.output_newick                  # BioRuby Newick output
 ```
 
-There are methods for finding sibling nodes, splitting the tree, and
-locating sequences on the same branch. More examples can be found in
-the tests and features.  The underlying implementation of Bio::Tree is
-that of BioRuby. We have added an OOP layer for traversing the tree by
-injecting methods into the BioRuby object itself. 
+There are methods for finding sibling nodes, splitting the alignment
+based on the tree, and locating sequences on the same branch. More
+examples can be found in the tests and features.  The underlying
+implementation of Bio::Tree is that of BioRuby. We have added an OOP
+layer for traversing the tree by injecting methods into the BioRuby
+object itself. 
 
 ### Alignment marking/masking/editing
 
