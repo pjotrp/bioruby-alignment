@@ -11,13 +11,13 @@ module Bio
       class Node
       end
 
-      # Make all nodes in the Bio::Tree aware of the tree object so we can use
-      # its methods
-      def Tree::init tree
+      # Make all nodes in the Bio::Tree aware of the tree object, and the alignment, so
+      # get a more intuitive API
+      def Tree::init tree, alignment
         if tree.kind_of?(Bio::Tree)
           # walk all nodes and infect the tree info
           tree.each_node do | node |
-            node.inject_tree(tree)
+            node.inject_tree(tree, alignment)
           end
           # tree.root.set_tree(tree)
         else
@@ -38,8 +38,9 @@ module Bio
   class Tree
     class Node
       # Add tree information to this node, so it can be queried 
-      def inject_tree tree
+      def inject_tree tree, alignment
         @tree = tree
+        @alignment = alignment
         self
       end
 
@@ -101,6 +102,15 @@ module Bio
           cs << n if distance(n) == min_distance
         end
         cs
+      end
+
+      # Return the alignment attached to the tree
+      def alignment
+        @alignment
+      end
+
+      def sequence
+        @alignment.find(name)
       end
     end  # End of injecting Node functionality
 

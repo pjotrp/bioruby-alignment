@@ -78,6 +78,11 @@ Then /^find that "([^"]*)" is on the same branch as "([^"]*)"$/ do |arg1, arg2|
   seq.nearest.map{|n|n.to_s}.sort.join(',').should == arg2
 end
 
+Then /^find that the alignment sequence matching tree node "(.*?)" is "(.*?)"$/ do |arg1, arg2|
+  tree = @aln.attach_tree(@tree)
+  node = tree.find(arg1)
+  node.sequence.to_s.should == arg2
+end
 
 Then /^draw the MSA with the tree$/ do | string |
   # textual drawing, like tabtree, or http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/149701

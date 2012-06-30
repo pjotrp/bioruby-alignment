@@ -28,6 +28,7 @@ Feature: Tree support for alignments
     And find that the nearest sequence to "seq1" is "seq2,seq3"
     And find that "seq1" is on the same branch as "seq2,seq3"
     And find that "seq4" is on the same branch as "seq1,seq2,seq3,seq5,seq8"
+    And find that the alignment sequence matching tree node "seq4" is "----PKLFSRPTIIFSGCSTACSGK--SEPVCGFRSFMLSDV"
     And draw the MSA with the tree
       """
       ,--9.69----------------------------------------- seq7  ----------PTIIFSGCSKACSGK-----VCGIFHAVRSFM

@@ -106,7 +106,7 @@ module Bio
       # the tree traverser
       def attach_tree tree
         extend Tree
-        @tree = Tree::init(tree)
+        @tree = Tree::init(tree,self)
         @tree
       end
 
