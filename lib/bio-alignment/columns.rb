@@ -67,11 +67,11 @@ module Bio
       end
 
       # update all elements in the column
-      def update! new_column
-        each_with_index do |e,i|
-          @aln[i][@col] = new_column[i]
-        end
-      end
+      # def update! new_column
+      #   each_with_index do |e,i|
+      #     @aln[i][@col] = new_column[i]
+      #   end
+      # end
 
       # iterator fetches a column on demand, yielding column elements
       def each
