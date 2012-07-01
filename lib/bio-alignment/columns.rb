@@ -50,19 +50,27 @@ module Bio
       end
     end
 
-    # Support the notion of columns in an alignment. A column
-    # can have state by attaching state objects
+    # Support the notion of columns in an alignment. A column is simply an
+    # integer index into the alignment, stored in @col. A column can have state
+    # by attaching state objects.
     class Column
       include State
       include Enumerable
 
       def initialize aln, col
         @aln = aln
-        @col = col
+        @col = col # column index number
       end
 
       def [] index
         @aln[index][@col] 
+      end
+
+      # update all elements in the column
+      def update! new_column
+        each_with_index do |e,i|
+          @aln[i][@col] = new_column[i]
+        end
       end
 
       # iterator fetches a column on demand, yielding column elements

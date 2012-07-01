@@ -18,6 +18,10 @@ module Bio
         @seq[index]
       end
 
+      def []= index, value
+        @seq[index] = value
+      end
+
       def length
         @seq.length
       end
