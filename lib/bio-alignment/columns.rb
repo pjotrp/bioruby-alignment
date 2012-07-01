@@ -37,7 +37,7 @@ module Bio
       end
 
       def columns_to_s
-        columns.map { |c| (c.state ? c.state.to_s : '?') }.join
+        columns.map { |c| (c.respond_to?(:state) ? c.state.to_s : '?') }.join
       end
        
       def clone_columns!
