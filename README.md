@@ -19,6 +19,8 @@ Features are:
 * Support for BioRuby trees and node distance calculation
 * bio-alignment interacts well with BioRuby structures,
   including sequence objects and alignment/tree parsers
+* Support for textual and HTML output of MSA (planned)
+* Support for Clayton's MAF parser is (planned)
 
 When possible, BioRuby functionality is merged in. For example, by
 supporting Bio::Sequence objects, standard BioRuby alignment
@@ -34,7 +36,13 @@ Bio::BioAlignment
 document](https://github.com/pjotrp/bioruby-alignment/blob/master/doc/bio-alignment-design.md)
 for Ruby.
 
-## Developers
+## Command line
+
+bio-alignment comes with a command line tool, which can apply a number
+of editing functions on an alignment, and generate textual and HTML
+output.
+
+## Section for developers
 
 ### Codon alignment example
 
@@ -50,7 +58,7 @@ aligmment (note codon gaps are represented by '---')
   aln = Alignment.new
   fasta = FastaReader.new('codon-alignment.fa')
   fasta.each do | rec |
-    aln.sequences << CodonSequence.new(rec.id, rec.seq)
+    aln << CodonSequence.new(rec.id, rec.seq)
   end
   # write a matching amino acid alignment
   fasta = FastaWriter.new('aa-aln.fa')
@@ -106,12 +114,21 @@ BioAlignment supports adding BioRuby's Bio::Sequence objects:
   include Bio::BioAlignment
 
   aln = Alignment.new
-  aln.sequences << Bio::Sequence::NA.new("atgcatgcaaaa")
-  aln.sequences << Bio::Sequence::NA.new("atg---tcaaaa")
+  aln << Bio::Sequence::NA.new("atgcatgcaaaa")
+  aln << Bio::Sequence::NA.new("atg---tcaaaa")
 ```
 
-and we can transform BioAlignment into BioRuby's Bio::Alignment and
-use BioRuby functions
+or use BioRuby's flat file reader
+
+```ruby
+  aln = Alignment.new
+  Bio::FlatFile.auto(filename).each_entry do |entry|
+    aln << entry
+  end
+```
+
+and, the other way, we can transform BioAlignment into BioRuby's
+Bio::Alignment and use BioRuby functions
 
 ```ruby
   bioruby_aln = aln.to_bioruby_alignment
@@ -132,7 +149,7 @@ the sequences
   aln2 = Alignment.new
   fasta2 = FastaReader.new('nt.fa')
   fasta2.each do | rec |
-    aln2.sequences << Sequence.new(rec.id, rec.seq)
+    aln2 << Sequence.new(rec.id, rec.seq)
   end
 ```
 

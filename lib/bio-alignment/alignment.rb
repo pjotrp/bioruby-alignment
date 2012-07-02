@@ -44,7 +44,7 @@ module Bio
 
       # return an array of sequence ids
       def ids
-        rows.map { |r| r.id }
+        rows.map { |r| fetch_id(r) }
       end
 
       def size
@@ -54,6 +54,10 @@ module Bio
       # Return a sequence by index
       def [] index
         rows[index]
+      end
+
+      def << seq
+        @sequences << seq
       end
 
       def each
@@ -68,12 +72,12 @@ module Bio
 
       def find name
         each do | seq |
-          return seq if seq.id == name
+          return seq if fetch_id(seq) == name
         end
         raise "ERROR: Sequence not found by its name, looking for <#{name}>"
       end
      
-      # clopy alignment and allow updating elements
+      # copy alignment and allow updating elements
       def update_each_element
         aln = self.clone
         aln.each { |seq| seq.each_with_index { |e,i| seq.seq[i] = yield e }}
@@ -82,7 +86,7 @@ module Bio
       def to_s
         res = ""
         res += "\t" + columns_to_s + "\n" if @columns
-        res += map{ |seq| seq.id.to_s + "\t" + seq.to_s }.join("\n")
+        res += map{ |seq| fetch_id(seq).to_s + "\t" + fetch_seq_string(seq) }.join("\n")
         res
       end
 
@@ -121,6 +125,33 @@ module Bio
         new_aln = Alignment.new(nrows)
         new_aln.attach_tree(new_tree.clone)
         new_aln
+      end
+
+    private
+
+      def fetch_id seq
+        if seq.respond_to?(:id)
+          seq.id
+        else
+          seq.entry_id
+        end
+      end
+
+      def fetch_seq seq
+        if seq.respond_to?(:seq)
+          seq.seq
+        else
+          seq
+        end
+      end
+
+      def fetch_seq_string seq
+        s = fetch_seq(seq)
+        if s.respond_to?(:join)
+          s.join
+        else
+          s.to_s
+        end
       end
     end
   end
