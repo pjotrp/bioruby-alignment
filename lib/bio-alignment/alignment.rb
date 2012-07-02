@@ -129,6 +129,7 @@ module Bio
 
     private
 
+      # Make BioRuby's entry_id compatible with id
       def fetch_id seq
         if seq.respond_to?(:id)
           seq.id
@@ -137,6 +138,7 @@ module Bio
         end
       end
 
+      # Coerce BioRuby's sequence objects to return the sequence itself
       def fetch_seq seq
         if seq.respond_to?(:seq)
           seq.seq
@@ -145,6 +147,7 @@ module Bio
         end
       end
 
+      # Coerce sequence objects into a string
       def fetch_seq_string seq
         s = fetch_seq(seq)
         if s.respond_to?(:join)
