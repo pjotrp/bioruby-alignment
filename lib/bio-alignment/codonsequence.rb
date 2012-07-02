@@ -10,6 +10,7 @@ module Bio
       UNDEFINED = 'X'
 
       attr_reader :codon_table
+      include State
 
       def initialize codon, codon_table = 1
         @codon = codon
@@ -108,6 +109,10 @@ module Bio
         @seq << codon
       end
         
+      # Return Sequence (string) as an Elements object
+      def to_elements
+        self
+      end
     end
 
   end

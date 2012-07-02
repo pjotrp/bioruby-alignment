@@ -38,9 +38,30 @@ for Ruby.
 
 ## Command line
 
-bio-alignment comes with a command line tool, which can apply a number
+bio-alignment comes with a command line interface (CLI), which can apply a number
 of editing functions on an alignment, and generate textual and HTML
-output.
+output. Note that the CLI does not cover the full library. The CLI can be useful
+for non-Rubyists, pipeline setups, and simply as examples
+
+Remove bridges (columns with mostly gaps) from an alignment
+
+    bio-alignment aa-alignment.fa --type aminoacid --edit bridges
+
+Mask islands (short misaligned 'floating' parts in a sequence) 
+
+    coming soon...
+
+Mask serial mutations
+
+    coming soon...
+
+Remove all sequences consisting of mostly gaps (30% informative) and output to FASTA
+ 
+    bio-alignment codon-alignment.fa --type codon --edit info --out fasta
+
+Remove all sequences containing gaps from an alignment
+
+    bio-alignment codon-alignment.fa --type codon --edit info --perc 100 --out fasta
 
 ## Section for developers
 
@@ -281,7 +302,7 @@ and, here we remove every marked element by turning it into a gap
 the old with the new. 
 
 It is important to note that, instead of directly editing alignments
-in place, this module always makes it a two step process. First items
+in place, bio-alignment always makes it a two step process. First items
 are masked/marked through the state of the rows/columns/elements, next
 the alignment is rewritten using this state. The advantage of using an
 intermediate state is that the state can be queried for creating (for

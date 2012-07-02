@@ -41,8 +41,16 @@ opts = OptionParser.new do |o|
     options[:type] = type.to_sym
   end
 
-  o.on('--edit bridges', [:bridges], 'Apply edit function') do |edit|
+  o.on('--edit bridges|islands|info', [:bridges,:islands,:info], 'Apply edit function') do |edit|
     options[:edit] = edit.to_sym
+  end
+
+  o.on('--perc value', Integer, 'Percentage') do |v|
+    options[:perc] = v
+  end
+
+  o.on('--out fasta', [:fasta], 'Format output') do |format|
+    options[:out] = format.to_sym
   end
 
   o.separator ""
@@ -93,7 +101,50 @@ logger.info [options, ARGV]
 ARGV.each do |fn|
   aln = Alignment.new
   Bio::FlatFile.auto(fn).each_entry do |entry|
-    aln << entry
+    case options[:type]
+      when :codon
+        aln << CodonSequence.new(entry.entry_id,entry.seq)
+      when :nucleotide 
+        aln << Sequence.new(entry.entry_id,entry.seq)
+      when :aminoacid
+        aln << Sequence.new(entry.entry_id,entry.seq)
+      else
+        # auto uses BioRuby sequence type
+        aln << entry
+    end
   end
-  print aln
+  case options[:edit]
+    when :bridges
+      logger.info "Apply delete bridges"
+      require 'bio-alignment/edit/del_bridges'
+      aln.extend(DelBridges)
+      aln2 = aln.del_bridges
+      aln = aln2
+    when :islands
+      logger.info "Apply mask islands filter"
+      require 'bio-alignment/edit/mask_islands'
+      aln.extend(MaskIslands)
+      aln.each { |seq| seq.extend(State) }
+      marked_aln = aln.mark_islands
+      aln2 = marked_aln.update_each_element { |e| (e.state.masked? ? Element.new("X"):e)}
+      aln = aln2
+    when :info
+      logger.info "Apply sequence information filter"
+      require 'bio-alignment/edit/del_non_informative_sequences'
+      aln.extend(DelNonInformativeSequences)
+      aln.each { |seq| seq.extend(State) }
+      aln2 = aln.del_non_informative_sequences(options[:perc])
+      aln = aln2
+    else 
+      # do nothing
+  end
+  case options[:out]
+    when :fasta
+      aln.each do | seq |
+        print ">",seq.id,"\n"
+        print seq.to_s,"\n"
+      end
+    else
+      print aln
+  end
 end
