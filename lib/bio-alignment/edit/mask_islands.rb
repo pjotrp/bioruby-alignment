@@ -57,7 +57,7 @@ module Bio
                 if gap.length > 2
                   in_island = false
                   mark_island(island)
-                  print_island(island)
+                  # print_island(island)
                   island = []
                 end
               end
@@ -65,7 +65,7 @@ module Bio
           end
           if in_island
             mark_island(island)
-            print_island(island) if island.length > 0
+            # print_island(island) if island.length > 0
           end
           row  # return changed sequence
         }

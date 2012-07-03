@@ -35,6 +35,10 @@ module Bio
         @codon
       end
 
+      def == other
+        @codon == other.to_s
+      end
+
       # lazily convert to Amino acid (once only)
       def to_aa
         aa = translate
@@ -114,7 +118,7 @@ module Bio
       def << codon
         @seq << codon
       end
-        
+
       # Return Sequence (string) as an Elements object
       def to_elements
         self
