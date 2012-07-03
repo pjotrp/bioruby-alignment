@@ -11,6 +11,7 @@ module Bio
       attr_reader :id, :seq
       def initialize id, seq
         @id = id
+        @id.freeze
         @seq = seq
       end
 

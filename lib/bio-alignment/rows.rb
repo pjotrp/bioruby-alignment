@@ -28,6 +28,7 @@ module Bio
       def initialize aln, row
         @aln = aln
         @row = row
+        freeze
       end
 
       def count &block

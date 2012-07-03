@@ -40,6 +40,7 @@ module Bio
       # Add tree information to this node, so it can be queried 
       def inject_tree tree, alignment
         @tree = tree
+        @tree.freeze
         @alignment = alignment
         self
       end

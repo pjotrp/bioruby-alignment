@@ -10,6 +10,7 @@ module Bio
 
       def initialize c
         @c = c
+        @c.freeze
       end
       def gap?
         @c == GAP
@@ -34,6 +35,7 @@ module Bio
       attr_reader :id, :seq
       def initialize id, seq
         @id = id
+        @id.freeze
         @seq = []
         if seq.kind_of?(Elements)
           @seq = seq.clone

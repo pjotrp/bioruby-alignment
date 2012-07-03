@@ -15,6 +15,8 @@ module Bio
       def initialize codon, codon_table = 1
         @codon = codon
         @codon_table = codon_table
+        @codon.freeze
+        @codon_table.freeze
       end
 
       def gap?
@@ -53,7 +55,7 @@ module Bio
       # lazy translation of codon to amino acid
       def translate
         @aa ||= Bio::CodonTable[@codon_table][@codon]
-        @aa
+        @aa.freeze
       end
     end
 
@@ -73,6 +75,9 @@ module Bio
         seq.scan(/\S\S\S/).each do | codon |
           @seq << Codon.new(codon, @codon_table)
         end
+        @id.freeze
+        @codon_table.freeze
+        # @seq is not immutable, as we can add new codes to the list
       end
 
       def [] index

@@ -60,6 +60,8 @@ module Bio
       def initialize aln, col
         @aln = aln
         @col = col # column index number
+        @col.freeze
+        @aln
       end
 
       def [] index
