@@ -13,6 +13,7 @@ module Bio
       include Pal2Nal
       include Rows
       include Columns
+      include Coerce
 
       attr_accessor :sequences
       attr_reader :tree
@@ -127,35 +128,6 @@ module Bio
         new_aln
       end
 
-    private
-
-      # Make BioRuby's entry_id compatible with id
-      def fetch_id seq
-        if seq.respond_to?(:id)
-          seq.id
-        else
-          seq.entry_id
-        end
-      end
-
-      # Coerce BioRuby's sequence objects to return the sequence itself
-      def fetch_seq seq
-        if seq.respond_to?(:seq)
-          seq.seq
-        else
-          seq
-        end
-      end
-
-      # Coerce sequence objects into a string
-      def fetch_seq_string seq
-        s = fetch_seq(seq)
-        if s.respond_to?(:join)
-          s.join
-        else
-          s.to_s
-        end
-      end
     end
   end
 end

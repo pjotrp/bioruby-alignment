@@ -145,18 +145,11 @@ ARGV.each do |fn|
   case options[:out]
     when :fasta
       aln.each do | seq |
-        print ">",seq.id,"\n"
-        if seq.kind_of?(CodonSequence) 
-          if options[:style] == :codon
-            print seq.to_s,"\n"
-          else
-            print seq.to_nt,"\n"
-          end
-        else
-          print seq.to_s,"\n"
-        end
+        print FastaOutput::to_fasta(seq)
       end
     else
-      print aln
+      aln.each do | seq |
+        print TextOutput::to_text(seq,options[:style])
+      end
   end
 end

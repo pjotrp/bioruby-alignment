@@ -2,6 +2,7 @@
 # bioruby directory tree.
 #
 
+require 'bio-alignment/coerce'
 require 'bio-alignment/state'
 require 'bio-alignment/elements'
 require 'bio-alignment/sequence'

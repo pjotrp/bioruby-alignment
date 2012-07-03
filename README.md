@@ -59,7 +59,12 @@ Remove all sequences consisting of mostly gaps (30% informative) and output to F
  
     bio-alignment codon-alignment.fa --type codon --edit info --out fasta
 
-Remove all sequences containing gaps from an alignment
+or output codon style
+
+    bio-alignment codon-alignment.fa --type codon --edit info --style codon
+
+Remove all sequences containing gaps from an alignment (why would you
+want to do that?)
 
     bio-alignment codon-alignment.fa --type codon --edit info --perc 100 --out fasta
 
