@@ -49,8 +49,12 @@ opts = OptionParser.new do |o|
     options[:perc] = v
   end
 
-  o.on('--out fasta', [:fasta], 'Format output') do |format|
+  o.on('--out fasta', [:fasta], 'Output format') do |format|
     options[:out] = format.to_sym
+  end
+
+  o.on('--style codon', [:codon], 'Output style') do |style|
+    options[:style] = style.to_sym
   end
 
   o.separator ""
@@ -142,7 +146,15 @@ ARGV.each do |fn|
     when :fasta
       aln.each do | seq |
         print ">",seq.id,"\n"
-        print seq.to_s,"\n"
+        if seq.kind_of?(CodonSequence) 
+          if options[:style] == :codon
+            print seq.to_s,"\n"
+          else
+            print seq.to_nt,"\n"
+          end
+        else
+          print seq.to_s,"\n"
+        end
       end
     else
       print aln

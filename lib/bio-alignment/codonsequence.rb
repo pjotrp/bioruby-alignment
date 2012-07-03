@@ -7,7 +7,7 @@ module Bio
     # Codon element for the matrix, used by CodonSequence.
     class Codon
       GAP = '---'
-      UNDEFINED = 'X'
+      UNDEFINED = 'XXX'
 
       attr_reader :codon_table
       include State
@@ -92,6 +92,7 @@ module Bio
         @seq.each { | codon | yield codon }
       end
 
+      # Output codon style
       def to_s
         @seq.map { |codon| codon.to_s }.join(' ')
       end
