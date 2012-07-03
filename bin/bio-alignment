@@ -114,6 +114,7 @@ ARGV.each do |fn|
         aln << Sequence.new(entry.entry_id,entry.seq)
       else
         # auto uses BioRuby sequence type
+        logger.warn "Using native type, if you encounter a problem, set the --type explicitly"
         aln << entry
     end
   end
@@ -128,7 +129,6 @@ ARGV.each do |fn|
       logger.info "Apply mask islands filter"
       require 'bio-alignment/edit/mask_islands'
       aln.extend(MaskIslands)
-      aln.each { |seq| seq.extend(State) }
       marked_aln = aln.mark_islands
       aln2 = marked_aln.update_each_element { |e| (e.state.masked? ? Element.new("X"):e)}
       aln = aln2

@@ -28,6 +28,15 @@ module Bio
           s.to_s
         end
       end
+
+      # Coerce sequence objects into elements
+      def Coerce::to_elements seq
+        if seq.respond_to?(:to_elements)
+          seq.to_elements
+        else
+          Elements.new(fetch_id(seq),fetch_seq(seq))
+        end
+      end
     end
   end
 end
