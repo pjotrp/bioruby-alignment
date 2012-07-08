@@ -45,7 +45,7 @@ module Bio
 
       # return an array of sequence ids
       def ids
-        rows.map { |r| fetch_id(r) }
+        rows.map { |r| Coerce::fetch_id(r) }
       end
 
       def size
@@ -73,7 +73,7 @@ module Bio
 
       def find name
         each do | seq |
-          return seq if fetch_id(seq) == name
+          return seq if Coerce::fetch_id(seq) == name
         end
         raise "ERROR: Sequence not found by its name, looking for <#{name}>"
       end
@@ -87,7 +87,7 @@ module Bio
       def to_s
         res = ""
         res += "\t" + columns_to_s + "\n" if @columns
-        res += map{ |seq| fetch_id(seq).to_s + "\t" + fetch_seq_string(seq) }.join("\n")
+        res += map{ |seq| Coerce::fetch_id(seq).to_s + "\t" + Coerce::fetch_seq_string(seq) }.join("\n")
         res
       end
 
