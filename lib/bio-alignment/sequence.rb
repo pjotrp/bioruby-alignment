@@ -19,7 +19,7 @@ module Bio
         @seq[index]
       end
 
-      # def []= index, value
+      # def []= index, value  --- we should not implement this for reasons of purity
       #   @seq[index] = value
       # end
 
