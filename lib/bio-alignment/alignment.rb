@@ -87,6 +87,7 @@ module Bio
       def to_s
         res = ""
         res += "\t" + columns_to_s + "\n" if @columns
+        # fetch each sequence in turn
         res += map{ |seq| Coerce::fetch_id(seq).to_s + "\t" + Coerce::fetch_seq_string(seq) }.join("\n")
         res
       end

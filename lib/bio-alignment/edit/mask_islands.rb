@@ -29,7 +29,7 @@ module Bio
         count_marked_elements = 0
 
         # Traverse each row in the alignment
-        mark_row_elements { |row,rownum|
+        marked_aln = mark_row_elements { |row,rownum|
           # for each element create a state object, and find unique elements (i.e. consensus) across a column
           row.each_with_index do |e,colnum|
             e.state = IslandElementState.new
@@ -77,7 +77,7 @@ module Bio
           end
         }
         logger.info("#{count_marked_islands} islands marked (#{count_marked_elements} elements)")
-        self
+        return marked_aln
       end
 
     private

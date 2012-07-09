@@ -5,8 +5,11 @@ module Bio
       def Coerce::fetch_id seq
         if seq.respond_to?(:id)
           seq.id
-        else
+        elsif seq.respond_to?(:entry_id)
           seq.entry_id
+        else
+          p seq
+          raise "Cannot find id for seq #{seq} (#{seq.class})"
         end
       end
 

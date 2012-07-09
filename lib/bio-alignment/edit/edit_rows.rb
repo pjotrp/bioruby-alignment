@@ -5,7 +5,7 @@ module Bio
     # state, and returning a newly cloned alignment
     module MarkRows
 
-      # Mark each seq
+      # Mark each seq and return alignment
       def mark_rows &block
         aln = markrows_clone
         aln.rows.each do | row |
@@ -16,7 +16,10 @@ module Bio
 
       # allow the marking of elements in a copied alignment, making sure 
       # each element is a proper Element object that can contain state.
+      #
       # A Sequence alignment will be turned into an Elements alignment.
+      #
+      # Returns the new alignment
       def mark_row_elements &block
         aln = markrows_clone
         aln.rows.each_with_index do | row,rownum |
