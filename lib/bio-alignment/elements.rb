@@ -24,6 +24,13 @@ module Bio
       def == other
         to_s == other.to_s
       end
+      def clone
+        e = self.dup
+        if e.state != nil
+          e.state = e.state.clone
+        end
+        e
+      end
     end
 
     # Elements is a container for Element sequences. 
@@ -77,7 +84,7 @@ module Bio
       def clone
         copy = Elements.new(@id,"")
         @seq.each do |e|
-          copy << e.dup
+          copy << e.clone
         end
         copy
       end
