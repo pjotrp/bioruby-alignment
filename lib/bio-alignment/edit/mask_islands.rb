@@ -24,6 +24,10 @@ module Bio
       # Consensus for each element is defined as the number of matches in the
       # column (default 1).
       def mark_islands
+        logger = Bio::Log::LoggerPlus['bio-alignment']
+        count_marked_islands = 0
+        count_marked_elements = 0
+
         # Traverse each row in the alignment
         mark_row_elements { |row,rownum|
           # for each element create a state object, and find unique elements (i.e. consensus) across a column
@@ -56,7 +60,9 @@ module Bio
                 gap << e
                 if gap.length > 2
                   in_island = false
-                  mark_island(island)
+                  ci, ce = mark_island(island)
+                  count_marked_islands += ci
+                  count_marked_elements += ce
                   # print_island(island)
                   island = []
                 end
@@ -64,11 +70,15 @@ module Bio
             end
           end
           if in_island
-            mark_island(island)
+            ci, ce = mark_island(island)
+            count_marked_islands += ci
+            count_marked_elements += ce
             # print_island(island) if island.length > 0
           end
           row  # return changed sequence
         }
+        logger.info("#{count_marked_islands} islands marked (#{count_marked_elements} elements)")
+        self
       end
 
     private
@@ -76,10 +86,13 @@ module Bio
       # Check a list of elements that form an island. First count the number
       # of elements marked as being unique. If the island is more than 50%
       # unique (i.e. less than 50% consensus with the rest if the alignment) 
-      # all island elements are marked for masking.
+      # all island elements are marked for masking. Returns the number of
+      # islands and elements marked as a tuple
       def mark_island island
         return if island.length < 2
         unique = 0
+        count_islands = 0
+        count_elements = 0
         island.each do |e|
           unique += 1 if e.state.unique == true
         end
@@ -89,7 +102,10 @@ module Bio
           island.each do |e|
             e.state.mask!
           end
+          count_islands += 1
+          count_elements += island.size
         end
+        return count_islands, count_elements
       end
 
       def print_island island
