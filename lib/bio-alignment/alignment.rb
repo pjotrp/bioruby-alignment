@@ -82,6 +82,7 @@ module Bio
       def update_each_element
         aln = self.clone
         aln.each { |seq| seq.each_with_index { |e,i| seq.seq[i] = yield e }}
+        aln
       end
 
       def to_s
