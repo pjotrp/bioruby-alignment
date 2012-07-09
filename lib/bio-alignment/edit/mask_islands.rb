@@ -89,7 +89,7 @@ module Bio
       # all island elements are marked for masking. Returns the number of
       # islands and elements marked as a tuple
       def mark_island island
-        return if island.length < 2
+        return 0,0 if island.length < 2
         unique = 0
         count_islands = 0
         count_elements = 0

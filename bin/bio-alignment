@@ -24,7 +24,6 @@ end
 
 require 'bio-alignment'
 require 'optparse'
-require 'bio-logger'
 include Bio::BioAlignment
 
 log = Bio::Log::LoggerPlus.new 'bio-alignment'
