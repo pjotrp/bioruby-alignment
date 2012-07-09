@@ -78,7 +78,7 @@ module Bio
         raise "ERROR: Sequence not found by its name, looking for <#{name}>"
       end
      
-      # copy alignment and allow updating elements
+      # copy alignment and allow updating elements. Returns alignment.
       def update_each_element
         aln = self.clone
         aln.each { |seq| seq.each_with_index { |e,i| seq.seq[i] = yield e }}
