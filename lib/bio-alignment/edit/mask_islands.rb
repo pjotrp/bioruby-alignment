@@ -75,6 +75,7 @@ module Bio
             count_marked_elements += ce
             # print_island(island) if island.length > 0
           end
+          row # always return the row to mark_row_elements
         }
         logger.info("#{count_marked_islands} islands marked (#{count_marked_elements} elements)")
         return marked_aln
