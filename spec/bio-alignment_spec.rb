@@ -108,3 +108,16 @@ describe "BioAlignment::DelBridges for codons" do
   aln3 = aln2.columns_where { |col| !col.state.deleted? }
   aln3.columns.size.should == 399
 end
+
+# require 'bio'  # BioRuby
+require 'bio-alignment/bioruby' # make Bio::Sequence enumerable
+
+describe "BioAlignment::BioRuby interface" do
+  include Bio::BioAlignment
+
+  aln = Alignment.new
+  aln << Bio::Sequence::NA.new("atgcatgcaaaa")
+  aln << Bio::Sequence::NA.new("atg---tcaaaa")
+  aln[0].should == "atgcatgcaaaa"
+  aln[1].should == "atg---tcaaaa"
+end
