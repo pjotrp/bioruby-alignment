@@ -161,6 +161,14 @@ Bio::Alignment and use BioRuby functions
   bioruby_aln.consensus_iupac
 ```
 
+Note that native BioRuby objects may not always work. In the first
+case, using Bio::Sequence::NA, no ID is passed in, so each sequence is
+labeled 'id?'. In the second case BioRuby's FlatFile returns a
+FastaFormat object, this time with ID, but FastaFormat does not
+support indexing. In general, it is recommended to stay with the
+bio-alignment Sequence classes (or roll your own, as long as they are
+Enumerable). 
+
 ### Pal2nal
 
 A protein (amino acid) to nucleotide alignment would first load
