@@ -4,7 +4,7 @@ module Bio
     class NA
       include Enumerable
       def each
-        to_s.each_byte do | c |
+        to_s.each_char do | c | 
           yield c
         end
       end
@@ -12,7 +12,7 @@ module Bio
     class AA
       include Enumerable
       def each
-        to_s.each_byte do | c |
+        to_s.each_char do | c |
           yield c
         end
       end
