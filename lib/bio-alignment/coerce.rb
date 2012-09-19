@@ -8,8 +8,7 @@ module Bio
         elsif seq.respond_to?(:entry_id)
           seq.entry_id
         else
-          p seq
-          raise "Cannot find id for seq #{seq} (#{seq.class})"
+          "id?"
         end
       end
 

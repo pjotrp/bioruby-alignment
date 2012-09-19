@@ -120,4 +120,7 @@ describe "BioAlignment::BioRuby interface" do
   aln << Bio::Sequence::NA.new("atg---tcaaaa")
   aln[0].should == "atgcatgcaaaa"
   aln[1].should == "atg---tcaaaa"
+  Coerce::fetch_seq_string(aln[0]).should == "atgcatgcaaaa"
+  Coerce::fetch_id(aln[0]).should == "id?"
+  puts aln
 end
