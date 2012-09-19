@@ -121,7 +121,11 @@ describe "BioAlignment::BioRuby interface" do
   aln[0].should == "atgcatgcaaaa"
   aln[1].should == "atg---tcaaaa"
   Coerce::fetch_seq_string(aln[0]).should == "atgcatgcaaaa"
-  if not (defined? RUBY_ENGINE && RUBY_ENGINE == 'jruby')  # JRuby can return an object id, it is a name collision
+  if defined?(RUBY_ENGINE) && RUBY_ENGINE == 'jruby'  
+    # JRuby can return an object id, it is a name collision
+    # do nothing
+    test = Coerce::fetch_id(aln[0])
+  else
     Coerce::fetch_id(aln[0]).should == "id?"
   end
   puts aln
