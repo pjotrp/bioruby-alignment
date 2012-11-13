@@ -254,13 +254,14 @@ programming. Primitives are provided which take out much of the
 plumbing, such as maintaining row/column/element state, and allow
 copy-on-edit (so no conflicts arise in concurrent code). For example,
 to walk an alignment by row, and update the row state, you can mark
-all rows for deletion which contain many gaps
+all rows (sequences) which contain many gaps for deletion
 
 ```ruby
   include MarkRows
   mark_rows { |rowstate,row|  # for every row/sequence
     num = row.count { |e| e.gap? }
     if (num.to_f/row.length) > 0.5
+      # this row in the alignment consists mostly of gaps
       rowstate.delete!  # mark row for deletion
     end
     rowstate   # returns the updated row state
@@ -278,9 +279,9 @@ The general idea is that there are many potential ways of selecting
 rows, and changing some state. The 'mark_rows' function/iterator takes
 care of the plumbing. All the programmer needs to do is to set the
 criterion, in this case a gap percentage, and tell the library what
-state has to change. In this example we only access one row, but you
-can also access the other rows. You won't be surprised that marking
-columns looks much the same
+state has to change. In this example we only access one row at a time,
+but you can also access the other rows. You won't be surprised that
+marking columns looks much the same
 
 ```ruby
   include MarkColumns
