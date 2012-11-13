@@ -340,6 +340,9 @@ An edit feature is added at runtime(!) Example:
 
 where aln2 is a copy of aln with bridging columns deleted.
 
+More examples can be found in the features/edit directory of the
+source.
+
 ### See also
 
 For more on the design of bio-alignment, read the
