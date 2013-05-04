@@ -1,0 +1,2 @@
+- Island masking assumes one unique element, maybe consider a
+  neighbour. The example in test/data is rather a good one.

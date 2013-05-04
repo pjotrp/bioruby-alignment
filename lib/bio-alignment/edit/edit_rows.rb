@@ -24,7 +24,7 @@ module Bio
         aln = markrows_clone
         aln.rows.each_with_index do | row,rownum |
           new_seq = block.call(Coerce::to_elements(row),rownum)
-          p [rownum,new_seq,row]
+          # p [rownum,new_seq,row]
           aln.rows[rownum] = new_seq
         end
         aln
