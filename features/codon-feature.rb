@@ -35,7 +35,7 @@ Then /^it should write a nucleotide alignment$/ do
   # Writing is actually handles by a different library
   fasta = FastaWriter.new('test/data/regression/nt-aln.fa')
   @aln.rows.each do | row |
-    fasta.write(row)
+    fasta.write(row.id, row.to_s)
   end
 end
 
@@ -45,4 +45,3 @@ Then /^it should write an amino acid alignment$/ do
     fasta.write(row.id, row.to_aa.to_s)
   end
 end
-
