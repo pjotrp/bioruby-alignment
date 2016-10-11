@@ -17,19 +17,18 @@ When /^I inject column state$/ do
 end
 
 Then /^I should be able to get the column state$/ do
-  column.state.deleted?.should be_true
+  column.state.deleted?.should be true
 end
 
 list = []
 When /^I iterate a column$/ do
   column10 = @aln.columns[10]
-  column10.each do | element | 
+  column10.each do | element |
     list << element.to_s
   end
 end
 
 Then /^I should get the column elements$/ do
-  list[0..10].should == 
+  list[0..10].should ==
   ["ctt", "gcg", "ctt", "ttt", "gcg", "ttt", "ttt", "agt", "ttt", "atg", "agt"]
 end
-
