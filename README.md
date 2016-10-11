@@ -47,7 +47,7 @@ Remove bridges (columns with mostly gaps) from an alignment
 
     bio-alignment aa-alignment.fa --type aminoacid --edit bridges
 
-Mask islands (short misaligned 'floating' parts in a sequence) 
+Mask islands (short misaligned 'floating' parts in a sequence)
 
     coming soon...
 
@@ -56,7 +56,7 @@ Mask serial mutations
     coming soon...
 
 Remove all sequences consisting of mostly gaps (30% informative) and output to FASTA
- 
+
     bio-alignment codon-alignment.fa --type codon --edit info --out fasta
 
 or output codon style
@@ -167,7 +167,7 @@ labeled 'id?'. In the second case BioRuby's FlatFile returns a
 FastaFormat object, this time with ID, but FastaFormat does not
 support indexing. In general, it is recommended to stay with the
 bio-alignment Sequence classes (or roll your own, as long as they are
-Enumerable). 
+Enumerable).
 
 ### Pal2nal
 
@@ -228,12 +228,12 @@ alignment, and traversing the tree using an intuitive interface
   newick_tree = Bio::Newick.new(string).tree  # use BioRuby's tree parser
   tree = aln.attach_tree(newick_tree)         # attach the tree
   # now do stuff with the tree, which has improved bio-alignment support
-  root = tree.root 
+  root = tree.root
   children = root.children
   children.map { |n| n.name }.sort.should == ["","seq7"]
   seq7 = children.last
   seq4 = tree.find("seq4")
-  seq4.distance(seq7).should == 19.387756600000003 
+  seq4.distance(seq7).should == 19.387756600000003
   # find the sequence in the alignment belonging to the node
   print seq4.sequence
   print tree.output_newick                  # BioRuby Newick output
@@ -244,7 +244,7 @@ based on the tree, and locating sequences on the same branch. More
 examples can be found in the tests and features.  The underlying
 implementation of Bio::Tree is that of BioRuby. We have added an OOP
 layer for traversing the tree by injecting methods into the BioRuby
-object itself. 
+object itself.
 
 ### Alignment marking/masking/editing
 
@@ -288,7 +288,7 @@ marking columns looks much the same
   mark_columns { |colstate,col|  # for every column
     num = col.count { |e| e.gap? }
     if (num.to_f/col.length) > 0.5
-      colstate.delete! 
+      colstate.delete!
     end
     colstate
   }
@@ -313,7 +313,7 @@ and, here we remove every marked element by turning it into a gap
 ```
 
 ''update_each_element'' visits every element in the MSA, and replaces
-the old with the new. 
+the old with the new.
 
 It is important to note that, instead of directly editing alignments
 in place, bio-alignment always makes it a two step process. First items
@@ -334,7 +334,7 @@ An edit feature is added at runtime(!) Example:
 ```ruby
   require 'bio-alignment/edit/del_bridges'
 
-  aln.extend DelBridges         # mix the module into the object 
+  aln.extend DelBridges         # mix the module into the object
   aln2 = aln.del_bridges        # execute the alignment editor
 ```
 
@@ -358,7 +358,7 @@ The API documentation can be found
 ## Cite
 
 If you use this software, please cite one of
-  
+
 * [BioRuby: bioinformatics software for the Ruby programming language](http://dx.doi.org/10.1093/bioinformatics/btq475)
 * [Biogem: an effective tool-based approach for scaling up open source software development in bioinformatics](http://dx.doi.org/10.1093/bioinformatics/bts080)
 
@@ -368,5 +368,4 @@ This Biogem is published at [#bio-alignment](http://biogems.info/index.html)
 
 ## Copyright
 
-Copyright (c) 2012 Pjotr Prins. See LICENSE.txt for further details.
-
+Copyright (c) 2012-2016 Pjotr Prins. See LICENSE.txt for further details.

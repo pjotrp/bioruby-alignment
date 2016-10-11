@@ -2,7 +2,7 @@
 #
 # BioRuby bio-alignment Plugin
 # Author:: Pjotr Prins
-# Copyright:: 2012
+# Copyright:: 2012-2016
 # License:: The Ruby License
 
 rootpath = File.dirname(File.dirname(__FILE__))
@@ -10,7 +10,7 @@ $: << File.join(rootpath,'lib')
 
 _VERSION = File.new(File.join(rootpath,'VERSION')).read.chomp
 
-$stderr.print "bio-alignment "+_VERSION+" Copyright (C) 2012 Pjotr Prins <pjotr.prins@thebird.nl>\n\n"
+$stderr.print "bio-alignment "+_VERSION+" Copyright (C) 2012-2016 Pjotr Prins <pjotr.prins@thebird.nl>\n\n"
 
 USAGE =<<EOU
 
@@ -61,19 +61,19 @@ opts = OptionParser.new do |o|
   o.on("--logger filename",String,"Log to file (default stderr)") do | name |
     Bio::Log::CLI.logger(name)
   end
-  
+
   o.on("--trace options",String,"Set log level (default INFO, see bio-logger)") do | s |
     Bio::Log::CLI.trace(s)
   end
-  
+
   o.on("-q", "--quiet", "Run quietly") do |q|
     Bio::Log::CLI.trace('error')
   end
-  
+
   o.on("-v", "--verbose", "Run verbosely") do |v|
     Bio::Log::CLI.trace('info')
   end
-  
+
   o.on("--debug", "Show debug messages") do |v|
     Bio::Log::CLI.trace('debug')
   end
@@ -88,7 +88,7 @@ end
 begin
   opts.parse!(ARGV)
 
-  if options[:show_help] 
+  if options[:show_help]
     print opts
     print USAGE
   end
@@ -107,7 +107,7 @@ ARGV.each do |fn|
     case options[:type]
       when :codon
         aln << CodonSequence.new(entry.entry_id,entry.seq)
-      when :nucleotide 
+      when :nucleotide
         aln << Sequence.new(entry.entry_id,entry.seq)
       when :aminoacid
         aln << Sequence.new(entry.entry_id,entry.seq)
@@ -138,7 +138,7 @@ ARGV.each do |fn|
       aln.each { |seq| seq.extend(State) }
       aln2 = aln.del_non_informative_sequences(options[:perc])
       aln = aln2
-    else 
+    else
       # do nothing
   end
   case options[:out]
