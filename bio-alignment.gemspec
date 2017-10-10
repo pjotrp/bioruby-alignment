@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   # s.date = "2016-10-10"
   # s.description = "Alignment handler for multiple sequence alignments (MSA)"
   s.email = "pjotr.public01@thebird.nl"
-  s.executables = ["bio-alignment"]
+  s.executables = ["bio-alignment", "pal2nal"]
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.md",
@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
     "TODO",
     "VERSION",
     "bin/bio-alignment",
+    "bin/pal2nal",
     "doc/bio-alignment-design.md",
     "features/bioruby-feature.rb",
     "features/bioruby.feature",
