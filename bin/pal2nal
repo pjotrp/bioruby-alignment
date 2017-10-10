@@ -6,10 +6,12 @@ Simple Pal2Nal implementation
 
 Pal2Nal converts a multiple sequence alignment of proteins and the
 corresponding DNA (or mRNA) sequences into a codon-based DNA
-alignment. This version implements a simple 1-to-1 matching. The
-resulting codon-based DNA alignment can further be subjected to the
-calculation of synonymous (Ks) and non-synonymous (Ka) substitution
-rates and be fed into PAML.
+alignment. This version implements a simple 1-to-1 matching with use
+of a codon table and validation(!)
+
+The resulting codon-based DNA alignment can further be subjected to
+the calculation of synonymous (Ks) and non-synonymous (Ka)
+substitution rates and be fed into PAML.
 
    pep.aln     Protein (AA) alignment
    nuc.fasta   Nucleotide sequences
