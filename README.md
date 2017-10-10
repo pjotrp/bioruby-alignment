@@ -38,7 +38,10 @@ for Ruby.
 
 ## Installation
 
-Dependencies are bioruby, bio-bigbio and bio-logger gems.
+Dependencies are bioruby, bio-bigbio and bio-logger gems. To run the
+tests you also need to install rspec and cucumber gems.
+
+Bundler is no longer used.
 
 ## Command line
 
