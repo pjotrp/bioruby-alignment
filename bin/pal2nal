@@ -91,7 +91,18 @@ end
 
 pal2nal = aa_aln.pal2nal(nt_aln, :codon_table => 1, :do_validate => true)
 
-pal2nal.each do | seq |
-  print ">",seq.id,"\n"
-  print seq.to_nt,"\n"
+LINELEN = 60
+offset = 0
+size   = pal2nal.first.seq.size * 3
+
+print "CLUSTAL W multiple sequence alignment\n"
+while size > 0
+  print "\n"
+  pal2nal.each do | seq |
+    print seq.id,"      "
+    print seq.to_nt[offset..offset+LINELEN-1],"\n"
+  end
+  offset += LINELEN
+  size -= LINELEN
 end
+print "\n"
