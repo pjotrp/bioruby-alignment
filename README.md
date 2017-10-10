@@ -36,6 +36,10 @@ Bio::BioAlignment
 document](https://github.com/pjotrp/bioruby-alignment/blob/master/doc/bio-alignment-design.md)
 for Ruby.
 
+## Installation
+
+Dependencies are bioruby, bio-bigbio and bio-logger gems.
+
 ## Command line
 
 bio-alignment comes with a command line interface (CLI), which can apply a number
@@ -82,7 +86,7 @@ aligmment (note codon gaps are represented by '---')
 
   include Bio::BioAlignment
   aln = Alignment.new
-  fasta = FastaReader.new('codon-alignment.fa')
+fasta = FastaReader.new('codon-alignment.fa')
   fasta.each do | rec |
     aln << CodonSequence.new(rec.id, rec.seq)
   end
@@ -171,23 +175,9 @@ Enumerable).
 
 ### Pal2nal
 
-A protein (amino acid) to nucleotide alignment would first load
-the sequences
-
-```ruby
-  aln1 = Alignment.new
-  fasta1 = FastaWriter.new('aa-aln.fa')
-  aln1.rows.each do | row |
-    fasta1.write(row.id, row.to_aa.to_s)
-  end
-  aln2 = Alignment.new
-  fasta2 = FastaReader.new('nt.fa')
-  fasta2.each do | rec |
-    aln2 << Sequence.new(rec.id, rec.seq)
-  end
-```
-
-Writing a (simple) version of pal2nal would be something like
+A protein (amino acid) to nucleotide alignment would first load the
+sequences and align them.  Writing a (simple) version of pal2nal would
+be something like
 
 ```ruby
   fasta3 = FastaWriter.new('nt-aln.fa')
@@ -210,14 +200,17 @@ Writing a (simple) version of pal2nal would be something like
   end
 ```
 
-With amino acid aa_aln and nucleotide nt_aln loaded, the library
-version of pal2nal includes validation
+We included a version (of course). With amino acid aa_aln and
+nucleotide nt_aln loaded, the library version of pal2nal includes
+validation
 
 ```ruby
   aln = aa_aln.pal2nal(nt_aln, :codon_table => 3, :do_validate => true)
 ```
 
-resulting in the codon alignment.
+resulting in the codon alignment. A command line
+[pal2nal](./bin/pal2nal) is also available on installing the gem.
+
 
 ### Phylogeny
 
@@ -368,4 +361,4 @@ This Biogem is published at [#bio-alignment](http://biogems.info/index.html)
 
 ## Copyright
 
-Copyright (c) 2012-2016 Pjotr Prins. See LICENSE.txt for further details.
+Copyright (c) 2012-2017 Pjotr Prins. See LICENSE.txt for further details.

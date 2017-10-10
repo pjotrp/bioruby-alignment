@@ -1,0 +1,97 @@
+#!/usr/bin/env ruby
+#
+
+USAGE = """
+Simple Pal2Nal implementation
+
+Pal2Nal converts a multiple sequence alignment of proteins and the
+corresponding DNA (or mRNA) sequences into a codon-based DNA
+alignment. This version implements a simple 1-to-1 matching. The
+resulting codon-based DNA alignment can further be subjected to the
+calculation of synonymous (Ks) and non-synonymous (Ka) substitution
+rates and be fed into PAML.
+
+   pep.aln     Protein (AA) alignment
+   nuc.fasta   Nucleotide sequences
+
+Example:
+
+   ./bin/pal2nal test/data/fasta/codon/aa-alignment.fa test/data/fasta/codon/nt.fa
+"""
+
+gempath = File.dirname(File.dirname(__FILE__))
+$: << File.join(gempath,'lib')
+
+VERSION_FILENAME=File.join(gempath,'VERSION')
+version = File.new(VERSION_FILENAME).read.chomp
+
+if ARGV.size == 0
+  print USAGE
+end
+
+require 'optparse'
+require 'bio-alignment'
+require 'bigbio'
+
+include Bio::BioAlignment
+
+options = {show_help: false}
+
+opts = OptionParser.new do |o|
+  o.banner = "Usage: #{File.basename($0)} pep.aln  nuc.fasta [options]"
+
+  o.on("-q", "--quiet", "Run quietly") do |q|
+    options[:quiet] = true
+  end
+
+  o.on("-v","--verbose", "Run verbosely") do |v|
+    options[:verbose] = true
+  end
+
+  o.on("-d", "--debug", "Debug mode") do |v|
+    options[:debug] = true
+  end
+
+  o.separator ""
+  o.on_tail('-h', '--help', 'display this help and exit') do
+    options[:show_help] = true
+  end
+end
+
+begin
+  opts.parse!(ARGV)
+
+  $stderr.print "Pal2Nal #{version} (biogem Ruby #{RUBY_VERSION}) by Pjotr Prins 2017\n" if !options[:quiet]
+
+  if options[:show_help] or ARGV.size < 2
+    print opts
+    print USAGE
+    exit 1
+  end
+
+  $stderr.print "Options: ",options,"\n" if !options[:quiet]
+
+rescue OptionParser::InvalidOption => e
+  options[:invalid_argument] = e.message
+end
+
+aafn = ARGV.shift
+ntfn = ARGV.shift
+
+aa_aln = Alignment.new
+aa     = FastaReader.new(aafn)
+aa.each do | rec |
+  aa_aln << Sequence.new(rec.id, rec.seq)
+end
+nt_aln = Alignment.new
+nt     = FastaReader.new(ntfn)
+nt.each do | rec |
+  nt_aln << Sequence.new(rec.id, rec.seq)
+end
+
+pal2nal = aa_aln.pal2nal(nt_aln, :codon_table => 1, :do_validate => true)
+
+pal2nal.each do | seq |
+  print ">",seq.id,"\n"
+  print seq.to_nt,"\n"
+end
