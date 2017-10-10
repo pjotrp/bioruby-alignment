@@ -8,6 +8,6 @@ gem "bio", ">= 1.5.0"      # for translation tables, BioRuby compat and Newick p
 group :development do
   gem "rake"
   gem "bio-bigbio"         # for reading FASTA files in tests
-  gem "cucumber" 
+  gem "cucumber"
   gem "rspec"
 end
