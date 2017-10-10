@@ -35,10 +35,18 @@ require 'bigbio'
 
 include Bio::BioAlignment
 
-options = {show_help: false}
+options = {show_help: false, codon_table: 1, validate: true}
 
 opts = OptionParser.new do |o|
   o.banner = "Usage: #{File.basename($0)} pep.aln  nuc.fasta [options]"
+
+  o.on("--codon-table [int]", Integer, "Codon table (default 1)") do |ct|
+    options[:codon_table] = ct
+  end
+
+  o.on("--no-validate", "Validate codons") do |b|
+    options[:validate] = false
+  end
 
   o.on("-q", "--quiet", "Run quietly") do |q|
     options[:quiet] = true
@@ -89,7 +97,7 @@ nt.each do | rec |
   nt_aln << Sequence.new(rec.id, rec.seq)
 end
 
-pal2nal = aa_aln.pal2nal(nt_aln, :codon_table => 1, :do_validate => true)
+pal2nal = aa_aln.pal2nal(nt_aln, :codon_table => options[:codon_table], :do_validate => options[:validate])
 
 LINELEN = 60
 offset = 0
@@ -99,7 +107,7 @@ print "CLUSTAL W multiple sequence alignment\n"
 while size > 0
   print "\n"
   pal2nal.each do | seq |
-    print seq.id,"      "
+    print seq.id," "*(18-seq.id.size)
     print seq.to_nt[offset..offset+LINELEN-1],"\n"
   end
   offset += LINELEN
